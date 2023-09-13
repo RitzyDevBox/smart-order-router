@@ -1,4 +1,9 @@
-import { ChainId, Token } from '@uniswap/sdk-core';
+import {
+  ChainId,
+  Token,
+  V2_FACTORY_ADDRESSES,
+  V2_FACTORY_INIT_HASH,
+} from '@uniswap/sdk-core';
 import { Pair } from '@uniswap/v2-sdk';
 import _ from 'lodash';
 
@@ -7,8 +12,10 @@ import { log } from '../../util/log';
 import {
   DAI_MAINNET,
   USDC_MAINNET,
+  USDT_HYPEREVM,
+  USDT_HYPEREVM_TESTNET,
   USDT_MAINNET,
-  WBTC_MAINNET
+  WBTC_MAINNET,
 } from '../token-provider';
 
 import { IV2SubgraphProvider, V2SubgraphPool } from './subgraph-provider';
@@ -23,7 +30,7 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     DAI_MAINNET,
     USDC_MAINNET,
     USDT_MAINNET,
-    WBTC_MAINNET
+    WBTC_MAINNET,
   ],
   [ChainId.GOERLI]: [WRAPPED_NATIVE_CURRENCY[ChainId.GOERLI]!],
   [ChainId.SEPOLIA]: [WRAPPED_NATIVE_CURRENCY[ChainId.SEPOLIA]!],
@@ -41,7 +48,9 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.BNB]: [],
   [ChainId.AVALANCHE]: [],
   [ChainId.BASE_GOERLI]: [],
-  [ChainId.BASE]: []
+  [ChainId.BASE]: [],
+  [ChainId.HYPEREVM_TESTNET]: [WRAPPED_NATIVE_CURRENCY[ChainId.HYPEREVM_TESTNET]!, USDT_HYPEREVM_TESTNET],
+  [ChainId.HYPEREVM]: [WRAPPED_NATIVE_CURRENCY[ChainId.HYPEREVM]!, USDT_HYPEREVM],
 };
 
 /**
@@ -57,7 +66,7 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  * @class StaticV2SubgraphProvider
  */
 export class StaticV2SubgraphProvider implements IV2SubgraphProvider {
-  constructor(private chainId: ChainId) {}
+  constructor(private chainId: ChainId) { }
 
   public async getPools(
     tokenIn?: Token,
@@ -93,7 +102,14 @@ export class StaticV2SubgraphProvider implements IV2SubgraphProvider {
 
     const subgraphPools: V2SubgraphPool[] = _(pairs)
       .map(([tokenA, tokenB]) => {
-        const poolAddress = Pair.getAddress(tokenA, tokenB);
+        const factoryAddress = V2_FACTORY_ADDRESSES[tokenA.chainId];
+        const initHashCode = V2_FACTORY_INIT_HASH[tokenA.chainId];
+        const poolAddress = Pair.getAddress(
+          tokenA,
+          tokenB,
+          factoryAddress,
+          initHashCode
+        );
 
         if (poolAddressSet.has(poolAddress)) {
           return undefined;
@@ -108,14 +124,14 @@ export class StaticV2SubgraphProvider implements IV2SubgraphProvider {
           id: poolAddress,
           liquidity: '100',
           token0: {
-            id: token0.address
+            id: token0.address,
           },
           token1: {
-            id: token1.address
+            id: token1.address,
           },
           supply: 100,
           reserve: 100,
-          reserveUSD: 100
+          reserveUSD: 100,
         };
       })
       .compact()

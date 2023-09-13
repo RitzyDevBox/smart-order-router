@@ -5,7 +5,15 @@
 import { JsonRpcProvider, JsonRpcSigner } from '@ethersproject/providers';
 import { AllowanceTransfer, PermitSingle } from '@uniswap/permit2-sdk';
 import { Protocol } from '@uniswap/router-sdk';
-import { ChainId, Currency, CurrencyAmount, Ether, Percent, Token, TradeType, } from '@uniswap/sdk-core';
+import {
+  ChainId,
+  Currency,
+  CurrencyAmount,
+  Ether,
+  Percent,
+  Token,
+  TradeType,
+} from '@uniswap/sdk-core';
 import {
   PERMIT2_ADDRESS,
   UNIVERSAL_ROUTER_ADDRESS as UNIVERSAL_ROUTER_ADDRESS_BY_CHAIN,
@@ -36,8 +44,8 @@ import {
   ID_TO_PROVIDER,
   MethodParameters,
   MixedRoute,
-  NATIVE_CURRENCY,
   nativeOnChain,
+  NATIVE_CURRENCY,
   NodeJSCache,
   OnChainQuoteProvider,
   parseAmount,
@@ -45,30 +53,30 @@ import {
   SimulationStatus,
   StaticGasPriceProvider,
   SUPPORTED_CHAINS,
-  SWAP_ROUTER_02_ADDRESSES,
   SwapOptions,
   SwapType,
+  SWAP_ROUTER_02_ADDRESSES,
   TenderlySimulator,
+  TokenPropertiesProvider,
+  TokenValidatorProvider,
+  UniswapMulticallProvider,
   UNI_GOERLI,
   UNI_MAINNET,
-  UniswapMulticallProvider,
   USDC_BNB,
   USDC_ETHEREUM_GNOSIS,
   USDC_MAINNET,
   USDC_ON,
   USDT_BNB,
   USDT_MAINNET,
-  V2_SUPPORTED,
   V2PoolProvider,
   V2Route,
+  V2_SUPPORTED,
   V3PoolProvider,
   V3Route,
   WBTC_GNOSIS,
   WBTC_MOONBEAM,
   WETH9,
   WNATIVE_ON,
-  TokenPropertiesProvider,
-  TokenValidatorProvider,
 } from '../../../../src';
 import { OnChainTokenFeeFetcher } from '../../../../src/providers/token-fee-fetcher';
 import { DEFAULT_ROUTING_CONFIG_BY_CHAIN } from '../../../../src/routers/alpha-router/config';
@@ -487,17 +495,17 @@ describe('alpha router integration', () => {
       ChainId.MAINNET,
       multicall2Provider,
       new NodeJSCache(new NodeCache({ stdTTL: 360, useClones: false }))
-    )
+    );
     const tokenFeeFetcher = new OnChainTokenFeeFetcher(
       ChainId.MAINNET,
       hardhat.provider
-    )
+    );
     const tokenPropertiesProvider = new TokenPropertiesProvider(
       ChainId.MAINNET,
       tokenValidatorProvider,
       new NodeJSCache(new NodeCache({ stdTTL: 360, useClones: false })),
       tokenFeeFetcher
-    )
+    );
     const v2PoolProvider = new V2PoolProvider(
       ChainId.MAINNET,
       multicall2Provider,
@@ -620,7 +628,6 @@ describe('alpha router integration', () => {
             getQuoteToken(tokenIn, tokenOut, tradeType),
             tradeType,
             {
-
               type: SwapType.UNIVERSAL_ROUTER,
               recipient: alice._address,
               slippageTolerance: SLIPPAGE,
@@ -2650,6 +2657,8 @@ describe('quote for other networks', () => {
     [ChainId.AVALANCHE]: () => USDC_ON(ChainId.AVALANCHE),
     [ChainId.BASE]: () => USDC_ON(ChainId.BASE),
     [ChainId.BASE_GOERLI]: () => USDC_ON(ChainId.BASE_GOERLI),
+    [ChainId.HYPEREVM_TESTNET]: () => USDC_ON(ChainId.HYPEREVM_TESTNET),
+    [ChainId.HYPEREVM]: () => USDC_ON(ChainId.HYPEREVM),
   };
   const TEST_ERC20_2: { [chainId in ChainId]: () => Token } = {
     [ChainId.MAINNET]: () => DAI_ON(1),
@@ -2669,6 +2678,8 @@ describe('quote for other networks', () => {
     [ChainId.AVALANCHE]: () => DAI_ON(ChainId.AVALANCHE),
     [ChainId.BASE]: () => WNATIVE_ON(ChainId.BASE),
     [ChainId.BASE_GOERLI]: () => WNATIVE_ON(ChainId.BASE_GOERLI),
+    [ChainId.HYPEREVM_TESTNET]: () => WNATIVE_ON(ChainId.HYPEREVM_TESTNET),
+    [ChainId.HYPEREVM]: () => WNATIVE_ON(ChainId.HYPEREVM_TESTNET),
   };
 
   // TODO: Find valid pools/tokens on optimistic kovan and polygon mumbai. We skip those tests for now.
@@ -2686,7 +2697,7 @@ describe('quote for other networks', () => {
       const erc1 = TEST_ERC20_1[chain]();
       const erc2 = TEST_ERC20_2[chain]();
 
-      describe(`${ID_TO_NETWORK_NAME(chain)} ${tradeType} 2xx`, function() {
+      describe(`${ID_TO_NETWORK_NAME(chain)} ${tradeType} 2xx`, function () {
         const wrappedNative = WNATIVE_ON(chain);
 
         let alphaRouter: AlphaRouter;
@@ -2709,18 +2720,22 @@ describe('quote for other networks', () => {
             ChainId.MAINNET,
             multicall2Provider,
             new NodeJSCache(new NodeCache({ stdTTL: 360, useClones: false }))
-          )
+          );
           const tokenFeeFetcher = new OnChainTokenFeeFetcher(
             ChainId.MAINNET,
             hardhat.provider
-          )
+          );
           const tokenPropertiesProvider = new TokenPropertiesProvider(
             ChainId.MAINNET,
             tokenValidatorProvider,
             new NodeJSCache(new NodeCache({ stdTTL: 360, useClones: false })),
             tokenFeeFetcher
-          )
-          const v2PoolProvider = new V2PoolProvider(chain, multicall2Provider, tokenPropertiesProvider);
+          );
+          const v2PoolProvider = new V2PoolProvider(
+            chain,
+            multicall2Provider,
+            tokenPropertiesProvider
+          );
 
           const ethEstimateGasSimulator = new EthEstimateGasSimulator(
             chain,
@@ -2755,7 +2770,7 @@ describe('quote for other networks', () => {
           });
         });
 
-        describe(`Swap`, function() {
+        describe(`Swap`, function () {
           it(`${wrappedNative.symbol} -> erc20`, async () => {
             const tokenIn = wrappedNative;
             const tokenOut = erc1;
@@ -2810,7 +2825,8 @@ describe('quote for other networks', () => {
             const tokenIn = nativeOnChain(chain);
             // TODO ROUTE-64: Remove this once smart-order-router supports ETH native currency on BASE
             // see https://uniswapteam.slack.com/archives/C021SU4PMR7/p1691593679108459?thread_ts=1691532336.742419&cid=C021SU4PMR7
-            const tokenOut = chain == ChainId.BASE ? USDC_ON(ChainId.BASE) : erc2
+            const tokenOut =
+              chain == ChainId.BASE ? USDC_ON(ChainId.BASE) : erc2;
 
             // Celo currently has low liquidity and will not be able to find route for
             // large input amounts
@@ -2921,7 +2937,7 @@ describe('quote for other networks', () => {
         });
 
         if (isTenderlyEnvironmentSet()) {
-          describe(`Simulate + Swap`, function() {
+          describe(`Simulate + Swap`, function () {
             // Tenderly does not support Celo
             if ([ChainId.CELO, ChainId.CELO_ALFAJORES].includes(chain)) {
               return;

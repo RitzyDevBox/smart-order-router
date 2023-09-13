@@ -1,4 +1,10 @@
-import { ChainId, Currency, Ether, NativeCurrency, Token } from '@uniswap/sdk-core';
+import {
+  ChainId,
+  Currency,
+  Ether,
+  NativeCurrency,
+  Token,
+} from '@uniswap/sdk-core';
 
 // WIP: Gnosis, Moonbeam
 export const SUPPORTED_CHAINS: ChainId[] = [
@@ -16,6 +22,8 @@ export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.BNB,
   ChainId.AVALANCHE,
   ChainId.BASE,
+  ChainId.HYPEREVM_TESTNET,
+  ChainId.HYPEREVM,
   // Gnosis and Moonbeam don't yet have contracts deployed yet
 ];
 
@@ -23,6 +31,8 @@ export const V2_SUPPORTED = [
   ChainId.MAINNET,
   ChainId.GOERLI,
   ChainId.SEPOLIA,
+  ChainId.HYPEREVM_TESTNET,
+  ChainId.HYPEREVM,
 ];
 
 export const HAS_L1_FEE = [
@@ -79,6 +89,10 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.BASE;
     case 84531:
       return ChainId.BASE_GOERLI;
+    case 998:
+      return ChainId.HYPEREVM_TESTNET;
+    case 999:
+      return ChainId.HYPEREVM;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -102,8 +116,9 @@ export enum ChainName {
   AVALANCHE = 'avalanche-mainnet',
   BASE = 'base-mainnet',
   BASE_GOERLI = 'base-goerli',
+  HYPEREVM_TESTNET = 'hyperevm-testnet',
+  HYPEREVM = 'hyperevm',
 }
-
 
 export enum NativeCurrencyName {
   // Strings match input for CLI
@@ -114,6 +129,8 @@ export enum NativeCurrencyName {
   MOONBEAM = 'GLMR',
   BNB = 'BNB',
   AVALANCHE = 'AVAX',
+  HYPEREVM = 'HYPE',
+  HYPEREVM_TESTNET = 'HYPE'
 }
 
 export const NATIVE_NAMES_BY_ID: { [chainId: number]: string[] } = {
@@ -152,9 +169,7 @@ export const NATIVE_NAMES_BY_ID: { [chainId: number]: string[] } = {
     'ETHER',
     '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
   ],
-  [ChainId.POLYGON]: [
-    'MATIC', '0x0000000000000000000000000000000000001010'
-  ],
+  [ChainId.POLYGON]: ['MATIC', '0x0000000000000000000000000000000000001010'],
   [ChainId.POLYGON_MUMBAI]: [
     'MATIC',
     '0x0000000000000000000000000000000000001010',
@@ -163,11 +178,7 @@ export const NATIVE_NAMES_BY_ID: { [chainId: number]: string[] } = {
   [ChainId.CELO_ALFAJORES]: ['CELO'],
   [ChainId.GNOSIS]: ['XDAI'],
   [ChainId.MOONBEAM]: ['GLMR'],
-  [ChainId.BNB]: [
-    'BNB',
-    'BNB',
-    '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-  ],
+  [ChainId.BNB]: ['BNB', 'BNB', '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'],
   [ChainId.AVALANCHE]: [
     'AVAX',
     'AVALANCHE',
@@ -177,7 +188,9 @@ export const NATIVE_NAMES_BY_ID: { [chainId: number]: string[] } = {
     'ETH',
     'ETHER',
     '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-  ]
+  ],
+  [ChainId.HYPEREVM_TESTNET]: ['HYPE', 'HYPE', '0x2222222222222222222222222222222222222222'],
+  [ChainId.HYPEREVM]: ['HYPE', 'HYPE', '0x2222222222222222222222222222222222222222'],
 };
 
 export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
@@ -197,6 +210,8 @@ export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
   [ChainId.BNB]: NativeCurrencyName.BNB,
   [ChainId.AVALANCHE]: NativeCurrencyName.AVALANCHE,
   [ChainId.BASE]: NativeCurrencyName.ETHER,
+  [ChainId.HYPEREVM_TESTNET]: NativeCurrencyName.HYPEREVM_TESTNET,
+  [ChainId.HYPEREVM]: NativeCurrencyName.HYPEREVM,
 };
 
 export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
@@ -235,6 +250,10 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.BASE;
     case 84531:
       return ChainName.BASE_GOERLI;
+    case 998:
+      return ChainName.HYPEREVM_TESTNET
+    case 999:
+      return ChainName.HYPEREVM;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -274,6 +293,10 @@ export const ID_TO_PROVIDER = (id: ChainId): string => {
       return process.env.JSON_RPC_PROVIDER_AVALANCHE!;
     case ChainId.BASE:
       return process.env.JSON_RPC_PROVIDER_BASE!;
+    case ChainId.HYPEREVM:
+      return process.env.JSON_RPC_PROVIDER_HYPEREVM!;
+    case ChainId.HYPEREVM_TESTNET:
+        return process.env.JSON_RPC_PROVIDER_HYPEREVM_TESTNET!;
     default:
       throw new Error(`Chain id: ${id} not supported`);
   }
@@ -400,7 +423,21 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
     18,
     'WETH',
     'Wrapped Ether'
-  )
+  ),
+  [ChainId.HYPEREVM_TESTNET]: new Token(
+    ChainId.HYPEREVM_TESTNET,
+    '0xADcb2f358Eae6492F61A5F87eb8893d09391d160',
+    18,
+    'WHYPE',
+    'Wrapped Hype Testnet'
+  ),
+  [ChainId.HYPEREVM]: new Token(
+    ChainId.HYPEREVM_TESTNET,
+    '0x5555555555555555555555555555555555555555',
+    18,
+    'WHYPE',
+    'Wrapped Hype'
+  ),
 };
 
 function isMatic(
@@ -551,6 +588,56 @@ class AvalancheNativeCurrency extends NativeCurrency {
   }
 }
 
+
+function isHyperevmTestnet(chainId: number): chainId is ChainId.HYPEREVM_TESTNET {
+  return chainId === ChainId.HYPEREVM_TESTNET;
+}
+
+function isHyperevm(chainId: number): chainId is ChainId.HYPEREVM {
+  return chainId === ChainId.HYPEREVM;
+}
+
+class HyperEvmTestnetNativeCurrency extends NativeCurrency {
+  equals(other: Currency): boolean {
+    return other.isNative && other.chainId === this.chainId;
+  }
+
+  get wrapped(): Token {
+    if (!isHyperevmTestnet(this.chainId)) throw new Error('Not hyperevm testnet');
+    const nativeCurrency = WRAPPED_NATIVE_CURRENCY[this.chainId];
+    if (nativeCurrency) {
+      return nativeCurrency;
+    }
+    throw new Error(`Does not support this chain ${this.chainId}`);
+  }
+
+  public constructor(chainId: number) {
+    if (!isHyperevmTestnet(chainId)) throw new Error('Not  hyperevm testnet');
+    super(chainId, 18, 'HYPE', 'hype');
+  }
+}
+
+class HyperEvmNativeCurrency extends NativeCurrency {
+  equals(other: Currency): boolean {
+    return other.isNative && other.chainId === this.chainId;
+  }
+
+  get wrapped(): Token {
+    if (!isHyperevm(this.chainId)) throw new Error('Not hyperevm');
+    const nativeCurrency = WRAPPED_NATIVE_CURRENCY[this.chainId];
+    if (nativeCurrency) {
+      return nativeCurrency;
+    }
+    throw new Error(`Does not support this chain ${this.chainId}`);
+  }
+
+  public constructor(chainId: number) {
+    if (!isHyperevm(chainId)) throw new Error('Not  hyperevm');
+    super(chainId, 18, 'HYPE', 'hype');
+  }
+}
+
+
 export class ExtendedEther extends Ether {
   public get wrapped(): Token {
     if (this.chainId in WRAPPED_NATIVE_CURRENCY) {
@@ -588,6 +675,10 @@ export function nativeOnChain(chainId: number): NativeCurrency {
     cachedNativeCurrency[chainId] = new BnbNativeCurrency(chainId);
   } else if (isAvax(chainId)) {
     cachedNativeCurrency[chainId] = new AvalancheNativeCurrency(chainId);
+  } else if (isHyperevmTestnet(chainId)) {
+    cachedNativeCurrency[chainId] = new HyperEvmTestnetNativeCurrency(chainId);
+  } else if (isHyperevm(chainId)) {
+    cachedNativeCurrency[chainId] = new HyperEvmNativeCurrency(chainId);
   } else {
     cachedNativeCurrency[chainId] = ExtendedEther.onChain(chainId);
   }

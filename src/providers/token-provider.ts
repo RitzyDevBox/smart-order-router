@@ -469,16 +469,16 @@ export const USDC_BASE = new Token(
   6,
   'USDbC',
   'USD Base Coin'
-)
+);
 
-// Base Goerli Tokens 
+// Base Goerli Tokens
 export const USDC_BASE_GOERLI = new Token(
   ChainId.BASE_GOERLI,
   '0x853154e2A5604E5C74a2546E2871Ad44932eB92C',
   6,
   'USDbC',
   'USD Base Coin'
-)
+);
 
 // Gnosis Tokens
 export const USDC_ETHEREUM_GNOSIS = new Token(
@@ -538,11 +538,28 @@ export const WBTC_MOONBEAM = new Token(
   'Wrapped BTC bridged using Multichain'
 );
 
+export const USDT_HYPEREVM = new Token(
+  ChainId.HYPEREVM,
+  '0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb',
+  6,
+  'USDT0',
+  'USDT0'
+);
+
+export const USDT_HYPEREVM_TESTNET = new Token(
+  ChainId.HYPEREVM_TESTNET,
+  '0x24ac48bf01fd6CB1C3836D08b3EdC70a9C4380cA',
+  8,
+  'USDC',
+  'USDC'
+);
+
+
 export class TokenProvider implements ITokenProvider {
   constructor(
     private chainId: ChainId,
     protected multicall2Provider: IMulticallProvider
-  ) {}
+  ) { }
 
   private async getTokenSymbol(
     addresses: string[],
@@ -687,10 +704,8 @@ export class TokenProvider implements ITokenProvider {
       }
 
       log.info(
-        `Got token symbol and decimals for ${
-          Object.values(addressToToken).length
-        } out of ${addresses.length} tokens on-chain ${
-          providerConfig ? `as of: ${providerConfig?.blockNumber}` : ''
+        `Got token symbol and decimals for ${Object.values(addressToToken).length
+        } out of ${addresses.length} tokens on-chain ${providerConfig ? `as of: ${providerConfig?.blockNumber}` : ''
         }`
       );
     }
@@ -758,6 +773,10 @@ export const USDT_ON = (chainId: ChainId): Token => {
       return USDT_ARBITRUM;
     case ChainId.BNB:
       return USDT_BNB;
+    case ChainId.HYPEREVM_TESTNET:
+        return USDT_HYPEREVM_TESTNET;
+    case ChainId.HYPEREVM:
+        return USDT_HYPEREVM;
     default:
       throw new Error(`Chain id: ${chainId} not supported`);
   }

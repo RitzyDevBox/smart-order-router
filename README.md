@@ -225,6 +225,30 @@ Total ticks crossed: 7
 ```
 
 
+
+## Hyperevm 
+
+quote USDC -> WHYPE
+```
+./bin/cli quote --tokenIn 0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb --tokenOut 0x5555555555555555555555555555555555555555  --amount .1 --exactIn --minSplits 1 --protocols v2 --router alpha --chainId 999 --debug
+```
+
+```
+./bin/cli quote --tokenIn 0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb --tokenOut 0x5555555555555555555555555555555555555555  --amount .1 --exactIn --minSplits 1 --protocols v3 --router alpha --chainId 999 --debug
+```
+
+```
+./bin/cli quote --tokenIn 0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb --tokenOut 0x5555555555555555555555555555555555555555  --amount .1 --exactIn --minSplits 1 --protocols mixed --router alpha --chainId 999 --debug
+```
+
+
+
+## Getting a v2 Pair address
+
+```
+./bin/cli poolAddressUtils --tokenIn 0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83 --tokenOut 0x1B6382DBDEa11d97f24495C9A90b7c88469134a4  --chainId 250
+```
+
 ## Adding a new Chain
 
 The main components to complete are:
@@ -234,11 +258,12 @@ The main components to complete are:
 - Populate chainId and addresses in `src/util/chains.ts` and `src/util/addresses.ts`
 - Populate token providers in `src/providers/caching-token-provider` and `src/providers/token-provider.ts`
 - Populate gas constants in `src/routers/alpha-router/gas-models/*`
-- Populate bases in `src/routers/legacy-router/bases.ts`
+- Populate bases onin `src/routers/legacy-router/bases.ts`
 - Populate `test/integ/routers/alpha-router/alpha-router.integration.test.ts` and `src/providers/v2/static-subgraph-provider.ts`
 - Populate `src/routers/alpha-router/*`
 - Add a log to `/CHANGELOG.md`
 - Run `npm run integ-test` successfully
+- Add liquidity to v3 for the USDC/W{Native} pool so the gas models can properly quote
 
 # Troubleshooting
 

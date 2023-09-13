@@ -64,6 +64,9 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (
         distributionPercent: 25,
         forceCrossProtocol: false,
       };
+    //TODO: Fill in configuration values
+    case ChainId.HYPEREVM_TESTNET:
+    case ChainId.HYPEREVM:
     default:
       return {
         v2PoolSelection: {
