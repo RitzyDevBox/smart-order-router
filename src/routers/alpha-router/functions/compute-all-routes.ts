@@ -1,4 +1,4 @@
-import { TPool } from '@uniswap/router-sdk';
+import { TPool } from '@rtz-dex-tools/router-sdk';
 import { ChainId, Currency, Token } from '@uniswap/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { Pool as V3Pool } from '@rtz-dex-tools/v3-sdk';

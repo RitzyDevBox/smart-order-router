@@ -7,7 +7,7 @@ import {
 } from '@uniswap/sdk-core';
 import { FACTORY_ADDRESS } from '@rtz-dex-tools/v3-sdk';
 
-import { ADDRESS_ZERO } from '@uniswap/router-sdk';
+import { ADDRESS_ZERO } from '@rtz-dex-tools/router-sdk';
 import { NETWORKS_WITH_SAME_UNISWAP_ADDRESSES } from './chains';
 
 export const BNB_TICK_LENS_ADDRESS =

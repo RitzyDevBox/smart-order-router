@@ -1,4 +1,4 @@
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@rtz-dex-tools/router-sdk';
 import { ChainId, Currency } from '@uniswap/sdk-core';
 
 import { ProviderConfig } from '../provider';
@@ -59,8 +59,7 @@ export interface IV4SubgraphProvider {
 
 export class V4SubgraphProvider
   extends SubgraphProvider<V4RawSubgraphPool, V4SubgraphPool>
-  implements IV4SubgraphProvider
-{
+  implements IV4SubgraphProvider {
   constructor(
     chainId: ChainId,
     retries = 2,

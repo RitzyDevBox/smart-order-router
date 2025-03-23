@@ -4,7 +4,7 @@ import {
   MixedRouteSDK,
   Protocol,
   Trade,
-} from '@uniswap/router-sdk';
+} from '@rtz-dex-tools/router-sdk';
 import {
   Currency,
   Fraction,

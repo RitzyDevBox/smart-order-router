@@ -6,7 +6,7 @@ import {
   encodeMixedRouteToPath,
   MixedRouteSDK,
   Protocol,
-} from '@uniswap/router-sdk';
+} from '@rtz-dex-tools/router-sdk';
 import { ChainId } from '@uniswap/sdk-core';
 import { encodeRouteToPath as encodeV3RouteToPath } from '@rtz-dex-tools/v3-sdk';
 import {

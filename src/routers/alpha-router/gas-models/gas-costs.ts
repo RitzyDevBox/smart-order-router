@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@rtz-dex-tools/router-sdk';
 import { ChainId, Currency } from '@uniswap/sdk-core';
 import { AAVE_MAINNET, LIDO_MAINNET } from '../../../providers';
 import { V3Route, V4Route } from '../../router';

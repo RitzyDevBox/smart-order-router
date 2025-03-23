@@ -4,7 +4,7 @@
  * @export
  * @interface IRouteCachingProvider
  */
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@rtz-dex-tools/router-sdk';
 import {
   ChainId,
   Currency,

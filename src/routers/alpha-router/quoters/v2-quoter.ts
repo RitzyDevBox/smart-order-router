@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@rtz-dex-tools/router-sdk';
 import { ChainId, Currency, Token, TradeType } from '@uniswap/sdk-core';
 import _ from 'lodash';
 
@@ -167,8 +167,8 @@ export class V2Quoter extends BaseQuoter<V2CandidatePools, V2Route, Token> {
     const amountToken = amounts[0]!.currency;
     const gasToken = _routingConfig.gasToken
       ? (
-          await this.tokenProvider.getTokens([_routingConfig.gasToken])
-        ).getTokenByAddress(_routingConfig.gasToken)
+        await this.tokenProvider.getTokens([_routingConfig.gasToken])
+      ).getTokenByAddress(_routingConfig.gasToken)
       : undefined;
 
     if (routes.length == 0) {

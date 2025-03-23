@@ -1,4 +1,4 @@
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@rtz-dex-tools/router-sdk';
 import { ChainId, Currency, Percent } from '@uniswap/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { Pool as V3Pool } from '@rtz-dex-tools/v3-sdk';
@@ -13,7 +13,7 @@ import { MixedRoute, SupportedRoutes } from '../routers/router';
 
 import { V3_CORE_FACTORY_ADDRESSES } from './addresses';
 
-import { TPool } from '@uniswap/router-sdk';
+import { TPool } from '@rtz-dex-tools/router-sdk';
 import { CurrencyAmount, V4_ETH_WETH_FAKE_POOL } from '.';
 import { CachedRoutes } from '../providers';
 

@@ -1,4 +1,4 @@
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@rtz-dex-tools/router-sdk';
 import { ChainId, Currency, TradeType } from '@uniswap/sdk-core';
 import _ from 'lodash';
 
@@ -156,11 +156,11 @@ export class V4Quoter extends BaseQuoter<V4CandidatePools, V4Route, Currency> {
     const quoteFn =
       tradeType == TradeType.EXACT_INPUT
         ? this.onChainQuoteProvider.getQuotesManyExactIn.bind(
-            this.onChainQuoteProvider
-          )
+          this.onChainQuoteProvider
+        )
         : this.onChainQuoteProvider.getQuotesManyExactOut.bind(
-            this.onChainQuoteProvider
-          );
+          this.onChainQuoteProvider
+        );
 
     const beforeQuotes = Date.now();
     log.info(
