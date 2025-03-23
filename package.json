@@ -1,6 +1,6 @@
 {
-  "name": "@uniswap/smart-order-router",
-  "version": "4.20.10",
+  "name": "@@rtz-dex-tools/smart-order-router",
+  "version": "11.0.1-static004",
   "description": "Uniswap Smart Order Router",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
