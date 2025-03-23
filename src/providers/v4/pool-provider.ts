@@ -1,4 +1,4 @@
-import { ChainId, Currency } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency } from '@rtz-dex-tools/sdk-core';
 import { Pool } from '@rtz-dex-tools/v4-sdk';
 import retry, { Options as RetryOptions } from 'async-retry';
 import { getAddress, log, STATE_VIEW_ADDRESSES } from '../../util';
@@ -73,7 +73,7 @@ export class V4PoolProvider
    * @param retryOptions The retry options for each call to the multicall.
    */
   constructor(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     multicall2Provider: IMulticallProvider,
     retryOptions: V4PoolRetryOptions = {
       retries: 2,

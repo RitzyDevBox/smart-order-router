@@ -1,15 +1,15 @@
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 export const opStackChains = [
-  ChainId.OPTIMISM,
-  ChainId.OPTIMISM_GOERLI,
-  ChainId.OPTIMISM_SEPOLIA,
-  ChainId.BASE,
-  ChainId.BASE_GOERLI,
-  ChainId.BLAST,
-  ChainId.ZORA,
-  ChainId.WORLDCHAIN,
-  ChainId.UNICHAIN_SEPOLIA,
-  ChainId.UNICHAIN,
-  ChainId.SONEIUM,
+  DepricatedChainId.OPTIMISM,
+  DepricatedChainId.OPTIMISM_GOERLI,
+  DepricatedChainId.OPTIMISM_SEPOLIA,
+  DepricatedChainId.BASE,
+  DepricatedChainId.BASE_GOERLI,
+  DepricatedChainId.BLAST,
+  DepricatedChainId.ZORA,
+  DepricatedChainId.WORLDCHAIN,
+  DepricatedChainId.UNICHAIN_SEPOLIA,
+  DepricatedChainId.UNICHAIN,
+  DepricatedChainId.SONEIUM,
 ];

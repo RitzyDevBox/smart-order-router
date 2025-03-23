@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { ZERO } from '@rtz-dex-tools/router-sdk';
-import { Fraction, TradeType } from '@uniswap/sdk-core';
+import { Fraction, TradeType } from '@rtz-dex-tools/sdk-core';
 
 import {
   RouteWithValidQuote,

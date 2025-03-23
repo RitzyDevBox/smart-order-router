@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 import { ICache } from '../cache';
 import { CachingSubgraphProvider } from '../caching-subgraph-provider';
 import { IV4SubgraphProvider, V4SubgraphPool } from './subgraph-provider';
@@ -20,7 +20,7 @@ export class CachingV4SubgraphProvider
    * @param cache Cache instance to hold cached pools.
    */
   constructor(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     subgraphProvider: IV4SubgraphProvider,
     cache: ICache<V4SubgraphPool[]>
   ) {

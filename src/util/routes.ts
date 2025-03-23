@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency, Percent } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency, Percent } from '@rtz-dex-tools/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { Pool as V3Pool } from '@rtz-dex-tools/v3-sdk';
 import { Pool as V4Pool } from '@rtz-dex-tools/v4-sdk';
@@ -95,7 +95,7 @@ export const routeToString = (route: SupportedRoutes): string => {
       // where we do not want to return the fake pool in the route string as it is not a real pool
       if (
         pool.tickSpacing ===
-        V4_ETH_WETH_FAKE_POOL[pool.chainId as ChainId].tickSpacing
+        V4_ETH_WETH_FAKE_POOL[pool.chainId as DepricatedChainId].tickSpacing
       ) {
         return ' --  ';
       }

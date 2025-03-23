@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency, TradeType } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency, TradeType } from '@rtz-dex-tools/sdk-core';
 import _ from 'lodash';
 
 import {
@@ -53,14 +53,14 @@ export abstract class BaseQuoter<
   TCurrency extends Currency
 > {
   protected tokenProvider: ITokenProvider;
-  protected chainId: ChainId;
+  protected chainId: DepricatedChainId;
   protected protocol: Protocol;
   protected blockedTokenListProvider?: ITokenListProvider;
   protected tokenValidatorProvider?: ITokenValidatorProvider;
 
   constructor(
     tokenProvider: ITokenProvider,
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     protocol: Protocol,
     blockedTokenListProvider?: ITokenListProvider,
     tokenValidatorProvider?: ITokenValidatorProvider

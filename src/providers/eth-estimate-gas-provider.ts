@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { JsonRpcProvider } from '@ethersproject/providers';
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 import {
   GasModelProviderConfig,
@@ -29,16 +29,17 @@ export class EthEstimateGasSimulator extends Simulator {
   v2PoolProvider: IV2PoolProvider;
   v3PoolProvider: IV3PoolProvider;
   v4PoolProvider: IV4PoolProvider;
-  private overrideEstimateMultiplier: { [chainId in ChainId]?: number };
+  private overrideEstimateMultiplier: { [chainId in DepricatedChainId]?: number
+  };
 
   constructor(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     provider: JsonRpcProvider,
     v2PoolProvider: IV2PoolProvider,
     v3PoolProvider: IV3PoolProvider,
     v4PoolProvider: IV4PoolProvider,
     portionProvider: IPortionProvider,
-    overrideEstimateMultiplier?: { [chainId in ChainId]?: number }
+    overrideEstimateMultiplier?: { [chainId in DepricatedChainId]?: number }
   ) {
     super(provider, portionProvider, chainId);
     this.v2PoolProvider = v2PoolProvider;
@@ -56,7 +57,7 @@ export class EthEstimateGasSimulator extends Simulator {
     const currencyIn = route.trade.inputAmount.currency;
     let estimatedGasUsed: BigNumber;
     if (swapOptions.type == SwapType.UNIVERSAL_ROUTER) {
-      if (currencyIn.isNative && this.chainId == ChainId.MAINNET) {
+      if (currencyIn.isNative && this.chainId == DepricatedChainId.MAINNET) {
         // w/o this gas estimate differs by a lot depending on if user holds enough native balance
         // always estimate gas as if user holds enough balance
         // so that gas estimate is consistent for UniswapX

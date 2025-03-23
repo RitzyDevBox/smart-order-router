@@ -1,4 +1,4 @@
-import { ChainId, Currency } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency } from '@rtz-dex-tools/sdk-core';
 import { Pool } from '@rtz-dex-tools/v4-sdk';
 import _ from 'lodash';
 
@@ -16,7 +16,7 @@ import { IV4SubgraphProvider, V4SubgraphPool } from './subgraph-provider';
 
 export class StaticV4SubgraphProvider implements IV4SubgraphProvider {
   constructor(
-    private chainId: ChainId,
+    private chainId: DepricatedChainId,
     private poolProvider: IV4PoolProvider,
     private v4PoolParams: Array<
       [number, number, string]

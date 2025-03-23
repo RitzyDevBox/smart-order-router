@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency } from '@rtz-dex-tools/sdk-core';
 
 import { ProviderConfig } from '../provider';
 import { SubgraphProvider } from '../subgraph-provider';
@@ -39,8 +39,8 @@ export type V4RawSubgraphPool = {
   totalValueLockedUSDUntracked: string;
 };
 
-const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
-  [ChainId.SEPOLIA]: '',
+const SUBGRAPH_URL_BY_CHAIN: { [chainId in DepricatedChainId]?: string } = {
+  [DepricatedChainId.SEPOLIA]: '',
 };
 
 /**
@@ -61,7 +61,7 @@ export class V4SubgraphProvider
   extends SubgraphProvider<V4RawSubgraphPool, V4SubgraphPool>
   implements IV4SubgraphProvider {
   constructor(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     retries = 2,
     timeout = 30000,
     rollback = true,

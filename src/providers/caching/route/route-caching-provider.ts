@@ -6,11 +6,11 @@
  */
 import { Protocol } from '@rtz-dex-tools/router-sdk';
 import {
-  ChainId,
   Currency,
   CurrencyAmount,
+  DepricatedChainId,
   TradeType,
-} from '@uniswap/sdk-core';
+} from '@rtz-dex-tools/sdk-core';
 
 import { CacheMode } from './model';
 import { CachedRoutes } from './model/cached-routes';
@@ -130,7 +130,7 @@ export abstract class IRouteCachingProvider {
    * @param tradeType
    */
   public abstract getCacheMode(
-    chainId: ChainId,
+    chainId:DepricatedChainId,
     amount: CurrencyAmount<Currency>,
     quoteCurrency: Currency,
     tradeType: TradeType,
@@ -159,7 +159,7 @@ export abstract class IRouteCachingProvider {
    * @protected
    */
   protected abstract _getCachedRoute(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     amount: CurrencyAmount<Currency>,
     quoteCurrency: Currency,
     tradeType: TradeType,

@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency, Token } from '@rtz-dex-tools/sdk-core';
 import retry from 'async-retry';
 import Timeout from 'await-timeout';
 import { gql, GraphQLClient } from 'graphql-request';
@@ -59,7 +59,7 @@ export abstract class SubgraphProvider<
 
   constructor(
     private protocol: Protocol,
-    private chainId: ChainId,
+    private chainId: DepricatedChainId,
     private retries = 2,
     private timeout = 30000,
     private rollback = true,

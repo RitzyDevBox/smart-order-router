@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 import retry from 'async-retry';
 import Timeout from 'await-timeout';
 import { gql, GraphQLClient } from 'graphql-request';
@@ -36,8 +36,8 @@ type RawV2SubgraphPool = {
   reserveUSD: string;
 };
 
-const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]:
+const SUBGRAPH_URL_BY_CHAIN: { [chainId in DepricatedChainId]?: string } = {
+  [DepricatedChainId.MAINNET]:
     'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v2-dev',
 };
 
@@ -61,7 +61,7 @@ export class V2SubgraphProvider implements IV2SubgraphProvider {
   private client: GraphQLClient;
 
   constructor(
-    private chainId: ChainId,
+    private chainId: DepricatedChainId,
     private retries = 2,
     private timeout = 360000,
     private rollback = true,
@@ -109,10 +109,9 @@ export class V2SubgraphProvider implements IV2SubgraphProvider {
     let pools: RawV2SubgraphPool[] = [];
 
     log.info(
-      `Getting V2 pools from the subgraph with page size ${this.pageSize}${
-        providerConfig?.blockNumber
-          ? ` as of block ${providerConfig?.blockNumber}`
-          : ''
+      `Getting V2 pools from the subgraph with page size ${this.pageSize}${providerConfig?.blockNumber
+        ? ` as of block ${providerConfig?.blockNumber}`
+        : ''
       }.`
     );
 
@@ -320,7 +319,7 @@ export class V2SubgraphProvider implements IV2SubgraphProvider {
     const virtualTokenAddress =
       '0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b'.toLowerCase();
     return (
-      this.chainId === ChainId.BASE &&
+      this.chainId === DepricatedChainId.BASE &&
       (pool.token0.id.toLowerCase() === virtualTokenAddress ||
         pool.token1.id.toLowerCase() === virtualTokenAddress)
     );

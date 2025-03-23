@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber';
 
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency } from '@rtz-dex-tools/sdk-core';
 import { AAVE_MAINNET, LIDO_MAINNET } from '../../../providers';
 import { V3Route, V4Route } from '../../router';
 
@@ -9,145 +9,145 @@ import { V3Route, V4Route } from '../../router';
 export const COST_PER_UNINIT_TICK = BigNumber.from(0);
 
 //l2 execution fee on optimism is roughly the same as mainnet
-export const BASE_SWAP_COST = (id: ChainId): BigNumber => {
+export const BASE_SWAP_COST = (id: DepricatedChainId): BigNumber => {
   switch (id) {
-    case ChainId.MAINNET:
-    case ChainId.GOERLI:
-    case ChainId.SEPOLIA:
-    case ChainId.OPTIMISM:
-    case ChainId.OPTIMISM_GOERLI:
-    case ChainId.OPTIMISM_SEPOLIA:
-    case ChainId.BNB:
-    case ChainId.AVALANCHE:
-    case ChainId.BASE:
-    case ChainId.BASE_GOERLI:
-    case ChainId.ZORA:
-    case ChainId.ZORA_SEPOLIA:
-    case ChainId.ROOTSTOCK:
-    case ChainId.BLAST:
-    case ChainId.ZKSYNC:
-    case ChainId.WORLDCHAIN:
-    case ChainId.UNICHAIN_SEPOLIA:
-    case ChainId.UNICHAIN:
-    case ChainId.BASE_SEPOLIA:
-    case ChainId.MONAD_TESTNET: // TODO: double check on monad gas
-    case ChainId.SONEIUM:
+    case DepricatedChainId.MAINNET:
+    case DepricatedChainId.GOERLI:
+    case DepricatedChainId.SEPOLIA:
+    case DepricatedChainId.OPTIMISM:
+    case DepricatedChainId.OPTIMISM_GOERLI:
+    case DepricatedChainId.OPTIMISM_SEPOLIA:
+    case DepricatedChainId.BNB:
+    case DepricatedChainId.AVALANCHE:
+    case DepricatedChainId.BASE:
+    case DepricatedChainId.BASE_GOERLI:
+    case DepricatedChainId.ZORA:
+    case DepricatedChainId.ZORA_SEPOLIA:
+    case DepricatedChainId.ROOTSTOCK:
+    case DepricatedChainId.BLAST:
+    case DepricatedChainId.ZKSYNC:
+    case DepricatedChainId.WORLDCHAIN:
+    case DepricatedChainId.UNICHAIN_SEPOLIA:
+    case DepricatedChainId.UNICHAIN:
+    case DepricatedChainId.BASE_SEPOLIA:
+    case DepricatedChainId.MONAD_TESTNET: // TODO: double check on monad gas
+    case DepricatedChainId.SONEIUM:
       return BigNumber.from(2000);
-    case ChainId.ARBITRUM_ONE:
-    case ChainId.ARBITRUM_GOERLI:
-    case ChainId.ARBITRUM_SEPOLIA:
+    case DepricatedChainId.ARBITRUM_ONE:
+    case DepricatedChainId.ARBITRUM_GOERLI:
+    case DepricatedChainId.ARBITRUM_SEPOLIA:
       return BigNumber.from(5000);
-    case ChainId.POLYGON:
-    case ChainId.POLYGON_MUMBAI:
+    case DepricatedChainId.POLYGON:
+    case DepricatedChainId.POLYGON_MUMBAI:
       return BigNumber.from(2000);
 
-    case ChainId.CELO:
-    case ChainId.CELO_ALFAJORES:
+    case DepricatedChainId.CELO:
+    case DepricatedChainId.CELO_ALFAJORES:
       return BigNumber.from(2000);
 
     //TODO determine if sufficient
-    case ChainId.GNOSIS:
+    case DepricatedChainId.GNOSIS:
       return BigNumber.from(2000);
-    case ChainId.MOONBEAM:
+    case DepricatedChainId.MOONBEAM:
       return BigNumber.from(2000);
   }
 };
-export const COST_PER_INIT_TICK = (id: ChainId): BigNumber => {
+export const COST_PER_INIT_TICK = (id: DepricatedChainId): BigNumber => {
   switch (id) {
-    case ChainId.MAINNET:
-    case ChainId.GOERLI:
-    case ChainId.SEPOLIA:
-    case ChainId.BNB:
-    case ChainId.AVALANCHE:
+    case DepricatedChainId.MAINNET:
+    case DepricatedChainId.GOERLI:
+    case DepricatedChainId.SEPOLIA:
+    case DepricatedChainId.BNB:
+    case DepricatedChainId.AVALANCHE:
       return BigNumber.from(31000);
-    case ChainId.OPTIMISM:
-    case ChainId.OPTIMISM_GOERLI:
-    case ChainId.OPTIMISM_SEPOLIA:
-    case ChainId.BASE:
-    case ChainId.BASE_GOERLI:
-    case ChainId.ZORA:
-    case ChainId.ZORA_SEPOLIA:
-    case ChainId.ROOTSTOCK:
-    case ChainId.BLAST:
-    case ChainId.ZKSYNC:
-    case ChainId.WORLDCHAIN:
-    case ChainId.UNICHAIN_SEPOLIA:
-    case ChainId.UNICHAIN:
-    case ChainId.BASE_SEPOLIA:
-    case ChainId.MONAD_TESTNET: // TODO: double check on monad gas
-    case ChainId.SONEIUM:
+    case DepricatedChainId.OPTIMISM:
+    case DepricatedChainId.OPTIMISM_GOERLI:
+    case DepricatedChainId.OPTIMISM_SEPOLIA:
+    case DepricatedChainId.BASE:
+    case DepricatedChainId.BASE_GOERLI:
+    case DepricatedChainId.ZORA:
+    case DepricatedChainId.ZORA_SEPOLIA:
+    case DepricatedChainId.ROOTSTOCK:
+    case DepricatedChainId.BLAST:
+    case DepricatedChainId.ZKSYNC:
+    case DepricatedChainId.WORLDCHAIN:
+    case DepricatedChainId.UNICHAIN_SEPOLIA:
+    case DepricatedChainId.UNICHAIN:
+    case DepricatedChainId.BASE_SEPOLIA:
+    case DepricatedChainId.MONAD_TESTNET: // TODO: double check on monad gas
+    case DepricatedChainId.SONEIUM:
       return BigNumber.from(31000);
-    case ChainId.ARBITRUM_ONE:
-    case ChainId.ARBITRUM_GOERLI:
-    case ChainId.ARBITRUM_SEPOLIA:
+    case DepricatedChainId.ARBITRUM_ONE:
+    case DepricatedChainId.ARBITRUM_GOERLI:
+    case DepricatedChainId.ARBITRUM_SEPOLIA:
       return BigNumber.from(31000);
-    case ChainId.POLYGON:
-    case ChainId.POLYGON_MUMBAI:
+    case DepricatedChainId.POLYGON:
+    case DepricatedChainId.POLYGON_MUMBAI:
       return BigNumber.from(31000);
-    case ChainId.CELO:
-    case ChainId.CELO_ALFAJORES:
+    case DepricatedChainId.CELO:
+    case DepricatedChainId.CELO_ALFAJORES:
       return BigNumber.from(31000);
-    case ChainId.GNOSIS:
+    case DepricatedChainId.GNOSIS:
       return BigNumber.from(31000);
-    case ChainId.MOONBEAM:
+    case DepricatedChainId.MOONBEAM:
       return BigNumber.from(31000);
   }
 };
 
-export const COST_PER_HOP = (id: ChainId): BigNumber => {
+export const COST_PER_HOP = (id: DepricatedChainId): BigNumber => {
   switch (id) {
-    case ChainId.MAINNET:
-    case ChainId.GOERLI:
-    case ChainId.SEPOLIA:
-    case ChainId.BNB:
-    case ChainId.OPTIMISM:
-    case ChainId.OPTIMISM_GOERLI:
-    case ChainId.OPTIMISM_SEPOLIA:
-    case ChainId.AVALANCHE:
-    case ChainId.BASE:
-    case ChainId.BASE_GOERLI:
-    case ChainId.ZORA:
-    case ChainId.ZORA_SEPOLIA:
-    case ChainId.ROOTSTOCK:
-    case ChainId.BLAST:
-    case ChainId.ZKSYNC:
-    case ChainId.WORLDCHAIN:
-    case ChainId.UNICHAIN_SEPOLIA:
-    case ChainId.UNICHAIN:
-    case ChainId.BASE_SEPOLIA:
-    case ChainId.MONAD_TESTNET: // TODO: double check on monad gas
-    case ChainId.SONEIUM:
+    case DepricatedChainId.MAINNET:
+    case DepricatedChainId.GOERLI:
+    case DepricatedChainId.SEPOLIA:
+    case DepricatedChainId.BNB:
+    case DepricatedChainId.OPTIMISM:
+    case DepricatedChainId.OPTIMISM_GOERLI:
+    case DepricatedChainId.OPTIMISM_SEPOLIA:
+    case DepricatedChainId.AVALANCHE:
+    case DepricatedChainId.BASE:
+    case DepricatedChainId.BASE_GOERLI:
+    case DepricatedChainId.ZORA:
+    case DepricatedChainId.ZORA_SEPOLIA:
+    case DepricatedChainId.ROOTSTOCK:
+    case DepricatedChainId.BLAST:
+    case DepricatedChainId.ZKSYNC:
+    case DepricatedChainId.WORLDCHAIN:
+    case DepricatedChainId.UNICHAIN_SEPOLIA:
+    case DepricatedChainId.UNICHAIN:
+    case DepricatedChainId.BASE_SEPOLIA:
+    case DepricatedChainId.MONAD_TESTNET: // TODO: double check on monad gas
+    case DepricatedChainId.SONEIUM:
       return BigNumber.from(80000);
-    case ChainId.ARBITRUM_ONE:
-    case ChainId.ARBITRUM_GOERLI:
-    case ChainId.ARBITRUM_SEPOLIA:
+    case DepricatedChainId.ARBITRUM_ONE:
+    case DepricatedChainId.ARBITRUM_GOERLI:
+    case DepricatedChainId.ARBITRUM_SEPOLIA:
       return BigNumber.from(80000);
-    case ChainId.POLYGON:
-    case ChainId.POLYGON_MUMBAI:
+    case DepricatedChainId.POLYGON:
+    case DepricatedChainId.POLYGON_MUMBAI:
       return BigNumber.from(80000);
-    case ChainId.CELO:
-    case ChainId.CELO_ALFAJORES:
+    case DepricatedChainId.CELO:
+    case DepricatedChainId.CELO_ALFAJORES:
       return BigNumber.from(80000);
-    case ChainId.GNOSIS:
+    case DepricatedChainId.GNOSIS:
       return BigNumber.from(80000);
-    case ChainId.MOONBEAM:
+    case DepricatedChainId.MOONBEAM:
       return BigNumber.from(80000);
   }
 };
 
-export const SINGLE_HOP_OVERHEAD = (_id: ChainId): BigNumber => {
+export const SINGLE_HOP_OVERHEAD = (_id: DepricatedChainId): BigNumber => {
   return BigNumber.from(15000);
 };
 
 export const TOKEN_OVERHEAD = (
-  id: ChainId,
+  id: DepricatedChainId,
   route: V3Route | V4Route
 ): BigNumber => {
   const currencies: Currency[] =
     route.protocol === Protocol.V4 ? route.currencyPath : route.tokenPath;
   let overhead = BigNumber.from(0);
 
-  if (id == ChainId.MAINNET) {
+  if (id == DepricatedChainId.MAINNET) {
     // AAVE's transfer contains expensive governance snapshotting logic. We estimate
     // it at around 150k.
     if (currencies.some((t: Currency) => t.equals(AAVE_MAINNET))) {
@@ -165,14 +165,14 @@ export const TOKEN_OVERHEAD = (
 };
 
 // TODO: change per chain
-export const NATIVE_WRAP_OVERHEAD = (id: ChainId): BigNumber => {
+export const NATIVE_WRAP_OVERHEAD = (id: DepricatedChainId): BigNumber => {
   switch (id) {
     default:
       return BigNumber.from(27938);
   }
 };
 
-export const NATIVE_UNWRAP_OVERHEAD = (id: ChainId): BigNumber => {
+export const NATIVE_UNWRAP_OVERHEAD = (id: DepricatedChainId): BigNumber => {
   switch (id) {
     default:
       return BigNumber.from(36000);
@@ -180,7 +180,7 @@ export const NATIVE_UNWRAP_OVERHEAD = (id: ChainId): BigNumber => {
 };
 
 export const NATIVE_OVERHEAD = (
-  chainId: ChainId,
+  chainId: DepricatedChainId,
   amount: Currency,
   quote: Currency
 ): BigNumber => {

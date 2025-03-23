@@ -10,12 +10,11 @@ import {
 } from '../gas-model';
 import { TickBasedHeuristicGasModelFactory } from '../tick-based-heuristic-gas-model';
 
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 export class V4HeuristicGasModelFactory
   extends TickBasedHeuristicGasModelFactory<V4RouteWithValidQuote>
-  implements IOnChainGasModelFactory<V4RouteWithValidQuote>
-{
+  implements IOnChainGasModelFactory<V4RouteWithValidQuote> {
   constructor(provider: BaseProvider) {
     super(provider);
   }
@@ -47,7 +46,7 @@ export class V4HeuristicGasModelFactory
   protected override estimateGas(
     routeWithValidQuote: V4RouteWithValidQuote,
     gasPriceWei: BigNumber,
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     providerConfig?: GasModelProviderConfig
   ) {
     const totalInitializedTicksCrossed = this.totalInitializedTicksCrossed(

@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 import { computePoolAddress, FeeAmount, Pool } from '@rtz-dex-tools/v3-sdk';
 import retry, { Options as RetryOptions } from 'async-retry';
 
@@ -84,7 +84,7 @@ export class V3PoolProvider
    * @param retryOptions The retry options for each call to the multicall.
    */
   constructor(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     multicall2Provider: IMulticallProvider,
     retryOptions: V3PoolRetryOptions = {
       retries: 2,

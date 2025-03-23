@@ -7,7 +7,7 @@ import {
   MixedRouteSDK,
   Protocol,
 } from '@rtz-dex-tools/router-sdk';
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 import { encodeRouteToPath as encodeV3RouteToPath } from '@rtz-dex-tools/v3-sdk';
 import {
   encodeRouteToPath as encodeV4RouteToPath,
@@ -335,7 +335,7 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
    * @param metricsPrefix metrics prefix to differentiate between different instances of the quote provider.
    */
   constructor(
-    protected chainId: ChainId,
+    protected chainId: DepricatedChainId,
     protected provider: BaseProvider,
     // Only supports Uniswap Multicall as it needs the gas limitting functionality.
     protected multicall2Provider: UniswapMulticallProvider,
@@ -384,7 +384,7 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
       protocol: Protocol
     ) => string | undefined,
     protected metricsPrefix: (
-      chainId: ChainId,
+      chainId: DepricatedChainId,
       useMixedRouteQuoter: boolean,
       mixedRouteContainsV4Pool: boolean,
       protocol: Protocol,
@@ -1083,8 +1083,8 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
           // To work around this and avoid throwing errors when really we just couldn't get a quote, we catch this
           // case and return 0 quotes found.
           if (
-            (this.chainId == ChainId.ARBITRUM_ONE ||
-              this.chainId == ChainId.ARBITRUM_GOERLI) &&
+            (this.chainId == DepricatedChainId.ARBITRUM_ONE ||
+              this.chainId == DepricatedChainId.ARBITRUM_GOERLI) &&
             _.every(
               failedQuoteStates,
               (failedQuoteState) =>

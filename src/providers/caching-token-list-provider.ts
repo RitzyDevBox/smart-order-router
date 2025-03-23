@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 import { TokenInfo, TokenList } from '@uniswap/token-lists';
 import axios from 'axios';
 
@@ -26,25 +26,22 @@ export interface ITokenListProvider {
 }
 
 export class CachingTokenListProvider
-  implements ITokenProvider, ITokenListProvider
-{
+  implements ITokenProvider, ITokenListProvider {
   private CACHE_KEY = (tokenInfo: TokenInfo) =>
-    `token-list-token-${this.chainId}/${this.tokenList.name}/${
-      this.tokenList.timestamp
-    }/${this.tokenList.version}/${tokenInfo.address.toLowerCase()}/${
-      tokenInfo.decimals
+    `token-list-token-${this.chainId}/${this.tokenList.name}/${this.tokenList.timestamp
+    }/${this.tokenList.version}/${tokenInfo.address.toLowerCase()}/${tokenInfo.decimals
     }/${tokenInfo.symbol}/${tokenInfo.name}`;
 
-  private chainId: ChainId;
+  private chainId: DepricatedChainId;
   private chainToTokenInfos: Map<string, TokenInfo[]>;
   private chainSymbolToTokenInfo: Map<string, TokenInfo>;
   private chainAddressToTokenInfo: Map<string, TokenInfo>;
   private tokenList: TokenList;
 
-  private CHAIN_SYMBOL_KEY = (chainId: ChainId, symbol: string) =>
-    `${chainId.toString()}/${symbol}`;
-  private CHAIN_ADDRESS_KEY = (chainId: ChainId, address: string) =>
-    `${chainId.toString()}/${address.toLowerCase()}`;
+  private CHAIN_SYMBOL_KEY = (chainId: DepricatedChainId, symbol: string) =>
+    `${DepricatedChainId.toString()}/${symbol}`;
+  private CHAIN_ADDRESS_KEY = (chainId: DepricatedChainId, address: string) =>
+    `${DepricatedChainId.toString()}/${address.toLowerCase()}`;
 
   /**
    * Creates an instance of CachingTokenListProvider.
@@ -55,7 +52,7 @@ export class CachingTokenListProvider
    * @param tokenCache Cache instance to hold cached tokens.
    */
   constructor(
-    chainId: ChainId | number,
+    chainId: DepricatedChainId | number,
     tokenList: TokenList,
     private tokenCache: ICache<Token>
   ) {
@@ -68,7 +65,7 @@ export class CachingTokenListProvider
 
     for (const tokenInfo of this.tokenList.tokens) {
       const chainId = tokenInfo.chainId;
-      const chainIdString = chainId.toString();
+      const chainIdString = DepricatedChainId.toString();
       const symbol = tokenInfo.symbol;
       const address = tokenInfo.address.toLowerCase();
 
@@ -89,7 +86,7 @@ export class CachingTokenListProvider
   }
 
   public static async fromTokenListURI(
-    chainId: ChainId | number,
+    chainId: DepricatedChainId | number,
     tokenListURI: string,
     tokenCache: ICache<Token>
   ) {
@@ -127,7 +124,7 @@ export class CachingTokenListProvider
   }
 
   public static async fromTokenList(
-    chainId: ChainId | number,
+    chainId: DepricatedChainId | number,
     tokenList: TokenList,
     tokenCache: ICache<Token>
   ) {
@@ -174,7 +171,7 @@ export class CachingTokenListProvider
       }
     } else {
       const chainTokens =
-        this.chainToTokenInfos.get(this.chainId.toString()) ?? [];
+        this.chainToTokenInfos.get(this.DepricatedChainId.toString()) ?? [];
       for (const info of chainTokens) {
         const token = await this.buildToken(info);
         addToken(token);

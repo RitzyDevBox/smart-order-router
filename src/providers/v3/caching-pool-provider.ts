@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 import { FeeAmount, Pool } from '@rtz-dex-tools/v3-sdk';
 import _ from 'lodash';
 
@@ -19,7 +19,7 @@ import { IV3PoolProvider, V3PoolAccessor } from './pool-provider';
  */
 export class CachingV3PoolProvider implements IV3PoolProvider {
   private POOL_KEY = (
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     address: string,
     blockNumber?: number
   ) =>
@@ -34,7 +34,7 @@ export class CachingV3PoolProvider implements IV3PoolProvider {
    * @param cache Cache instance to hold cached pools.
    */
   constructor(
-    protected chainId: ChainId,
+    protected chainId: DepricatedChainId,
     protected poolProvider: IV3PoolProvider,
     private cache: ICache<Pool>
   ) { }

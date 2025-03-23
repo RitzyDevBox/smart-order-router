@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 
 import { ProviderConfig } from '../provider';
 import { SubgraphProvider } from '../subgraph-provider';
@@ -35,30 +35,30 @@ export type V3RawSubgraphPool = {
   totalValueLockedUSDUntracked: string;
 };
 
-const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]:
+const SUBGRAPH_URL_BY_CHAIN: { [chainId in DepricatedChainId]?: string } = {
+  [DepricatedChainId.MAINNET]:
     'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',
-  [ChainId.OPTIMISM]:
+  [DepricatedChainId.OPTIMISM]:
     'https://api.thegraph.com/subgraphs/name/ianlapham/optimism-post-regenesis',
   // todo: add once subgraph is live
-  [ChainId.OPTIMISM_SEPOLIA]: '',
-  [ChainId.ARBITRUM_ONE]:
+  [DepricatedChainId.OPTIMISM_SEPOLIA]: '',
+  [DepricatedChainId.ARBITRUM_ONE]:
     'https://api.thegraph.com/subgraphs/name/ianlapham/arbitrum-minimal',
   // todo: add once subgraph is live
-  [ChainId.ARBITRUM_SEPOLIA]: '',
-  [ChainId.POLYGON]:
+  [DepricatedChainId.ARBITRUM_SEPOLIA]: '',
+  [DepricatedChainId.POLYGON]:
     'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-polygon',
-  [ChainId.CELO]:
+  [DepricatedChainId.CELO]:
     'https://api.thegraph.com/subgraphs/name/jesse-sawa/uniswap-celo',
-  [ChainId.GOERLI]:
+  [DepricatedChainId.GOERLI]:
     'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-gorli',
-  [ChainId.BNB]:
+  [DepricatedChainId.BNB]:
     'https://api.thegraph.com/subgraphs/name/ilyamk/uniswap-v3---bnb-chain',
-  [ChainId.AVALANCHE]:
+  [DepricatedChainId.AVALANCHE]:
     'https://api.thegraph.com/subgraphs/name/lynnshaoyu/uniswap-v3-avax',
-  [ChainId.BASE]:
+  [DepricatedChainId.BASE]:
     'https://api.studio.thegraph.com/query/48211/uniswap-v3-base/version/latest',
-  [ChainId.BLAST]:
+  [DepricatedChainId.BLAST]:
     'https://gateway-arbitrum.network.thegraph.com/api/0ae45f0bf40ae2e73119b44ccd755967/subgraphs/id/2LHovKznvo8YmKC9ZprPjsYAZDCc4K5q4AYz8s3cnQn1',
 };
 
@@ -80,7 +80,7 @@ export class V3SubgraphProvider
   extends SubgraphProvider<V3RawSubgraphPool, V3SubgraphPool>
   implements IV3SubgraphProvider {
   constructor(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     retries = 2,
     timeout = 30000,
     rollback = true,

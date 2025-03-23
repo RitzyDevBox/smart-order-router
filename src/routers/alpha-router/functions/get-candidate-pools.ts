@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency, Token, TradeType } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency, Token, TradeType } from '@rtz-dex-tools/sdk-core';
 import { FeeAmount } from '@rtz-dex-tools/v3-sdk';
 import _ from 'lodash';
 
@@ -140,7 +140,7 @@ export type V4GetCandidatePoolsParams = {
   tokenProvider: ITokenProvider;
   poolProvider: IV4PoolProvider;
   blockedTokenListProvider?: ITokenListProvider;
-  chainId: ChainId;
+  chainId: DepricatedChainId;
   v4PoolParams?: Array<[number, number, string]>;
 };
 
@@ -153,7 +153,7 @@ export type V3GetCandidatePoolsParams = {
   tokenProvider: ITokenProvider;
   poolProvider: IV3PoolProvider;
   blockedTokenListProvider?: ITokenListProvider;
-  chainId: ChainId;
+  chainId: DepricatedChainId;
 };
 
 export type V2GetCandidatePoolsParams = {
@@ -165,7 +165,7 @@ export type V2GetCandidatePoolsParams = {
   tokenProvider: ITokenProvider;
   poolProvider: IV2PoolProvider;
   blockedTokenListProvider?: ITokenListProvider;
-  chainId: ChainId;
+  chainId: DepricatedChainId;
 };
 
 export type MixedRouteGetCandidatePoolsParams = {
@@ -179,11 +179,11 @@ export type MixedRouteGetCandidatePoolsParams = {
   v3poolProvider: IV3PoolProvider;
   v4PoolProvider: IV4PoolProvider;
   blockedTokenListProvider?: ITokenListProvider;
-  chainId: ChainId;
+  chainId: DepricatedChainId;
 };
 
-const baseTokensByChain: { [chainId in ChainId]?: Token[] } = {
-  [ChainId.MAINNET]: [
+const baseTokensByChain: { [chainId in DepricatedChainId]?: Token[] } = {
+  [DepricatedChainId.MAINNET]: [
     USDC_MAINNET,
     USDT_MAINNET,
     WBTC_MAINNET,
@@ -192,72 +192,72 @@ const baseTokensByChain: { [chainId in ChainId]?: Token[] } = {
     FEI_MAINNET,
     WSTETH_MAINNET,
   ],
-  [ChainId.OPTIMISM]: [
+  [DepricatedChainId.OPTIMISM]: [
     DAI_OPTIMISM,
     USDC_OPTIMISM,
     USDT_OPTIMISM,
     WBTC_OPTIMISM,
   ],
-  [ChainId.SEPOLIA]: [DAI_SEPOLIA, USDC_SEPOLIA],
-  [ChainId.OPTIMISM_GOERLI]: [
+  [DepricatedChainId.SEPOLIA]: [DAI_SEPOLIA, USDC_SEPOLIA],
+  [DepricatedChainId.OPTIMISM_GOERLI]: [
     DAI_OPTIMISM_GOERLI,
     USDC_OPTIMISM_GOERLI,
     USDT_OPTIMISM_GOERLI,
     WBTC_OPTIMISM_GOERLI,
   ],
-  [ChainId.OPTIMISM_SEPOLIA]: [
+  [DepricatedChainId.OPTIMISM_SEPOLIA]: [
     DAI_OPTIMISM_SEPOLIA,
     USDC_OPTIMISM_SEPOLIA,
     USDT_OPTIMISM_SEPOLIA,
     WBTC_OPTIMISM_SEPOLIA,
   ],
-  [ChainId.ARBITRUM_ONE]: [
+  [DepricatedChainId.ARBITRUM_ONE]: [
     DAI_ARBITRUM,
     USDC_ARBITRUM,
     WBTC_ARBITRUM,
     USDT_ARBITRUM,
   ],
-  [ChainId.ARBITRUM_GOERLI]: [USDC_ARBITRUM_GOERLI],
-  [ChainId.ARBITRUM_SEPOLIA]: [USDC_ARBITRUM_SEPOLIA],
-  [ChainId.POLYGON]: [USDC_POLYGON, WMATIC_POLYGON],
-  [ChainId.POLYGON_MUMBAI]: [DAI_POLYGON_MUMBAI, WMATIC_POLYGON_MUMBAI],
-  [ChainId.CELO]: [CUSD_CELO, CEUR_CELO, CELO],
-  [ChainId.CELO_ALFAJORES]: [
+  [DepricatedChainId.ARBITRUM_GOERLI]: [USDC_ARBITRUM_GOERLI],
+  [DepricatedChainId.ARBITRUM_SEPOLIA]: [USDC_ARBITRUM_SEPOLIA],
+  [DepricatedChainId.POLYGON]: [USDC_POLYGON, WMATIC_POLYGON],
+  [DepricatedChainId.POLYGON_MUMBAI]: [DAI_POLYGON_MUMBAI, WMATIC_POLYGON_MUMBAI],
+  [DepricatedChainId.CELO]: [CUSD_CELO, CEUR_CELO, CELO],
+  [DepricatedChainId.CELO_ALFAJORES]: [
     CUSD_CELO_ALFAJORES,
     CEUR_CELO_ALFAJORES,
     CELO_ALFAJORES,
   ],
-  [ChainId.GNOSIS]: [WBTC_GNOSIS, WXDAI_GNOSIS, USDC_ETHEREUM_GNOSIS],
-  [ChainId.MOONBEAM]: [
+  [DepricatedChainId.GNOSIS]: [WBTC_GNOSIS, WXDAI_GNOSIS, USDC_ETHEREUM_GNOSIS],
+  [DepricatedChainId.MOONBEAM]: [
     DAI_MOONBEAM,
     USDC_MOONBEAM,
     WBTC_MOONBEAM,
     WGLMR_MOONBEAM,
   ],
-  [ChainId.BNB]: [DAI_BNB, USDC_BNB, USDT_BNB],
-  [ChainId.AVALANCHE]: [DAI_AVAX, USDC_AVAX],
-  [ChainId.BASE]: [USDC_BASE],
-  [ChainId.BLAST]: [WRAPPED_NATIVE_CURRENCY[ChainId.BLAST]!, USDB_BLAST],
-  [ChainId.ZORA]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZORA]!],
-  [ChainId.ZKSYNC]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZKSYNC]!],
-  [ChainId.WORLDCHAIN]: [WRAPPED_NATIVE_CURRENCY[ChainId.WORLDCHAIN]!],
-  [ChainId.UNICHAIN_SEPOLIA]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.UNICHAIN_SEPOLIA]!,
+  [DepricatedChainId.BNB]: [DAI_BNB, USDC_BNB, USDT_BNB],
+  [DepricatedChainId.AVALANCHE]: [DAI_AVAX, USDC_AVAX],
+  [DepricatedChainId.BASE]: [USDC_BASE],
+  [DepricatedChainId.BLAST]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BLAST]!, USDB_BLAST],
+  [DepricatedChainId.ZORA]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZORA]!],
+  [DepricatedChainId.ZKSYNC]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZKSYNC]!],
+  [DepricatedChainId.WORLDCHAIN]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.WORLDCHAIN]!],
+  [DepricatedChainId.UNICHAIN_SEPOLIA]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.UNICHAIN_SEPOLIA]!,
   ],
-  [ChainId.MONAD_TESTNET]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.MONAD_TESTNET]!,
+  [DepricatedChainId.MONAD_TESTNET]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MONAD_TESTNET]!,
     USDT_MONAD_TESTNET,
   ],
-  [ChainId.BASE_SEPOLIA]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.BASE_SEPOLIA]!,
+  [DepricatedChainId.BASE_SEPOLIA]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BASE_SEPOLIA]!,
     USDC_BASE_SEPOLIA,
   ],
-  [ChainId.UNICHAIN]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.UNICHAIN]!,
+  [DepricatedChainId.UNICHAIN]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.UNICHAIN]!,
     DAI_UNICHAIN,
     USDC_UNICHAIN,
   ],
-  [ChainId.SONEIUM]: [USDC_SONEIUM, WRAPPED_NATIVE_CURRENCY[ChainId.SONEIUM]!],
+  [DepricatedChainId.SONEIUM]: [USDC_SONEIUM, WRAPPED_NATIVE_CURRENCY[DepricatedChainId.SONEIUM]!],
 };
 
 class SubcategorySelectionPools<SubgraphPool> {
@@ -614,7 +614,7 @@ export async function getV4CandidatePools({
   let top2EthQuoteTokenPool: V4SubgraphPool[] = [];
   if (
     (WRAPPED_NATIVE_CURRENCY[chainId]?.symbol ==
-      WRAPPED_NATIVE_CURRENCY[ChainId.MAINNET]?.symbol &&
+      WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MAINNET]?.symbol &&
       currencyOut.symbol != 'WETH' &&
       currencyOut.symbol != 'WETH9' &&
       currencyOut.symbol != 'ETH') ||
@@ -1014,7 +1014,7 @@ export async function getV3CandidatePools({
     // TODO: ROUTE-347, Remove this check once we have a better way to sync filters from subgraph cronjob <> routing path.
     if (
       !(
-        chainId == ChainId.MAINNET &&
+        chainId == DepricatedChainId.MAINNET &&
         (tokenIn.address.toLowerCase() ===
           '0xd46ba6d942050d489dbd938a2c909a5d5039a161' ||
           tokenOut.address.toLowerCase() ===
@@ -1061,7 +1061,7 @@ export async function getV3CandidatePools({
   let top2EthQuoteTokenPool: V3SubgraphPool[] = [];
   if (
     (WRAPPED_NATIVE_CURRENCY[chainId]?.symbol ==
-      WRAPPED_NATIVE_CURRENCY[ChainId.MAINNET]?.symbol &&
+      WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MAINNET]?.symbol &&
       tokenOut.symbol != 'WETH' &&
       tokenOut.symbol != 'WETH9' &&
       tokenOut.symbol != 'ETH') ||

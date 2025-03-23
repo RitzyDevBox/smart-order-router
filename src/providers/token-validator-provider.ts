@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 import _ from 'lodash';
 
 import { ITokenValidator__factory } from '../types/other/factories/ITokenValidator__factory';
@@ -53,13 +53,13 @@ export interface ITokenValidatorProvider {
 }
 
 export class TokenValidatorProvider implements ITokenValidatorProvider {
-  private CACHE_KEY = (chainId: ChainId, address: string) =>
+  private CACHE_KEY = (chainId: DepricatedChainId, address: string) =>
     `token-${chainId}-${address}`;
 
   private BASES: string[];
 
   constructor(
-    protected chainId: ChainId,
+    protected chainId: DepricatedChainId,
     protected multicall2Provider: IMulticallProvider,
     private tokenValidationCache: ICache<TokenValidationResult>,
     private tokenValidatorAddress = TOKEN_VALIDATOR_ADDRESS,
@@ -96,8 +96,7 @@ export class TokenValidatorProvider implements ITokenValidatorProvider {
           ))!;
 
         metric.putMetric(
-          `TokenValidatorProviderValidateCacheHitResult${
-            tokenToResult[address.toLowerCase()]
+          `TokenValidatorProviderValidateCacheHitResult${tokenToResult[address.toLowerCase()]
           }`,
           1,
           MetricLoggerUnit.Count
@@ -108,8 +107,7 @@ export class TokenValidatorProvider implements ITokenValidatorProvider {
     }
 
     log.info(
-      `Got token validation results for ${
-        addressesRaw.length - addresses.length
+      `Got token validation results for ${addressesRaw.length - addresses.length
       } tokens from cache. Getting ${addresses.length} on-chain.`
     );
 

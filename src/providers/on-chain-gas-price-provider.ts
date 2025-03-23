@@ -1,4 +1,4 @@
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 import { opStackChains } from '../util/l2FeeChains';
 import { EIP1559GasPriceProvider } from './eip-1559-gas-price-provider';
@@ -6,10 +6,10 @@ import { GasPrice, IGasPriceProvider } from './gas-price-provider';
 import { LegacyGasPriceProvider } from './legacy-gas-price-provider';
 
 const DEFAULT_EIP_1559_SUPPORTED_CHAINS = [
-  ChainId.MAINNET,
-  ChainId.GOERLI,
-  ChainId.POLYGON_MUMBAI,
-  ChainId.ARBITRUM_ONE,
+  DepricatedChainId.MAINNET,
+  DepricatedChainId.GOERLI,
+  DepricatedChainId.POLYGON_MUMBAI,
+  DepricatedChainId.ARBITRUM_ONE,
   ...opStackChains,
 ];
 
@@ -22,10 +22,10 @@ const DEFAULT_EIP_1559_SUPPORTED_CHAINS = [
  */
 export class OnChainGasPriceProvider extends IGasPriceProvider {
   constructor(
-    protected chainId: ChainId,
+    protected chainId: DepricatedChainId,
     protected eip1559GasPriceProvider: EIP1559GasPriceProvider,
     protected legacyGasPriceProvider: LegacyGasPriceProvider,
-    protected eipChains: ChainId[] = DEFAULT_EIP_1559_SUPPORTED_CHAINS
+    protected eipChains: DepricatedChainId[] = DEFAULT_EIP_1559_SUPPORTED_CHAINS
   ) {
     super();
   }

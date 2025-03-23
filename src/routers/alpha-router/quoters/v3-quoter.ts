@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency, Token, TradeType } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency, Token, TradeType } from '@rtz-dex-tools/sdk-core';
 import _ from 'lodash';
 
 import {
@@ -42,7 +42,7 @@ export class V3Quoter extends BaseQuoter<V3CandidatePools, V3Route, Token> {
     v3PoolProvider: IV3PoolProvider,
     onChainQuoteProvider: IOnChainQuoteProvider,
     tokenProvider: ITokenProvider,
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     blockedTokenListProvider?: ITokenListProvider,
     tokenValidatorProvider?: ITokenValidatorProvider
   ) {

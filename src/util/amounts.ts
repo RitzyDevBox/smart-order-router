@@ -1,10 +1,10 @@
 import { parseUnits } from '@ethersproject/units';
 import { ADDRESS_ZERO } from '@rtz-dex-tools/router-sdk';
 import {
-  ChainId,
+  DepricatedChainId,
   Currency,
   CurrencyAmount as CurrencyAmountRaw,
-} from '@uniswap/sdk-core';
+} from '@rtz-dex-tools/sdk-core';
 import { FeeAmount, TICK_SPACINGS } from '@rtz-dex-tools/v3-sdk';
 import JSBI from 'jsbi';
 
@@ -60,7 +60,7 @@ export function unparseFeeAmount(feeAmount: FeeAmount) {
   }
 }
 
-export function getApplicableV3FeeAmounts(chainId: ChainId): FeeAmount[] {
+export function getApplicableV3FeeAmounts(chainId: DepricatedChainId): FeeAmount[] {
   const feeAmounts = [
     FeeAmount.HIGH,
     FeeAmount.MEDIUM,
@@ -68,7 +68,7 @@ export function getApplicableV3FeeAmounts(chainId: ChainId): FeeAmount[] {
     FeeAmount.LOWEST,
   ];
 
-  if (chainId === ChainId.BASE) {
+  if (chainId === DepricatedChainId.BASE) {
     feeAmounts.push(FeeAmount.LOW_200, FeeAmount.LOW_300, FeeAmount.LOW_400);
   }
 
@@ -76,7 +76,7 @@ export function getApplicableV3FeeAmounts(chainId: ChainId): FeeAmount[] {
 }
 
 export function getApplicableV4FeesTickspacingsHooks(
-  chainId: ChainId
+  chainId: DepricatedChainId
 ): Array<[number, number, string]> {
   const feeAmounts = [
     FeeAmount.HIGH,
@@ -85,7 +85,7 @@ export function getApplicableV4FeesTickspacingsHooks(
     FeeAmount.LOWEST,
   ];
 
-  if (chainId === ChainId.BASE) {
+  if (chainId === DepricatedChainId.BASE) {
     feeAmounts.push(FeeAmount.LOW_200, FeeAmount.LOW_300, FeeAmount.LOW_400);
   }
 

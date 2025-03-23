@@ -1,9 +1,9 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import {
-  ChainId,
+  DepricatedChainId,
   CurrencyAmount as CurrencyAmountRaw,
   Token,
-} from '@uniswap/sdk-core';
+} from '@rtz-dex-tools/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { Pool } from '@rtz-dex-tools/v3-sdk';
 
@@ -84,57 +84,57 @@ import {
 // When adding new usd gas tokens, ensure the tokens are ordered
 // from tokens with highest decimals to lowest decimals. For example,
 // DAI_AVAX has 18 decimals and comes before USDC_AVAX which has 6 decimals.
-export const usdGasTokensByChain: { [chainId in ChainId]?: Token[] } = {
-  [ChainId.MAINNET]: [DAI_MAINNET, USDC_MAINNET, USDT_MAINNET],
-  [ChainId.ARBITRUM_ONE]: [
+export const usdGasTokensByChain: { [chainId in DepricatedChainId]?: Token[] } = {
+  [DepricatedChainId.MAINNET]: [DAI_MAINNET, USDC_MAINNET, USDT_MAINNET],
+  [DepricatedChainId.ARBITRUM_ONE]: [
     DAI_ARBITRUM,
     USDC_ARBITRUM,
     USDC_NATIVE_ARBITRUM,
     USDT_ARBITRUM,
   ],
-  [ChainId.OPTIMISM]: [
+  [DepricatedChainId.OPTIMISM]: [
     DAI_OPTIMISM,
     USDC_OPTIMISM,
     USDC_NATIVE_OPTIMISM,
     USDT_OPTIMISM,
   ],
-  [ChainId.OPTIMISM_GOERLI]: [
+  [DepricatedChainId.OPTIMISM_GOERLI]: [
     DAI_OPTIMISM_GOERLI,
     USDC_OPTIMISM_GOERLI,
     USDT_OPTIMISM_GOERLI,
   ],
-  [ChainId.OPTIMISM_SEPOLIA]: [
+  [DepricatedChainId.OPTIMISM_SEPOLIA]: [
     DAI_OPTIMISM_SEPOLIA,
     USDC_OPTIMISM_SEPOLIA,
     USDT_OPTIMISM_SEPOLIA,
   ],
-  [ChainId.ARBITRUM_GOERLI]: [USDC_ARBITRUM_GOERLI],
-  [ChainId.ARBITRUM_SEPOLIA]: [USDC_ARBITRUM_SEPOLIA],
-  [ChainId.GOERLI]: [DAI_GOERLI, USDC_GOERLI, USDT_GOERLI, WBTC_GOERLI],
-  [ChainId.SEPOLIA]: [USDC_SEPOLIA, DAI_SEPOLIA],
-  [ChainId.POLYGON]: [USDC_POLYGON, USDC_NATIVE_POLYGON],
-  [ChainId.POLYGON_MUMBAI]: [DAI_POLYGON_MUMBAI],
-  [ChainId.CELO]: [CUSD_CELO, USDC_CELO, USDC_NATIVE_CELO, USDC_WORMHOLE_CELO],
-  [ChainId.CELO_ALFAJORES]: [CUSD_CELO_ALFAJORES],
-  [ChainId.GNOSIS]: [USDC_ETHEREUM_GNOSIS],
-  [ChainId.MOONBEAM]: [USDC_MOONBEAM],
-  [ChainId.BNB]: [USDT_BNB, USDC_BNB, DAI_BNB],
-  [ChainId.AVALANCHE]: [
+  [DepricatedChainId.ARBITRUM_GOERLI]: [USDC_ARBITRUM_GOERLI],
+  [DepricatedChainId.ARBITRUM_SEPOLIA]: [USDC_ARBITRUM_SEPOLIA],
+  [DepricatedChainId.GOERLI]: [DAI_GOERLI, USDC_GOERLI, USDT_GOERLI, WBTC_GOERLI],
+  [DepricatedChainId.SEPOLIA]: [USDC_SEPOLIA, DAI_SEPOLIA],
+  [DepricatedChainId.POLYGON]: [USDC_POLYGON, USDC_NATIVE_POLYGON],
+  [DepricatedChainId.POLYGON_MUMBAI]: [DAI_POLYGON_MUMBAI],
+  [DepricatedChainId.CELO]: [CUSD_CELO, USDC_CELO, USDC_NATIVE_CELO, USDC_WORMHOLE_CELO],
+  [DepricatedChainId.CELO_ALFAJORES]: [CUSD_CELO_ALFAJORES],
+  [DepricatedChainId.GNOSIS]: [USDC_ETHEREUM_GNOSIS],
+  [DepricatedChainId.MOONBEAM]: [USDC_MOONBEAM],
+  [DepricatedChainId.BNB]: [USDT_BNB, USDC_BNB, DAI_BNB],
+  [DepricatedChainId.AVALANCHE]: [
     DAI_AVAX,
     USDC_AVAX,
     USDC_NATIVE_AVAX,
     USDC_BRIDGED_AVAX,
   ],
-  [ChainId.BASE]: [USDC_BASE, USDC_NATIVE_BASE],
-  [ChainId.BLAST]: [USDB_BLAST],
-  [ChainId.ZORA]: [USDC_ZORA],
-  [ChainId.ZKSYNC]: [DAI_ZKSYNC, USDCE_ZKSYNC, USDC_ZKSYNC],
-  [ChainId.WORLDCHAIN]: [USDC_WORLDCHAIN],
-  [ChainId.UNICHAIN_SEPOLIA]: [USDC_UNICHAIN_SEPOLIA],
-  [ChainId.MONAD_TESTNET]: [USDT_MONAD_TESTNET],
-  [ChainId.BASE_SEPOLIA]: [USDC_BASE_SEPOLIA],
-  [ChainId.UNICHAIN]: [DAI_UNICHAIN, USDC_UNICHAIN],
-  [ChainId.SONEIUM]: [USDC_SONEIUM],
+  [DepricatedChainId.BASE]: [USDC_BASE, USDC_NATIVE_BASE],
+  [DepricatedChainId.BLAST]: [USDB_BLAST],
+  [DepricatedChainId.ZORA]: [USDC_ZORA],
+  [DepricatedChainId.ZKSYNC]: [DAI_ZKSYNC, USDCE_ZKSYNC, USDC_ZKSYNC],
+  [DepricatedChainId.WORLDCHAIN]: [USDC_WORLDCHAIN],
+  [DepricatedChainId.UNICHAIN_SEPOLIA]: [USDC_UNICHAIN_SEPOLIA],
+  [DepricatedChainId.MONAD_TESTNET]: [USDT_MONAD_TESTNET],
+  [DepricatedChainId.BASE_SEPOLIA]: [USDC_BASE_SEPOLIA],
+  [DepricatedChainId.UNICHAIN]: [DAI_UNICHAIN, USDC_UNICHAIN],
+  [DepricatedChainId.SONEIUM]: [USDC_SONEIUM],
 };
 
 export type L1ToL2GasCosts = {
@@ -154,7 +154,7 @@ export type GasModelProviderConfig = ProviderConfig & {
 };
 
 export type BuildOnChainGasModelFactoryType = {
-  chainId: ChainId;
+  chainId: DepricatedChainId;
   gasPriceWei: BigNumber;
   pools: LiquidityCalculationPools;
   amountToken: Token;
@@ -165,7 +165,7 @@ export type BuildOnChainGasModelFactoryType = {
 };
 
 export type BuildV2GasModelFactoryType = {
-  chainId: ChainId;
+  chainId: DepricatedChainId;
   gasPriceWei: BigNumber;
   poolProvider: IV2PoolProvider;
   token: Token;
@@ -280,7 +280,7 @@ export abstract class IOnChainGasModelFactory<
 // Gets the native price of the pool, dependent on 0 or 1
 // quotes across the pool
 export const getQuoteThroughNativePool = (
-  chainId: ChainId,
+  chainId: DepricatedChainId,
   nativeTokenAmount: CurrencyAmountRaw<Token>,
   nativeTokenPool: Pool | Pair
 ): CurrencyAmount => {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 import { FeeAmount, Pool } from '@rtz-dex-tools/v3-sdk';
 import JSBI from 'jsbi';
 import _ from 'lodash';
@@ -80,28 +80,28 @@ import { IV3PoolProvider } from './pool-provider';
 import { IV3SubgraphProvider, V3SubgraphPool } from './subgraph-provider';
 
 type ChainTokenList = {
-  readonly [chainId in ChainId]: Token[];
+  readonly [chainId in DepricatedChainId]: Token[];
 };
 
 const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  [ChainId.MAINNET]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.MAINNET]!,
+  [DepricatedChainId.MAINNET]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MAINNET]!,
     DAI_MAINNET,
     USDC_MAINNET,
     USDT_MAINNET,
     WBTC_MAINNET,
     WSTETH_MAINNET,
   ],
-  [ChainId.GOERLI]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.GOERLI]!,
+  [DepricatedChainId.GOERLI]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.GOERLI]!,
     USDT_GOERLI,
     USDC_GOERLI,
     WBTC_GOERLI,
     DAI_GOERLI,
   ],
-  [ChainId.SEPOLIA]: [WRAPPED_NATIVE_CURRENCY[ChainId.SEPOLIA]!, USDC_SEPOLIA],
-  [ChainId.OPTIMISM]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.OPTIMISM]!,
+  [DepricatedChainId.SEPOLIA]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.SEPOLIA]!, USDC_SEPOLIA],
+  [DepricatedChainId.OPTIMISM]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.OPTIMISM]!,
     USDC_OPTIMISM,
     DAI_OPTIMISM,
     USDT_OPTIMISM,
@@ -109,52 +109,52 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     OP_OPTIMISM,
   ],
   // todo: once subgraph is created
-  [ChainId.OPTIMISM_SEPOLIA]: [
-    //   WRAPPED_NATIVE_CURRENCY[ChainId.OPTIMISM_SEPOLIA]!,
+  [DepricatedChainId.OPTIMISM_SEPOLIA]: [
+    //   WRAPPED_NATIVE_CURRENCY[DepricatedChainId.OPTIMISM_SEPOLIA]!,
   ],
-  [ChainId.ARBITRUM_ONE]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.ARBITRUM_ONE]!,
+  [DepricatedChainId.ARBITRUM_ONE]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ARBITRUM_ONE]!,
     WBTC_ARBITRUM,
     DAI_ARBITRUM,
     USDC_ARBITRUM,
     USDT_ARBITRUM,
     ARB_ARBITRUM,
   ],
-  [ChainId.ARBITRUM_GOERLI]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.ARBITRUM_GOERLI]!,
+  [DepricatedChainId.ARBITRUM_GOERLI]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ARBITRUM_GOERLI]!,
     USDC_ARBITRUM_GOERLI,
   ],
-  [ChainId.ARBITRUM_SEPOLIA]: [
-    // WRAPPED_NATIVE_CURRENCY[ChainId.ARBITRUM_SEPOLIA]!,
+  [DepricatedChainId.ARBITRUM_SEPOLIA]: [
+    // WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ARBITRUM_SEPOLIA]!,
   ],
-  [ChainId.OPTIMISM_GOERLI]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.OPTIMISM_GOERLI]!,
+  [DepricatedChainId.OPTIMISM_GOERLI]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.OPTIMISM_GOERLI]!,
     USDC_OPTIMISM_GOERLI,
     DAI_OPTIMISM_GOERLI,
     USDT_OPTIMISM_GOERLI,
     WBTC_OPTIMISM_GOERLI,
   ],
-  [ChainId.POLYGON]: [USDC_POLYGON, WETH_POLYGON, WMATIC_POLYGON],
-  [ChainId.POLYGON_MUMBAI]: [
+  [DepricatedChainId.POLYGON]: [USDC_POLYGON, WETH_POLYGON, WMATIC_POLYGON],
+  [DepricatedChainId.POLYGON_MUMBAI]: [
     DAI_POLYGON_MUMBAI,
-    WRAPPED_NATIVE_CURRENCY[ChainId.POLYGON_MUMBAI]!,
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.POLYGON_MUMBAI]!,
     WMATIC_POLYGON_MUMBAI,
   ],
-  [ChainId.CELO]: [CELO, CUSD_CELO, CEUR_CELO, DAI_CELO],
-  [ChainId.CELO_ALFAJORES]: [
+  [DepricatedChainId.CELO]: [CELO, CUSD_CELO, CEUR_CELO, DAI_CELO],
+  [DepricatedChainId.CELO_ALFAJORES]: [
     CELO_ALFAJORES,
     CUSD_CELO_ALFAJORES,
     CEUR_CELO_ALFAJORES,
     DAI_CELO_ALFAJORES,
   ],
-  [ChainId.GNOSIS]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.GNOSIS],
+  [DepricatedChainId.GNOSIS]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.GNOSIS],
     WBTC_GNOSIS,
     WXDAI_GNOSIS,
     USDC_ETHEREUM_GNOSIS,
   ],
-  [ChainId.BNB]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.BNB],
+  [DepricatedChainId.BNB]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BNB],
     BUSD_BNB,
     DAI_BNB,
     USDC_BNB,
@@ -162,52 +162,52 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     BTC_BNB,
     ETH_BNB,
   ],
-  [ChainId.AVALANCHE]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.AVALANCHE],
+  [DepricatedChainId.AVALANCHE]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.AVALANCHE],
     USDC_AVAX,
     DAI_AVAX,
   ],
-  [ChainId.MOONBEAM]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.MOONBEAM],
+  [DepricatedChainId.MOONBEAM]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MOONBEAM],
     DAI_MOONBEAM,
     USDC_MOONBEAM,
     WBTC_MOONBEAM,
   ],
-  [ChainId.BASE_GOERLI]: [WRAPPED_NATIVE_CURRENCY[ChainId.BASE_GOERLI]],
-  [ChainId.BASE]: [WRAPPED_NATIVE_CURRENCY[ChainId.BASE], USDC_BASE],
-  [ChainId.ZORA]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZORA]!],
-  [ChainId.ZORA_SEPOLIA]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZORA_SEPOLIA]!],
-  [ChainId.ROOTSTOCK]: [WRAPPED_NATIVE_CURRENCY[ChainId.ROOTSTOCK]!],
-  [ChainId.BLAST]: [WRAPPED_NATIVE_CURRENCY[ChainId.BLAST]!, USDB_BLAST],
-  [ChainId.ZKSYNC]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.ZKSYNC]!,
+  [DepricatedChainId.BASE_GOERLI]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BASE_GOERLI]],
+  [DepricatedChainId.BASE]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BASE], USDC_BASE],
+  [DepricatedChainId.ZORA]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZORA]!],
+  [DepricatedChainId.ZORA_SEPOLIA]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZORA_SEPOLIA]!],
+  [DepricatedChainId.ROOTSTOCK]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ROOTSTOCK]!],
+  [DepricatedChainId.BLAST]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BLAST]!, USDB_BLAST],
+  [DepricatedChainId.ZKSYNC]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZKSYNC]!,
     USDCE_ZKSYNC,
     USDC_ZKSYNC,
   ],
-  [ChainId.WORLDCHAIN]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.WORLDCHAIN]!,
+  [DepricatedChainId.WORLDCHAIN]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.WORLDCHAIN]!,
     USDC_WORLDCHAIN,
     WLD_WORLDCHAIN,
     WBTC_WORLDCHAIN,
   ],
-  [ChainId.UNICHAIN_SEPOLIA]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.UNICHAIN_SEPOLIA]!,
+  [DepricatedChainId.UNICHAIN_SEPOLIA]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.UNICHAIN_SEPOLIA]!,
     USDC_UNICHAIN_SEPOLIA,
   ],
-  [ChainId.UNICHAIN]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.UNICHAIN]!,
+  [DepricatedChainId.UNICHAIN]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.UNICHAIN]!,
     DAI_UNICHAIN,
     USDC_UNICHAIN,
   ],
-  [ChainId.MONAD_TESTNET]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.MONAD_TESTNET]!,
+  [DepricatedChainId.MONAD_TESTNET]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MONAD_TESTNET]!,
     USDT_MONAD_TESTNET,
   ],
-  [ChainId.BASE_SEPOLIA]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.BASE_SEPOLIA]!,
+  [DepricatedChainId.BASE_SEPOLIA]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BASE_SEPOLIA]!,
     USDC_BASE_SEPOLIA,
   ],
-  [ChainId.SONEIUM]: [WRAPPED_NATIVE_CURRENCY[ChainId.SONEIUM]!, USDC_SONEIUM],
+  [DepricatedChainId.SONEIUM]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.SONEIUM]!, USDC_SONEIUM],
 };
 
 /**
@@ -223,7 +223,7 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  */
 export class StaticV3SubgraphProvider implements IV3SubgraphProvider {
   constructor(
-    private chainId: ChainId,
+    private chainId: DepricatedChainId,
     private poolProvider: IV3PoolProvider
   ) { }
 

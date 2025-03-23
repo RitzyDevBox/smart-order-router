@@ -2,7 +2,7 @@ import { estimateL1Gas, estimateL1GasCost } from '@eth-optimism/sdk';
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider, TransactionRequest } from '@ethersproject/providers';
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Percent, Token, TradeType } from '@uniswap/sdk-core';
+import { DepricatedChainId, Percent, Token, TradeType } from '@rtz-dex-tools/sdk-core';
 import { UniversalRouterVersion } from '@rtz-dex-tools/universal-router-sdk';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { FeeAmount, Pool } from '@rtz-dex-tools/v3-sdk';
@@ -47,7 +47,7 @@ export async function getV2NativePool(
   poolProvider: IV2PoolProvider,
   providerConfig?: GasModelProviderConfig
 ): Promise<Pair | null> {
-  const chainId = token.chainId as ChainId;
+  const chainId = token.chainId as DepricatedChainId;
   const weth = WRAPPED_NATIVE_CURRENCY[chainId]!;
 
   const poolAccessor = await poolProvider.getPools(
@@ -78,7 +78,7 @@ export async function getHighestLiquidityV3NativePool(
   poolProvider: IV3PoolProvider,
   providerConfig?: GasModelProviderConfig
 ): Promise<Pool | null> {
-  const nativeCurrency = WRAPPED_NATIVE_CURRENCY[token.chainId as ChainId]!;
+  const nativeCurrency = WRAPPED_NATIVE_CURRENCY[token.chainId as DepricatedChainId]!;
 
   const feeAmounts = getApplicableV3FeeAmounts(token.chainId);
 
@@ -114,7 +114,7 @@ export async function getHighestLiquidityV3NativePool(
 }
 
 export async function getHighestLiquidityV3USDPool(
-  chainId: ChainId,
+  chainId: DepricatedChainId,
   poolProvider: IV3PoolProvider,
   providerConfig?: GasModelProviderConfig
 ): Promise<Pool> {
@@ -203,7 +203,7 @@ export function getArbitrumBytes(data: string): BigNumber {
 export function calculateArbitrumToL1FeeFromCalldata(
   calldata: string,
   gasData: ArbitrumGasData,
-  chainId: ChainId
+  chainId: DepricatedChainId
 ): [BigNumber, BigNumber, BigNumber] {
   const { perL2TxFee, perL1CalldataFee, perArbGasTotal } = gasData;
   // calculates gas amounts based on bytes of calldata, use 0 as overhead.
@@ -216,7 +216,7 @@ export function calculateArbitrumToL1FeeFromCalldata(
 
 export async function calculateOptimismToL1FeeFromCalldata(
   calldata: string,
-  chainId: ChainId,
+  chainId: DepricatedChainId,
   provider: BaseProvider
 ): Promise<[BigNumber, BigNumber]> {
   const tx: TransactionRequest = {
@@ -231,10 +231,10 @@ export async function calculateOptimismToL1FeeFromCalldata(
   return [l1GasUsed, l1GasCost];
 }
 
-export function getL2ToL1GasUsed(data: string, chainId: ChainId): BigNumber {
+export function getL2ToL1GasUsed(data: string, chainId: DepricatedChainId): BigNumber {
   switch (chainId) {
-    case ChainId.ARBITRUM_ONE:
-    case ChainId.ARBITRUM_GOERLI: {
+    case DepricatedChainId.ARBITRUM_ONE:
+    case DepricatedChainId.ARBITRUM_GOERLI: {
       // calculates bytes of compressed calldata
       const l1ByteUsed = getArbitrumBytes(data);
       return l1ByteUsed.mul(16);
@@ -245,7 +245,7 @@ export function getL2ToL1GasUsed(data: string, chainId: ChainId): BigNumber {
 }
 
 export async function calculateGasUsed(
-  chainId: ChainId,
+  chainId: DepricatedChainId,
   route: SwapRoute,
   simulatedGasUsed: BigNumber,
   v2PoolProvider: IV2PoolProvider,
@@ -546,7 +546,7 @@ export function initSwapRouteFromExisting(
 
 export const calculateL1GasFeesHelper = async (
   route: RouteWithValidQuote[],
-  chainId: ChainId,
+  chainId: DepricatedChainId,
   usdPool: Pair | Pool,
   quoteToken: Token,
   nativePool: Pair | Pool | null,
@@ -578,8 +578,8 @@ export const calculateL1GasFeesHelper = async (
       provider
     );
   } else if (
-    chainId == ChainId.ARBITRUM_ONE ||
-    chainId == ChainId.ARBITRUM_GOERLI
+    chainId == DepricatedChainId.ARBITRUM_ONE ||
+    chainId == DepricatedChainId.ARBITRUM_GOERLI
   ) {
     [mainnetGasUsed, mainnetFeeInWei, gasUsedL1OnL2] =
       calculateArbitrumToL1SecurityFee(
@@ -636,7 +636,7 @@ export const calculateL1GasFeesHelper = async (
   async function calculateOptimismToL1SecurityFee(
     routes: RouteWithValidQuote[],
     swapConfig: SwapOptionsUniversalRouter,
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     provider: BaseProvider
   ): Promise<[BigNumber, BigNumber]> {
     const route: RouteWithValidQuote = routes[0]!;
@@ -654,7 +654,7 @@ export const calculateL1GasFeesHelper = async (
     const data = buildSwapMethodParameters(
       trade,
       swapConfig,
-      ChainId.OPTIMISM
+      DepricatedChainId.OPTIMISM
     ).calldata;
 
     const [l1GasUsed, l1GasCost] = await calculateOptimismToL1FeeFromCalldata(
@@ -669,7 +669,7 @@ export const calculateL1GasFeesHelper = async (
     routes: RouteWithValidQuote[],
     swapConfig: SwapOptionsUniversalRouter,
     gasData: ArbitrumGasData,
-    chainId: ChainId
+    chainId: DepricatedChainId
   ): [BigNumber, BigNumber, BigNumber] {
     const route: RouteWithValidQuote = routes[0]!;
 
@@ -687,7 +687,7 @@ export const calculateL1GasFeesHelper = async (
     const data = buildSwapMethodParameters(
       trade,
       swapConfig,
-      ChainId.ARBITRUM_ONE
+      DepricatedChainId.ARBITRUM_ONE
     ).calldata;
     return calculateArbitrumToL1FeeFromCalldata(data, gasData, chainId);
   }
@@ -698,7 +698,7 @@ export const calculateL1GasFeesHelper = async (
 export const logGasEstimationVsSimulationMetrics = (
   route: SwapRoute,
   simulationGasUsed: BigNumber,
-  chainId: ChainId
+  chainId: DepricatedChainId
 ) => {
   try {
     // Log the diff between original estimatedGasUsed and the simulated gas used

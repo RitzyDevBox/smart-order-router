@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { Token } from '@uniswap/sdk-core';
+import { Token } from '@rtz-dex-tools/sdk-core';
 import { SubgraphPool } from '../routers/alpha-router/functions/get-candidate-pools';
 import { log } from '../util';
 import { ProviderConfig } from './provider';

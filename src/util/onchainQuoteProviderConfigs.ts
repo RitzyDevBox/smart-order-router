@@ -1,4 +1,4 @@
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 import {
   BatchParams,
@@ -8,12 +8,12 @@ import {
 } from '../providers';
 
 export const NETWORKS_WITH_SAME_RETRY_OPTIONS = Object.values(
-  ChainId
-) as ChainId[];
+  DepricatedChainId
+) as DepricatedChainId[];
 
 export function constructSameRetryOptionsMap<T extends QuoteRetryOptions>(
   retryOptions: T,
-  additionalNetworks: ChainId[] = []
+  additionalNetworks: DepricatedChainId[] = []
 ): { [chainId: number]: T } {
   return NETWORKS_WITH_SAME_RETRY_OPTIONS.concat(additionalNetworks).reduce<{
     [chainId: number]: T;
@@ -34,12 +34,12 @@ export const RETRY_OPTIONS = {
 };
 
 export const NETWORKS_WITH_SAME_BATCH_PARAMS = Object.values(
-  ChainId
-) as ChainId[];
+  DepricatedChainId
+) as DepricatedChainId[];
 
 export function constructSameBatchParamsMap<T extends BatchParams>(
   batchParams: T,
-  additionalNetworks: ChainId[] = []
+  additionalNetworks: DepricatedChainId[] = []
 ): { [chainId: number]: T } {
   return NETWORKS_WITH_SAME_BATCH_PARAMS.concat(additionalNetworks).reduce<{
     [chainId: number]: T;
@@ -60,14 +60,14 @@ export const BATCH_PARAMS = {
 };
 
 export const NETWORKS_WITH_SAME_GAS_ERROR_FAILURE_OVERRIDES = Object.values(
-  ChainId
-) as ChainId[];
+  DepricatedChainId
+) as DepricatedChainId[];
 
 export function constructSameGasErrorFailureOverridesMap<
   T extends FailureOverrides
 >(
   gasErrorFailureOverrides: T,
-  additionalNetworks: ChainId[] = []
+  additionalNetworks: DepricatedChainId[] = []
 ): { [chainId: number]: T } {
   return NETWORKS_WITH_SAME_GAS_ERROR_FAILURE_OVERRIDES.concat(
     additionalNetworks
@@ -91,14 +91,14 @@ export const GAS_ERROR_FAILURE_OVERRIDES = {
 };
 
 export const NETWORKS_WITH_SAME_SUCCESS_RATE_FAILURE_OVERRIDES = Object.values(
-  ChainId
-) as ChainId[];
+  DepricatedChainId
+) as DepricatedChainId[];
 
 export function constructSameSuccessRateFailureOverridesMap<
   T extends FailureOverrides
 >(
   successRateFailureOverrides: T,
-  additionalNetworks: ChainId[] = []
+  additionalNetworks: DepricatedChainId[] = []
 ): { [chainId: number]: T } {
   return NETWORKS_WITH_SAME_SUCCESS_RATE_FAILURE_OVERRIDES.concat(
     additionalNetworks
@@ -122,12 +122,12 @@ export const SUCCESS_RATE_FAILURE_OVERRIDES = {
 };
 
 export const NETWORKS_WITH_SAME_BLOCK_NUMBER_CONFIGS = Object.values(
-  ChainId
-) as ChainId[];
+  DepricatedChainId
+) as DepricatedChainId[];
 
 export function constructSameBlockNumberConfigsMap<T extends BlockNumberConfig>(
   blockNumberConfigs: T,
-  additionalNetworks: ChainId[] = []
+  additionalNetworks: DepricatedChainId[] = []
 ): { [chainId: number]: T } {
   return NETWORKS_WITH_SAME_BLOCK_NUMBER_CONFIGS.concat(
     additionalNetworks

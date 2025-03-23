@@ -1,5 +1,5 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
-import { ChainId, TradeType } from '@uniswap/sdk-core';
+import { DepricatedChainId, TradeType } from '@rtz-dex-tools/sdk-core';
 import { BigNumber } from 'ethers/lib/ethers';
 
 import {
@@ -53,7 +53,7 @@ export abstract class Simulator {
   constructor(
     provider: JsonRpcProvider,
     portionProvider: IPortionProvider,
-    protected chainId: ChainId
+    protected chainId: DepricatedChainId
   ) {
     this.provider = provider;
     this.portionProvider = portionProvider;
@@ -71,7 +71,7 @@ export abstract class Simulator {
       swapRoute.trade.tradeType == TradeType.EXACT_INPUT ? amount : quote;
     if (
       // we assume we always have enough eth mainnet balance because we use beacon address later
-      (neededBalance.currency.isNative && this.chainId == ChainId.MAINNET) ||
+      (neededBalance.currency.isNative && this.chainId == DepricatedChainId.MAINNET) ||
       (await this.userHasSufficientBalance(
         fromAddress,
         swapRoute.trade.tradeType,

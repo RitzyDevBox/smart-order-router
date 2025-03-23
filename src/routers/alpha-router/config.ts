@@ -1,24 +1,24 @@
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 import { AlphaRouterConfig, LowerCaseStringArray } from './alpha-router';
 
 export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (
-  chainId: ChainId
+  chainId: DepricatedChainId
 ): AlphaRouterConfig => {
   switch (chainId) {
     // Optimism
-    case ChainId.OPTIMISM:
-    case ChainId.OPTIMISM_GOERLI:
-    case ChainId.OPTIMISM_SEPOLIA:
-    case ChainId.BASE:
-    case ChainId.BASE_GOERLI:
-    case ChainId.BASE_SEPOLIA:
-    case ChainId.BLAST:
-    case ChainId.WORLDCHAIN:
-    case ChainId.UNICHAIN_SEPOLIA:
-    case ChainId.MONAD_TESTNET:
-    case ChainId.UNICHAIN:
-    case ChainId.SONEIUM:
+    case DepricatedChainId.OPTIMISM:
+    case DepricatedChainId.OPTIMISM_GOERLI:
+    case DepricatedChainId.OPTIMISM_SEPOLIA:
+    case DepricatedChainId.BASE:
+    case DepricatedChainId.BASE_GOERLI:
+    case DepricatedChainId.BASE_SEPOLIA:
+    case DepricatedChainId.BLAST:
+    case DepricatedChainId.WORLDCHAIN:
+    case DepricatedChainId.UNICHAIN_SEPOLIA:
+    case DepricatedChainId.MONAD_TESTNET:
+    case DepricatedChainId.UNICHAIN:
+    case DepricatedChainId.SONEIUM:
       return {
         v2PoolSelection: {
           topN: 3,
@@ -53,11 +53,11 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (
     // Arbitrum calls have lower gas limits and tend to timeout more, which causes us to reduce the multicall
     // batch size and send more multicalls per quote. To reduce the amount of requests each quote sends, we
     // have to adjust the routing config so we explore fewer routes.
-    case ChainId.ARBITRUM_ONE:
-    case ChainId.ARBITRUM_GOERLI:
-    case ChainId.ARBITRUM_SEPOLIA:
-    case ChainId.CELO:
-    case ChainId.CELO_ALFAJORES:
+    case DepricatedChainId.ARBITRUM_ONE:
+    case DepricatedChainId.ARBITRUM_GOERLI:
+    case DepricatedChainId.ARBITRUM_SEPOLIA:
+    case DepricatedChainId.CELO:
+    case DepricatedChainId.CELO_ALFAJORES:
       return {
         v2PoolSelection: {
           topN: 3,

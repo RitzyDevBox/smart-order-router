@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider } from '@ethersproject/providers';
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 import { TokenFeeDetector__factory } from '../types/other/factories/TokenFeeDetector__factory';
 import { TokenFeeDetector } from '../types/other/TokenFeeDetector';
@@ -34,31 +34,31 @@ export type TokenFeeResult = {
 export type TokenFeeMap = Record<Address, TokenFeeResult>;
 
 // address at which the FeeDetector lens is deployed
-const FEE_DETECTOR_ADDRESS = (chainId: ChainId) => {
+const FEE_DETECTOR_ADDRESS = (chainId: DepricatedChainId) => {
   switch (chainId) {
-    case ChainId.MAINNET:
+    case DepricatedChainId.MAINNET:
       return '0xbc708B192552e19A088b4C4B8772aEeA83bCf760';
-    case ChainId.OPTIMISM:
+    case DepricatedChainId.OPTIMISM:
       return '0x95aDC98A949dCD94645A8cD56830D86e4Cf34Eff';
-    case ChainId.BNB:
+    case DepricatedChainId.BNB:
       return '0xCF6220e4496B091a6b391D48e770f1FbaC63E740';
-    case ChainId.POLYGON:
+    case DepricatedChainId.POLYGON:
       return '0xC988e19819a63C0e487c6Ad8d6668Ac773923BF2';
-    case ChainId.BASE:
+    case DepricatedChainId.BASE:
       return '0xCF6220e4496B091a6b391D48e770f1FbaC63E740';
-    case ChainId.ARBITRUM_ONE:
+    case DepricatedChainId.ARBITRUM_ONE:
       return '0x37324D81e318260DC4f0fCb68035028eFdE6F50e';
-    case ChainId.CELO:
+    case DepricatedChainId.CELO:
       return '0x8eEa35913DdeD795001562f9bA5b282d3ac04B60';
-    case ChainId.AVALANCHE:
+    case DepricatedChainId.AVALANCHE:
       return '0x8269d47c4910B8c87789aA0eC128C11A8614dfC8';
-    case ChainId.WORLDCHAIN:
+    case DepricatedChainId.WORLDCHAIN:
       return '0xbc708B192552e19A088b4C4B8772aEeA83bCf760';
-    case ChainId.UNICHAIN_SEPOLIA:
+    case DepricatedChainId.UNICHAIN_SEPOLIA:
       return '0xbc708B192552e19A088b4C4B8772aEeA83bCf760';
-    case ChainId.UNICHAIN:
+    case DepricatedChainId.UNICHAIN:
       return '0xbc708B192552e19A088b4C4B8772aEeA83bCf760';
-    case ChainId.SONEIUM:
+    case DepricatedChainId.SONEIUM:
       return '0x7A5299822b2cD9aC9A9f67756Aa2d62140e9A66f';
     default:
       // just default to mainnet contract
@@ -86,7 +86,7 @@ export class OnChainTokenFeeFetcher implements ITokenFeeFetcher {
   private readonly contract: TokenFeeDetector;
 
   constructor(
-    private chainId: ChainId,
+    private chainId: DepricatedChainId,
     rpcProvider: BaseProvider,
     private tokenFeeAddress = FEE_DETECTOR_ADDRESS(chainId),
     private gasLimitPerCall = GAS_LIMIT_PER_VALIDATE,

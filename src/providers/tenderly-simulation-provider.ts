@@ -4,7 +4,7 @@ import https from 'https';
 import { MaxUint256 } from '@ethersproject/constants';
 import { JsonRpcProvider } from '@ethersproject/providers';
 import { permit2Address } from '@uniswap/permit2-sdk';
-import { ChainId } from '@uniswap/sdk-core';
+import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 import { UNIVERSAL_ROUTER_ADDRESS } from '@rtz-dex-tools/universal-router-sdk';
 import axios, { AxiosRequestConfig } from 'axios';
 import { BigNumber } from 'ethers/lib/ethers';
@@ -89,7 +89,7 @@ enum TenderlySimulationType {
 }
 
 type TenderlySimulationRequest = {
-  network_id: ChainId;
+  network_id: DepricatedChainId;
   estimate_gas: boolean;
   input: string;
   to: string;
@@ -134,27 +134,27 @@ const TENDERLY_BATCH_SIMULATE_API = (
 ) =>
   `${tenderlyBaseUrl}/api/v1/account/${tenderlyUser}/project/${tenderlyProject}/simulate-batch`;
 
-const TENDERLY_NODE_API = (chainId: ChainId, tenderlyNodeApiKey: string) => {
+const TENDERLY_NODE_API = (chainId: DepricatedChainId, tenderlyNodeApiKey: string) => {
   switch (chainId) {
-    case ChainId.MAINNET:
+    case DepricatedChainId.MAINNET:
       return `https://mainnet.gateway.tenderly.co/${tenderlyNodeApiKey}`;
-    case ChainId.BASE:
+    case DepricatedChainId.BASE:
       return `https://base.gateway.tenderly.co/${tenderlyNodeApiKey}`;
-    case ChainId.ARBITRUM_ONE:
+    case DepricatedChainId.ARBITRUM_ONE:
       return `https://arbitrum.gateway.tenderly.co/${tenderlyNodeApiKey}`;
-    case ChainId.OPTIMISM:
+    case DepricatedChainId.OPTIMISM:
       return `https://optimism.gateway.tenderly.co/${tenderlyNodeApiKey}`;
-    case ChainId.POLYGON:
+    case DepricatedChainId.POLYGON:
       return `https://polygon.gateway.tenderly.co/${tenderlyNodeApiKey}`;
-    case ChainId.AVALANCHE:
+    case DepricatedChainId.AVALANCHE:
       return `https://avalanche.gateway.tenderly.co/${tenderlyNodeApiKey}`;
-    case ChainId.BLAST:
+    case DepricatedChainId.BLAST:
       return `https://blast.gateway.tenderly.co/${tenderlyNodeApiKey}`;
-    case ChainId.WORLDCHAIN:
+    case DepricatedChainId.WORLDCHAIN:
       return `https://worldchain-mainnet.gateway.tenderly.co/${tenderlyNodeApiKey}`;
-    case ChainId.UNICHAIN:
+    case DepricatedChainId.UNICHAIN:
       return `https://unichain.gateway.tenderly.co/${tenderlyNodeApiKey}`;
-    case ChainId.SONEIUM:
+    case DepricatedChainId.SONEIUM:
       return `https://soneium.gateway.tenderly.co/${tenderlyNodeApiKey}`;
     default:
       throw new Error(
@@ -164,13 +164,13 @@ const TENDERLY_NODE_API = (chainId: ChainId, tenderlyNodeApiKey: string) => {
 };
 
 export const TENDERLY_NOT_SUPPORTED_CHAINS = [
-  ChainId.CELO,
-  ChainId.CELO_ALFAJORES,
-  ChainId.ZKSYNC,
+  DepricatedChainId.CELO,
+  DepricatedChainId.CELO_ALFAJORES,
+  DepricatedChainId.ZKSYNC,
   // tenderly node RPC supports BNB and ZORA upon request, we will make them available
-  ChainId.BNB,
-  ChainId.ZORA,
-  ChainId.MONAD_TESTNET,
+  DepricatedChainId.BNB,
+  DepricatedChainId.ZORA,
+  DepricatedChainId.MONAD_TESTNET,
 ];
 
 // We multiply tenderly gas limit by this to overestimate gas limit
@@ -180,7 +180,7 @@ export class FallbackTenderlySimulator extends Simulator {
   private tenderlySimulator: TenderlySimulator;
   private ethEstimateGasSimulator: EthEstimateGasSimulator;
   constructor(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     provider: JsonRpcProvider,
     portionProvider: IPortionProvider,
     tenderlySimulator: TenderlySimulator,
@@ -261,10 +261,11 @@ export class TenderlySimulator extends Simulator {
   private v2PoolProvider: IV2PoolProvider;
   private v3PoolProvider: IV3PoolProvider;
   private v4PoolProvider: IV4PoolProvider;
-  private overrideEstimateMultiplier: { [chainId in ChainId]?: number };
+  private overrideEstimateMultiplier: { [chainId in DepricatedChainId]?: number
+  };
   private tenderlyRequestTimeout?: number;
   private tenderlyNodeApiMigrationPercent?: number;
-  private tenderlyNodeApiEnabledChains?: ChainId[] = [];
+  private tenderlyNodeApiEnabledChains?: DepricatedChainId[] = [];
   private tenderlyServiceInstance = axios.create({
     // keep connections alive,
     // maxSockets default is Infinity, so Infinity is read as 50 sockets
@@ -273,7 +274,7 @@ export class TenderlySimulator extends Simulator {
   });
 
   constructor(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     tenderlyBaseUrl: string,
     tenderlyUser: string,
     tenderlyProject: string,
@@ -284,10 +285,10 @@ export class TenderlySimulator extends Simulator {
     v4PoolProvider: IV4PoolProvider,
     provider: JsonRpcProvider,
     portionProvider: IPortionProvider,
-    overrideEstimateMultiplier?: { [chainId in ChainId]?: number },
+    overrideEstimateMultiplier?: { [chainId in DepricatedChainId]?: number },
     tenderlyRequestTimeout?: number,
     tenderlyNodeApiMigrationPercent?: number,
-    tenderlyNodeApiEnabledChains?: ChainId[]
+    tenderlyNodeApiEnabledChains?: DepricatedChainId[]
   ) {
     super(provider, portionProvider, chainId);
     this.tenderlyBaseUrl = tenderlyBaseUrl;
@@ -348,7 +349,7 @@ export class TenderlySimulator extends Simulator {
 
     if (swapOptions.type == SwapType.UNIVERSAL_ROUTER) {
       // simulating from beacon chain deposit address that should always hold **enough balance**
-      if (currencyIn.isNative && this.chainId == ChainId.MAINNET) {
+      if (currencyIn.isNative && this.chainId == DepricatedChainId.MAINNET) {
         fromAddress = BEACON_CHAIN_DEPOSIT_ADDRESS;
       }
       // Do initial onboarding approval of Permit2.

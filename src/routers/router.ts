@@ -11,7 +11,7 @@ import {
   Percent,
   Token,
   TradeType,
-} from '@uniswap/sdk-core';
+} from '@rtz-dex-tools/sdk-core';
 import {
   SwapOptions as UniversalRouterSwapOptions,
   UniversalRouterVersion,

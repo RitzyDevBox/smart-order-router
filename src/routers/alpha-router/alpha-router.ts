@@ -3,12 +3,12 @@ import { BaseProvider, JsonRpcProvider } from '@ethersproject/providers';
 import DEFAULT_TOKEN_LIST from '@uniswap/default-token-list';
 import { Protocol, SwapRouter, Trade, ZERO } from '@rtz-dex-tools/router-sdk';
 import {
-  ChainId,
+  DepricatedChainId,
   Currency,
   Fraction,
   Token,
   TradeType,
-} from '@uniswap/sdk-core';
+} from '@rtz-dex-tools/sdk-core';
 import { TokenList } from '@uniswap/token-lists';
 import { Pool, Position, SqrtPriceMath, TickMath } from '@rtz-dex-tools/v3-sdk';
 import retry from 'async-retry';
@@ -196,7 +196,7 @@ export type AlphaRouterParams = {
   /**
    * The chain id for this instance of the Alpha Router.
    */
-  chainId: ChainId;
+  chainId: DepricatedChainId;
   /**
    * The Web3 provider for getting on-chain data.
    */
@@ -315,17 +315,17 @@ export type AlphaRouterParams = {
   /**
    * All the supported v2 chains configuration
    */
-  v2Supported?: ChainId[];
+  v2Supported?: DepricatedChainId[];
 
   /**
    * All the supported v4 chains configuration
    */
-  v4Supported?: ChainId[];
+  v4Supported?: DepricatedChainId[];
 
   /**
    * All the supported mixed chains configuration
    */
-  mixedSupported?: ChainId[];
+  mixedSupported?: DepricatedChainId[];
 
   /**
    * The v4 pool params to be used for the v4 pool provider.
@@ -533,7 +533,7 @@ export class AlphaRouter
   implements
   IRouter<AlphaRouterConfig>,
   ISwapToRatio<AlphaRouterConfig, SwapAndAddConfig> {
-  protected chainId: ChainId;
+  protected chainId: DepricatedChainId;
   protected provider: BaseProvider;
   protected multicall2Provider: UniswapMulticallProvider;
   protected v4SubgraphProvider: IV4SubgraphProvider;
@@ -562,9 +562,9 @@ export class AlphaRouter
   protected routeCachingProvider?: IRouteCachingProvider;
   protected tokenPropertiesProvider: ITokenPropertiesProvider;
   protected portionProvider: IPortionProvider;
-  protected v2Supported?: ChainId[];
-  protected v4Supported?: ChainId[];
-  protected mixedSupported?: ChainId[];
+  protected v2Supported?: DepricatedChainId[];
+  protected v4Supported?: DepricatedChainId[];
+  protected mixedSupported?: DepricatedChainId[];
   protected v4PoolParams?: Array<[number, number, string]>;
   protected cachedRoutesCacheInvalidationFixRolloutPercentage?: number;
   protected shouldEnableMixedRouteEthWeth?: boolean;
@@ -627,9 +627,9 @@ export class AlphaRouter
       this.onChainQuoteProvider = onChainQuoteProvider;
     } else {
       switch (chainId) {
-        case ChainId.OPTIMISM:
-        case ChainId.OPTIMISM_GOERLI:
-        case ChainId.OPTIMISM_SEPOLIA:
+        case DepricatedChainId.OPTIMISM:
+        case DepricatedChainId.OPTIMISM_GOERLI:
+        case DepricatedChainId.OPTIMISM_SEPOLIA:
           this.onChainQuoteProvider = new OnChainQuoteProvider(
             chainId,
             provider,
@@ -670,16 +670,16 @@ export class AlphaRouter
             }
           );
           break;
-        case ChainId.BASE:
-        case ChainId.BLAST:
-        case ChainId.ZORA:
-        case ChainId.WORLDCHAIN:
-        case ChainId.UNICHAIN_SEPOLIA:
-        case ChainId.MONAD_TESTNET:
-        case ChainId.BASE_SEPOLIA:
-        case ChainId.UNICHAIN:
-        case ChainId.BASE_GOERLI:
-        case ChainId.SONEIUM:
+        case DepricatedChainId.BASE:
+        case DepricatedChainId.BLAST:
+        case DepricatedChainId.ZORA:
+        case DepricatedChainId.WORLDCHAIN:
+        case DepricatedChainId.UNICHAIN_SEPOLIA:
+        case DepricatedChainId.MONAD_TESTNET:
+        case DepricatedChainId.BASE_SEPOLIA:
+        case DepricatedChainId.UNICHAIN:
+        case DepricatedChainId.BASE_GOERLI:
+        case DepricatedChainId.SONEIUM:
           this.onChainQuoteProvider = new OnChainQuoteProvider(
             chainId,
             provider,
@@ -720,7 +720,7 @@ export class AlphaRouter
             }
           );
           break;
-        case ChainId.ZKSYNC:
+        case DepricatedChainId.ZKSYNC:
           this.onChainQuoteProvider = new OnChainQuoteProvider(
             chainId,
             provider,
@@ -761,9 +761,9 @@ export class AlphaRouter
             }
           );
           break;
-        case ChainId.ARBITRUM_ONE:
-        case ChainId.ARBITRUM_GOERLI:
-        case ChainId.ARBITRUM_SEPOLIA:
+        case DepricatedChainId.ARBITRUM_ONE:
+        case DepricatedChainId.ARBITRUM_GOERLI:
+        case DepricatedChainId.ARBITRUM_SEPOLIA:
           this.onChainQuoteProvider = new OnChainQuoteProvider(
             chainId,
             provider,
@@ -794,8 +794,8 @@ export class AlphaRouter
             }
           );
           break;
-        case ChainId.CELO:
-        case ChainId.CELO_ALFAJORES:
+        case DepricatedChainId.CELO:
+        case DepricatedChainId.CELO_ALFAJORES:
           this.onChainQuoteProvider = new OnChainQuoteProvider(
             chainId,
             provider,
@@ -826,10 +826,10 @@ export class AlphaRouter
             }
           );
           break;
-        case ChainId.POLYGON_MUMBAI:
-        case ChainId.SEPOLIA:
-        case ChainId.MAINNET:
-        case ChainId.POLYGON:
+        case DepricatedChainId.POLYGON_MUMBAI:
+        case DepricatedChainId.SEPOLIA:
+        case DepricatedChainId.MAINNET:
+        case DepricatedChainId.POLYGON:
           this.onChainQuoteProvider = new OnChainQuoteProvider(
             chainId,
             provider,
@@ -858,7 +858,7 @@ export class AlphaRouter
 
     if (tokenValidatorProvider) {
       this.tokenValidatorProvider = tokenValidatorProvider;
-    } else if (this.chainId === ChainId.MAINNET) {
+    } else if (this.chainId === DepricatedChainId.MAINNET) {
       this.tokenValidatorProvider = new TokenValidatorProvider(
         this.chainId,
         this.multicall2Provider,
@@ -1008,8 +1008,8 @@ export class AlphaRouter
       new SwapRouterProvider(this.multicall2Provider, this.chainId);
 
     if (
-      chainId === ChainId.ARBITRUM_ONE ||
-      chainId === ChainId.ARBITRUM_GOERLI
+      chainId === DepricatedChainId.ARBITRUM_ONE ||
+      chainId === DepricatedChainId.ARBITRUM_GOERLI
     ) {
       this.l2GasDataProvider =
         arbitrumGasDataProvider ??

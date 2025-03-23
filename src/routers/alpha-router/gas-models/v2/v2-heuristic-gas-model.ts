@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import _ from 'lodash';
 
@@ -201,7 +201,7 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
   private estimateGas(
     routeWithValidQuote: V2RouteWithValidQuote,
     gasPriceWei: BigNumber,
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     providerConfig?: GasModelProviderConfig
   ) {
     const hops = routeWithValidQuote.route.pairs.length;
@@ -224,7 +224,7 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
   }
 
   private async getEthPool(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     token: Token,
     poolProvider: IV2PoolProvider,
     providerConfig?: ProviderConfig
@@ -255,7 +255,7 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
   }
 
   private async getHighestLiquidityUSDPool(
-    chainId: ChainId,
+    chainId: DepricatedChainId,
     poolProvider: IV2PoolProvider,
     providerConfig?: ProviderConfig
   ): Promise<Pair> {

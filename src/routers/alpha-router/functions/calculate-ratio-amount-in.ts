@@ -1,4 +1,4 @@
-import { Fraction } from '@uniswap/sdk-core';
+import { Fraction } from '@rtz-dex-tools/sdk-core';
 
 import { CurrencyAmount } from '../../../util/amounts';
 

@@ -1,5 +1,6 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency, TradeType } from '@uniswap/sdk-core';
+import { Currency, DepricatedChainId, TradeType } from '@rtz-dex-tools/sdk-core';
+import { UniversalRouterVersion } from '@rtz-dex-tools/universal-router-sdk';
 import _ from 'lodash';
 
 import {
@@ -22,6 +23,9 @@ import {
   MetricLoggerUnit,
   routeToString
 } from '../../../util';
+import {
+  mixedRouteFilterOutV4Pools
+} from '../../../util/mixedRouteFilterOutV4Pools';
 import { MixedRoute } from '../../router';
 import { AlphaRouterConfig } from '../alpha-router';
 import { MixedRouteWithValidQuote } from '../entities';
@@ -38,10 +42,6 @@ import { IGasModel } from '../gas-models';
 
 import { BaseQuoter } from './base-quoter';
 import { GetQuotesResult, GetRoutesResult } from './model';
-import { UniversalRouterVersion } from '@rtz-dex-tools/universal-router-sdk';
-import {
-  mixedRouteFilterOutV4Pools
-} from '../../../util/mixedRouteFilterOutV4Pools';
 
 export class MixedQuoter extends BaseQuoter<
   [
@@ -70,7 +70,7 @@ export class MixedQuoter extends BaseQuoter<
     v2PoolProvider: IV2PoolProvider,
     onChainQuoteProvider: IOnChainQuoteProvider,
     tokenProvider: ITokenProvider,
-    chainId: ChainId,
+    chainId:DepricatedChainId,
     blockedTokenListProvider?: ITokenListProvider,
     tokenValidatorProvider?: ITokenValidatorProvider
   ) {

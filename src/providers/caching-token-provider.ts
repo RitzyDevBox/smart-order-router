@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 import _ from 'lodash';
 
 import { log, WRAPPED_NATIVE_CURRENCY } from '../util';
@@ -68,10 +68,10 @@ import {
 
 // These tokens will added to the Token cache on initialization.
 export const CACHE_SEED_TOKENS: {
-  [chainId in ChainId]?: { [symbol: string]: Token };
+  [chainId in DepricatedChainId]?: { [symbol: string]: Token };
 } = {
-  [ChainId.MAINNET]: {
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.MAINNET]!,
+  [DepricatedChainId.MAINNET]: {
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MAINNET]!,
     USDC: USDC_MAINNET,
     USDT: USDT_MAINNET,
     WBTC: WBTC_MAINNET,
@@ -80,131 +80,131 @@ export const CACHE_SEED_TOKENS: {
     // our token providers.
     // This workaround adds it to the cache, so we won't try to fetch it on-chain.
     RING: new Token(
-      ChainId.MAINNET,
+      DepricatedChainId.MAINNET,
       '0x9469D013805bFfB7D3DEBe5E7839237e535ec483',
       18,
       'RING',
       'RING'
     ),
   },
-  [ChainId.SEPOLIA]: {
+  [DepricatedChainId.SEPOLIA]: {
     USDC: USDC_SEPOLIA,
   },
-  [ChainId.OPTIMISM]: {
+  [DepricatedChainId.OPTIMISM]: {
     USDC: USDC_OPTIMISM,
     USDT: USDT_OPTIMISM,
     WBTC: WBTC_OPTIMISM,
     DAI: DAI_OPTIMISM,
   },
-  [ChainId.OPTIMISM_GOERLI]: {
+  [DepricatedChainId.OPTIMISM_GOERLI]: {
     USDC: USDC_OPTIMISM_GOERLI,
     USDT: USDT_OPTIMISM_GOERLI,
     WBTC: WBTC_OPTIMISM_GOERLI,
     DAI: DAI_OPTIMISM_GOERLI,
   },
-  [ChainId.OPTIMISM_SEPOLIA]: {
+  [DepricatedChainId.OPTIMISM_SEPOLIA]: {
     USDC: USDC_OPTIMISM_SEPOLIA,
     USDT: USDT_OPTIMISM_SEPOLIA,
     WBTC: WBTC_OPTIMISM_SEPOLIA,
     DAI: DAI_OPTIMISM_SEPOLIA,
   },
-  [ChainId.ARBITRUM_ONE]: {
+  [DepricatedChainId.ARBITRUM_ONE]: {
     USDC: USDC_ARBITRUM,
     USDT: USDT_ARBITRUM,
     WBTC: WBTC_ARBITRUM,
     DAI: DAI_ARBITRUM,
   },
-  [ChainId.ARBITRUM_GOERLI]: {
+  [DepricatedChainId.ARBITRUM_GOERLI]: {
     USDC: USDC_ARBITRUM_GOERLI,
   },
-  [ChainId.ARBITRUM_SEPOLIA]: {
+  [DepricatedChainId.ARBITRUM_SEPOLIA]: {
     USDC: USDC_ARBITRUM_SEPOLIA,
     DAI: DAI_ARBITRUM_SEPOLIA,
   },
-  [ChainId.POLYGON]: {
+  [DepricatedChainId.POLYGON]: {
     WMATIC: WMATIC_POLYGON,
     USDC: USDC_POLYGON,
   },
-  [ChainId.POLYGON_MUMBAI]: {
+  [DepricatedChainId.POLYGON_MUMBAI]: {
     WMATIC: WMATIC_POLYGON_MUMBAI,
     DAI: DAI_POLYGON_MUMBAI,
   },
-  [ChainId.CELO]: {
+  [DepricatedChainId.CELO]: {
     CELO: CELO,
     CUSD: CUSD_CELO,
     CEUR: CEUR_CELO,
     DAI: DAI_CELO,
   },
-  [ChainId.CELO_ALFAJORES]: {
+  [DepricatedChainId.CELO_ALFAJORES]: {
     CELO: CELO_ALFAJORES,
     CUSD: CUSD_CELO_ALFAJORES,
     CEUR: CUSD_CELO_ALFAJORES,
     DAI: DAI_CELO_ALFAJORES,
   },
-  [ChainId.GNOSIS]: {
-    WXDAI: WRAPPED_NATIVE_CURRENCY[ChainId.GNOSIS],
+  [DepricatedChainId.GNOSIS]: {
+    WXDAI: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.GNOSIS],
     USDC_ETHEREUM_GNOSIS: USDC_ETHEREUM_GNOSIS,
   },
-  [ChainId.MOONBEAM]: {
+  [DepricatedChainId.MOONBEAM]: {
     USDC: USDC_MOONBEAM,
     DAI: DAI_MOONBEAM,
     WBTC: WBTC_MOONBEAM,
-    WGLMR: WRAPPED_NATIVE_CURRENCY[ChainId.MOONBEAM],
+    WGLMR: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MOONBEAM],
   },
-  [ChainId.BNB]: {
+  [DepricatedChainId.BNB]: {
     USDC: USDC_BNB,
     USDT: USDT_BNB,
     BUSD: BUSD_BNB,
     ETH: ETH_BNB,
     DAI: DAI_BNB,
     BTC: BTC_BNB,
-    WBNB: WRAPPED_NATIVE_CURRENCY[ChainId.BNB],
+    WBNB: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BNB],
   },
-  [ChainId.AVALANCHE]: {
+  [DepricatedChainId.AVALANCHE]: {
     USDC: USDC_AVAX,
     DAI: DAI_AVAX,
-    WAVAX: WRAPPED_NATIVE_CURRENCY[ChainId.AVALANCHE],
+    WAVAX: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.AVALANCHE],
   },
-  [ChainId.BASE]: {
+  [DepricatedChainId.BASE]: {
     USDC: USDC_BASE,
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.BASE],
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BASE],
   },
-  [ChainId.BLAST]: {
+  [DepricatedChainId.BLAST]: {
     USDB: USDB_BLAST,
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.BLAST],
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BLAST],
   },
-  [ChainId.ZORA]: {
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.ZORA],
+  [DepricatedChainId.ZORA]: {
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZORA],
   },
-  [ChainId.ZKSYNC]: {
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.ZKSYNC],
+  [DepricatedChainId.ZKSYNC]: {
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZKSYNC],
   },
-  [ChainId.WORLDCHAIN]: {
+  [DepricatedChainId.WORLDCHAIN]: {
     USDC: USDC_WORLDCHAIN,
     WLD: WLD_WORLDCHAIN,
     WBTC: WBTC_WORLDCHAIN,
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.WORLDCHAIN],
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.WORLDCHAIN],
   },
-  [ChainId.UNICHAIN_SEPOLIA]: {
+  [DepricatedChainId.UNICHAIN_SEPOLIA]: {
     USDC: USDC_SEPOLIA,
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.UNICHAIN_SEPOLIA],
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.UNICHAIN_SEPOLIA],
   },
-  [ChainId.MONAD_TESTNET]: {
+  [DepricatedChainId.MONAD_TESTNET]: {
     USDT: USDT_MONAD_TESTNET,
-    WMON: WRAPPED_NATIVE_CURRENCY[ChainId.MONAD_TESTNET],
+    WMON: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MONAD_TESTNET],
   },
-  [ChainId.BASE_SEPOLIA]: {
+  [DepricatedChainId.BASE_SEPOLIA]: {
     USDC: USDC_BASE_SEPOLIA,
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.BASE_SEPOLIA],
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BASE_SEPOLIA],
   },
-  [ChainId.UNICHAIN]: {
+  [DepricatedChainId.UNICHAIN]: {
     DAI: DAI_UNICHAIN,
     USDC: USDC_UNICHAIN,
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.UNICHAIN],
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.UNICHAIN],
   },
-  [ChainId.SONEIUM]: {
+  [DepricatedChainId.SONEIUM]: {
     USDC: USDC_SONEIUM,
-    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.SONEIUM],
+    WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.SONEIUM],
   },
   // Currently we do not have providers for Moonbeam mainnet or Gnosis testnet
 };
@@ -217,17 +217,17 @@ export const CACHE_SEED_TOKENS: {
  * @class CachingTokenProviderWithFallback
  */
 export class CachingTokenProviderWithFallback implements ITokenProvider {
-  private CACHE_KEY = (chainId: ChainId, address: string) =>
+  private CACHE_KEY = (chainId: DepricatedChainId, address: string) =>
     `token-${chainId}-${address}`;
 
   constructor(
-    protected chainId: ChainId,
+    protected chainId: DepricatedChainId,
     // Token metadata (e.g. symbol and decimals) don't change so can be cached indefinitely.
     // Constructing a new token object is slow as sdk-core does checksumming.
     private tokenCache: ICache<Token>,
     protected primaryTokenProvider: ITokenProvider,
     protected fallbackTokenProvider?: ITokenProvider
-  ) {}
+  ) { }
 
   public async getTokens(_addresses: string[]): Promise<TokenAccessor> {
     const seedTokens = CACHE_SEED_TOKENS[this.chainId];
@@ -266,12 +266,10 @@ export class CachingTokenProviderWithFallback implements ITokenProvider {
 
     log.info(
       { addressesToFindInPrimary },
-      `Found ${addresses.length - addressesToFindInPrimary.length} out of ${
-        addresses.length
-      } tokens in local cache. ${
-        addressesToFindInPrimary.length > 0
-          ? `Checking primary token provider for ${addressesToFindInPrimary.length} tokens`
-          : ``
+      `Found ${addresses.length - addressesToFindInPrimary.length} out of ${addresses.length
+      } tokens in local cache. ${addressesToFindInPrimary.length > 0
+        ? `Checking primary token provider for ${addressesToFindInPrimary.length} tokens`
+        : ``
       }
       `
     );
@@ -298,12 +296,10 @@ export class CachingTokenProviderWithFallback implements ITokenProvider {
 
       log.info(
         { addressesToFindInSecondary },
-        `Found ${
-          addressesToFindInPrimary.length - addressesToFindInSecondary.length
-        } tokens in primary. ${
-          this.fallbackTokenProvider
-            ? `Checking secondary token provider for ${addressesToFindInSecondary.length} tokens`
-            : `No fallback token provider specified. About to return.`
+        `Found ${addressesToFindInPrimary.length - addressesToFindInSecondary.length
+        } tokens in primary. ${this.fallbackTokenProvider
+          ? `Checking secondary token provider for ${addressesToFindInSecondary.length} tokens`
+          : `No fallback token provider specified. About to return.`
         }`
       );
     }

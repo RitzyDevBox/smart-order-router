@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { ChainId, Currency } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency } from '@rtz-dex-tools/sdk-core';
 
 import { getAddressLowerCase, log, metric, MetricLoggerUnit } from '../util';
 
@@ -37,17 +37,17 @@ export interface ITokenPropertiesProvider {
 }
 
 export class TokenPropertiesProvider implements ITokenPropertiesProvider {
-  private CACHE_KEY = (chainId: ChainId, address: string) =>
+  private CACHE_KEY = (chainId: DepricatedChainId, address: string) =>
     `token-properties-${chainId}-${address}`;
 
   constructor(
-    private chainId: ChainId,
+    private chainId: DepricatedChainId,
     private tokenPropertiesCache: ICache<TokenPropertiesResult>,
     private tokenFeeFetcher: ITokenFeeFetcher,
     private allowList = DEFAULT_ALLOWLIST,
     private positiveCacheEntryTTL = POSITIVE_CACHE_ENTRY_TTL,
     private negativeCacheEntryTTL = NEGATIVE_CACHE_ENTRY_TTL
-  ) {}
+  ) { }
 
   public async getTokensProperties(
     currencies: Currency[],

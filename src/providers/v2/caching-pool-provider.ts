@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import _ from 'lodash';
 
@@ -15,7 +15,7 @@ import { IV2PoolProvider, V2PoolAccessor } from './pool-provider';
  * @class CachingV2PoolProvider
  */
 export class CachingV2PoolProvider implements IV2PoolProvider {
-  private POOL_KEY = (chainId: ChainId, address: string) =>
+  private POOL_KEY = (chainId: DepricatedChainId, address: string) =>
     `pool-${chainId}-${address}`;
 
   /**
@@ -25,7 +25,7 @@ export class CachingV2PoolProvider implements IV2PoolProvider {
    * @param cache Cache instance to hold cached pools.
    */
   constructor(
-    protected chainId: ChainId,
+    protected chainId: DepricatedChainId,
     protected poolProvider: IV2PoolProvider,
     // Cache is block aware. For V2 pools we need to use the current blocks reserves values since
     // we compute quotes off-chain.

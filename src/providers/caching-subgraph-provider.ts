@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency, Token } from '@uniswap/sdk-core';
+import { Currency, DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
 
 import { SubgraphPool } from '../routers/alpha-router/functions/get-candidate-pools';
 import { nativeOnChain, WRAPPED_NATIVE_CURRENCY } from '../util';
@@ -24,7 +24,6 @@ import {
   ETH_BNB,
   OP_OPTIMISM,
   USDB_BLAST,
-  USDCE_ZKSYNC,
   USDC_ARBITRUM,
   USDC_AVAX,
   USDC_BASE,
@@ -40,6 +39,7 @@ import {
   USDC_UNICHAIN_SEPOLIA,
   USDC_WORLDCHAIN,
   USDC_ZKSYNC,
+  USDCE_ZKSYNC,
   USDT_ARBITRUM,
   USDT_BNB,
   USDT_MAINNET,
@@ -58,37 +58,37 @@ import {
 import { V3SubgraphPool } from './v3/subgraph-provider';
 
 type ChainTokenList = {
-  readonly [chainId in ChainId]: Currency[];
+  readonly [chainId in DepricatedChainId]: Currency[];
 };
 
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  [ChainId.MAINNET]: [
-    nativeOnChain(ChainId.MAINNET),
-    WRAPPED_NATIVE_CURRENCY[ChainId.MAINNET]!,
+  [DepricatedChainId.MAINNET]: [
+    nativeOnChain(DepricatedChainId.MAINNET),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MAINNET]!,
     DAI_MAINNET,
     USDC_MAINNET,
     USDT_MAINNET,
     WBTC_MAINNET,
     WSTETH_MAINNET,
   ],
-  [ChainId.GOERLI]: [WRAPPED_NATIVE_CURRENCY[ChainId.GOERLI]!],
-  [ChainId.SEPOLIA]: [
-    nativeOnChain(ChainId.SEPOLIA),
-    WRAPPED_NATIVE_CURRENCY[ChainId.SEPOLIA]!,
+  [DepricatedChainId.GOERLI]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.GOERLI]!],
+  [DepricatedChainId.SEPOLIA]: [
+    nativeOnChain(DepricatedChainId.SEPOLIA),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.SEPOLIA]!,
   ],
   //v2 not deployed on [arbitrum, polygon, celo, gnosis, moonbeam, bnb, avalanche] and their testnets
-  [ChainId.OPTIMISM]: [
-    nativeOnChain(ChainId.OPTIMISM),
-    WRAPPED_NATIVE_CURRENCY[ChainId.OPTIMISM]!,
+  [DepricatedChainId.OPTIMISM]: [
+    nativeOnChain(DepricatedChainId.OPTIMISM),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.OPTIMISM]!,
     USDC_OPTIMISM,
     DAI_OPTIMISM,
     USDT_OPTIMISM,
     WBTC_OPTIMISM,
     OP_OPTIMISM,
   ],
-  [ChainId.ARBITRUM_ONE]: [
-    nativeOnChain(ChainId.ARBITRUM_ONE),
-    WRAPPED_NATIVE_CURRENCY[ChainId.ARBITRUM_ONE]!,
+  [DepricatedChainId.ARBITRUM_ONE]: [
+    nativeOnChain(DepricatedChainId.ARBITRUM_ONE),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ARBITRUM_ONE]!,
     WBTC_ARBITRUM,
     DAI_ARBITRUM,
     USDC_ARBITRUM,
@@ -96,29 +96,29 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     USDT_ARBITRUM,
     ARB_ARBITRUM,
   ],
-  [ChainId.ARBITRUM_GOERLI]: [],
-  [ChainId.ARBITRUM_SEPOLIA]: [],
-  [ChainId.OPTIMISM_GOERLI]: [],
-  [ChainId.OPTIMISM_SEPOLIA]: [],
-  [ChainId.POLYGON]: [
-    nativeOnChain(ChainId.POLYGON),
+  [DepricatedChainId.ARBITRUM_GOERLI]: [],
+  [DepricatedChainId.ARBITRUM_SEPOLIA]: [],
+  [DepricatedChainId.OPTIMISM_GOERLI]: [],
+  [DepricatedChainId.OPTIMISM_SEPOLIA]: [],
+  [DepricatedChainId.POLYGON]: [
+    nativeOnChain(DepricatedChainId.POLYGON),
     USDC_POLYGON,
     WETH_POLYGON,
     WMATIC_POLYGON,
   ],
-  [ChainId.POLYGON_MUMBAI]: [],
-  [ChainId.CELO]: [CELO, CUSD_CELO, CEUR_CELO, DAI_CELO],
-  [ChainId.CELO_ALFAJORES]: [],
-  [ChainId.GNOSIS]: [],
-  [ChainId.MOONBEAM]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.MOONBEAM],
+  [DepricatedChainId.POLYGON_MUMBAI]: [],
+  [DepricatedChainId.CELO]: [CELO, CUSD_CELO, CEUR_CELO, DAI_CELO],
+  [DepricatedChainId.CELO_ALFAJORES]: [],
+  [DepricatedChainId.GNOSIS]: [],
+  [DepricatedChainId.MOONBEAM]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MOONBEAM],
     DAI_MOONBEAM,
     USDC_MOONBEAM,
     WBTC_MOONBEAM,
   ],
-  [ChainId.BNB]: [
-    nativeOnChain(ChainId.BNB),
-    WRAPPED_NATIVE_CURRENCY[ChainId.BNB],
+  [DepricatedChainId.BNB]: [
+    nativeOnChain(DepricatedChainId.BNB),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BNB],
     BUSD_BNB,
     DAI_BNB,
     USDC_BNB,
@@ -126,64 +126,64 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     BTC_BNB,
     ETH_BNB,
   ],
-  [ChainId.AVALANCHE]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.AVALANCHE],
+  [DepricatedChainId.AVALANCHE]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.AVALANCHE],
     USDC_AVAX,
     DAI_AVAX,
   ],
-  [ChainId.BASE_GOERLI]: [],
-  [ChainId.BASE]: [
-    nativeOnChain(ChainId.BASE),
-    WRAPPED_NATIVE_CURRENCY[ChainId.BASE],
+  [DepricatedChainId.BASE_GOERLI]: [],
+  [DepricatedChainId.BASE]: [
+    nativeOnChain(DepricatedChainId.BASE),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BASE],
     USDC_BASE,
   ],
-  [ChainId.ZORA]: [
-    nativeOnChain(ChainId.ZORA),
-    WRAPPED_NATIVE_CURRENCY[ChainId.ZORA]!,
+  [DepricatedChainId.ZORA]: [
+    nativeOnChain(DepricatedChainId.ZORA),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZORA]!,
   ],
-  [ChainId.ZORA_SEPOLIA]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZORA_SEPOLIA]!],
-  [ChainId.ROOTSTOCK]: [WRAPPED_NATIVE_CURRENCY[ChainId.ROOTSTOCK]!],
-  [ChainId.BLAST]: [
-    nativeOnChain(ChainId.BLAST),
-    WRAPPED_NATIVE_CURRENCY[ChainId.BLAST]!,
+  [DepricatedChainId.ZORA_SEPOLIA]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZORA_SEPOLIA]!],
+  [DepricatedChainId.ROOTSTOCK]: [WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ROOTSTOCK]!],
+  [DepricatedChainId.BLAST]: [
+    nativeOnChain(DepricatedChainId.BLAST),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BLAST]!,
     USDB_BLAST,
   ],
-  [ChainId.ZKSYNC]: [
-    WRAPPED_NATIVE_CURRENCY[ChainId.ZKSYNC]!,
+  [DepricatedChainId.ZKSYNC]: [
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.ZKSYNC]!,
     USDCE_ZKSYNC,
     USDC_ZKSYNC,
   ],
-  [ChainId.WORLDCHAIN]: [
-    nativeOnChain(ChainId.WORLDCHAIN),
-    WRAPPED_NATIVE_CURRENCY[ChainId.WORLDCHAIN]!,
+  [DepricatedChainId.WORLDCHAIN]: [
+    nativeOnChain(DepricatedChainId.WORLDCHAIN),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.WORLDCHAIN]!,
     USDC_WORLDCHAIN,
     WLD_WORLDCHAIN,
     WBTC_WORLDCHAIN,
   ],
-  [ChainId.UNICHAIN_SEPOLIA]: [
-    nativeOnChain(ChainId.UNICHAIN_SEPOLIA),
-    WRAPPED_NATIVE_CURRENCY[ChainId.UNICHAIN_SEPOLIA]!,
+  [DepricatedChainId.UNICHAIN_SEPOLIA]: [
+    nativeOnChain(DepricatedChainId.UNICHAIN_SEPOLIA),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.UNICHAIN_SEPOLIA]!,
     USDC_UNICHAIN_SEPOLIA,
   ],
-  [ChainId.UNICHAIN]: [
-    nativeOnChain(ChainId.UNICHAIN),
-    WRAPPED_NATIVE_CURRENCY[ChainId.UNICHAIN]!,
+  [DepricatedChainId.UNICHAIN]: [
+    nativeOnChain(DepricatedChainId.UNICHAIN),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.UNICHAIN]!,
     DAI_UNICHAIN,
     USDC_UNICHAIN,
   ],
-  [ChainId.BASE_SEPOLIA]: [
-    nativeOnChain(ChainId.BASE_SEPOLIA),
-    WRAPPED_NATIVE_CURRENCY[ChainId.BASE_SEPOLIA]!,
+  [DepricatedChainId.BASE_SEPOLIA]: [
+    nativeOnChain(DepricatedChainId.BASE_SEPOLIA),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.BASE_SEPOLIA]!,
     USDC_BASE_SEPOLIA,
   ],
-  [ChainId.MONAD_TESTNET]: [
-    nativeOnChain(ChainId.MONAD_TESTNET),
-    WRAPPED_NATIVE_CURRENCY[ChainId.MONAD_TESTNET]!,
+  [DepricatedChainId.MONAD_TESTNET]: [
+    nativeOnChain(DepricatedChainId.MONAD_TESTNET),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MONAD_TESTNET]!,
     USDT_MONAD_TESTNET,
   ],
-  [ChainId.SONEIUM]: [
-    nativeOnChain(ChainId.SONEIUM),
-    WRAPPED_NATIVE_CURRENCY[ChainId.SONEIUM]!,
+  [DepricatedChainId.SONEIUM]: [
+    nativeOnChain(DepricatedChainId.SONEIUM),
+    WRAPPED_NATIVE_CURRENCY[DepricatedChainId.SONEIUM]!,
     USDC_SONEIUM,
   ],
 };
@@ -207,7 +207,7 @@ export interface ISubgraphProvider<TSubgraphPool extends SubgraphPool> {
 export abstract class CachingSubgraphProvider<
   TSubgraphPool extends SubgraphPool
 > implements ISubgraphProvider<TSubgraphPool> {
-  private SUBGRAPH_KEY = (chainId: ChainId) =>
+  private SUBGRAPH_KEY = (chainId:DepricatedChainId) =>
     `subgraph-pools-${this.protocol}-${chainId}`;
 
   /**
@@ -218,7 +218,7 @@ export abstract class CachingSubgraphProvider<
    * @param protocol Subgraph protocol version
    */
   constructor(
-    private chainId: ChainId,
+    private chainId:DepricatedChainId,
     protected subgraphProvider: ISubgraphProvider<TSubgraphPool>,
     private cache: ICache<TSubgraphPool[]>,
     private protocol: Protocol

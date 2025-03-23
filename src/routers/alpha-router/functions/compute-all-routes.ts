@@ -1,5 +1,5 @@
 import { TPool } from '@rtz-dex-tools/router-sdk';
-import { ChainId, Currency, Token } from '@uniswap/sdk-core';
+import { DepricatedChainId, Currency, Token } from '@rtz-dex-tools/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { Pool as V3Pool } from '@rtz-dex-tools/v3-sdk';
 import { Pool as V4Pool } from '@rtz-dex-tools/v4-sdk';
@@ -89,7 +89,7 @@ export function computeAllMixedRoutes(
     ).length > 0;
   const amendedPools =
     containsV4NativePools && shouldEnableMixedRouteEthWeth
-      ? parts.concat(V4_ETH_WETH_FAKE_POOL[currencyIn.chainId as ChainId])
+      ? parts.concat(V4_ETH_WETH_FAKE_POOL[currencyIn.chainId as DepricatedChainId])
       : parts;
   // NOTE: we added a fake v4 pool, in order for mixed route to connect the v3 weth pool with v4 eth pool
   const routesRaw = computeAllRoutes<TPool, MixedRoute, Currency>(
@@ -153,7 +153,7 @@ export function computeAllRoutes<
         (pool) =>
           pool instanceof V4Pool &&
           pool.tickSpacing ===
-          V4_ETH_WETH_FAKE_POOL[tokenIn.chainId as ChainId].tickSpacing
+          V4_ETH_WETH_FAKE_POOL[tokenIn.chainId as DepricatedChainId].tickSpacing
       ).length > 0;
     const amendedMaxHops = currentRouteContainsFakeV4Pool
       ? maxHops + 1
