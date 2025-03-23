@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { ChainId, Currency } from '@uniswap/sdk-core';
 import { Pool as V3Pool } from '@rtz-dex-tools/v3-sdk';
-import { Pool as V4Pool } from '@uniswap/v4-sdk';
+import { Pool as V4Pool } from '@rtz-dex-tools/v4-sdk';
 import { Options as RetryOptions } from 'async-retry';
 import _ from 'lodash';
 

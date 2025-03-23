@@ -23,7 +23,7 @@ import {
   Position,
   Route as V3RouteRaw,
 } from '@rtz-dex-tools/v3-sdk';
-import { Route as V4RouteRaw } from '@uniswap/v4-sdk';
+import { Route as V4RouteRaw } from '@rtz-dex-tools/v4-sdk';
 
 import { SimulationStatus } from '../providers';
 import { CurrencyAmount } from '../util/amounts';
