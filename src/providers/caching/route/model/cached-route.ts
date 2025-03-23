@@ -1,6 +1,6 @@
 import { Protocol } from '@uniswap/router-sdk';
 import { Currency } from '@uniswap/sdk-core';
-import { Pair } from '@uniswap/v2-sdk';
+import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { Pool as V3Pool } from '@uniswap/v3-sdk';
 import { Pool as V4Pool } from '@uniswap/v4-sdk';
 

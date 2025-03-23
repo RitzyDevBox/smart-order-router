@@ -5,7 +5,7 @@ import { Pool as V3Pool } from '@uniswap/v3-sdk';
 import { Pool as V4Pool } from '@uniswap/v4-sdk';
 import _ from 'lodash';
 
-import { Pair } from '@uniswap/v2-sdk';
+import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { IV4PoolProvider } from '../../../providers';
 import { IV2PoolProvider } from '../../../providers/v2/pool-provider';
 import { IV3PoolProvider } from '../../../providers/v3/pool-provider';
