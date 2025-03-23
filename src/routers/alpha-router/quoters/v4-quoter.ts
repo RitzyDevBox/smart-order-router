@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, Currency, TradeType } from '@rtz-dex-tools/sdk-core';
+import { Currency, TradeType } from '@rtz-dex-tools/sdk-core';
 import _ from 'lodash';
 
 import {
@@ -41,7 +41,7 @@ export class V4Quoter extends BaseQuoter<V4CandidatePools, V4Route, Currency> {
     v4PoolProvider: IV4PoolProvider,
     onChainQuoteProvider: IOnChainQuoteProvider,
     tokenProvider: ITokenProvider,
-    chainId: DepricatedChainId,
+    chainId: number,
     blockedTokenListProvider?: ITokenListProvider,
     tokenValidatorProvider?: ITokenValidatorProvider
   ) {

@@ -13,7 +13,7 @@ export const NETWORKS_WITH_SAME_RETRY_OPTIONS = Object.values(
 
 export function constructSameRetryOptionsMap<T extends QuoteRetryOptions>(
   retryOptions: T,
-  additionalNetworks: DepricatedChainId[] = []
+  additionalNetworks: number[] = []
 ): { [chainId: number]: T } {
   return NETWORKS_WITH_SAME_RETRY_OPTIONS.concat(additionalNetworks).reduce<{
     [chainId: number]: T;

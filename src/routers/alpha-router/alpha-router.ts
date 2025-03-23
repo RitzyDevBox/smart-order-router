@@ -1,16 +1,17 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider, JsonRpcProvider } from '@ethersproject/providers';
-import DEFAULT_TOKEN_LIST from '@uniswap/default-token-list';
 import { Protocol, SwapRouter, Trade, ZERO } from '@rtz-dex-tools/router-sdk';
 import {
-  DepricatedChainId,
   Currency,
+  DepricatedChainId,
   Fraction,
   Token,
   TradeType,
 } from '@rtz-dex-tools/sdk-core';
-import { TokenList } from '@uniswap/token-lists';
+import { UniversalRouterVersion } from '@rtz-dex-tools/universal-router-sdk';
 import { Pool, Position, SqrtPriceMath, TickMath } from '@rtz-dex-tools/v3-sdk';
+import DEFAULT_TOKEN_LIST from '@uniswap/default-token-list';
+import { TokenList } from '@uniswap/token-lists';
 import retry from 'async-retry';
 import JSBI from 'jsbi';
 import _ from 'lodash';
@@ -107,10 +108,12 @@ import {
   ID_TO_NETWORK_NAME,
   V2_SUPPORTED,
 } from '../../util/chains';
+import { DEFAULT_BLOCKS_TO_LIVE } from '../../util/defaultBlocksToLive';
 import {
   getHighestLiquidityV3NativePool,
   getHighestLiquidityV3USDPool,
 } from '../../util/gas-factory-helpers';
+import { INTENT } from '../../util/intent';
 import { log } from '../../util/log';
 import {
   buildSwapMethodParameters,
@@ -129,6 +132,7 @@ import {
   RETRY_OPTIONS,
   SUCCESS_RATE_FAILURE_OVERRIDES,
 } from '../../util/onchainQuoteProviderConfigs';
+import { serializeRouteIds } from '../../util/serializeRouteIds';
 import { UNSUPPORTED_TOKENS } from '../../util/unsupported-tokens';
 import {
   IRouter,
@@ -148,10 +152,7 @@ import {
   V4Route,
 } from '../router';
 
-import { UniversalRouterVersion } from '@rtz-dex-tools/universal-router-sdk';
-import { DEFAULT_BLOCKS_TO_LIVE } from '../../util/defaultBlocksToLive';
-import { INTENT } from '../../util/intent';
-import { serializeRouteIds } from '../../util/serializeRouteIds';
+
 import {
   DEFAULT_ROUTING_CONFIG_BY_CHAIN,
   ETH_GAS_STATION_API_URL,

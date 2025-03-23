@@ -1,5 +1,6 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
-import { DepricatedChainId, TradeType } from '@rtz-dex-tools/sdk-core';
+import { TradeType } from '@rtz-dex-tools/sdk-core';
+import { permit2Address } from '@uniswap/permit2-sdk';
 import { BigNumber } from 'ethers/lib/ethers';
 
 import {
@@ -12,7 +13,6 @@ import { Erc20__factory } from '../types/other/factories/Erc20__factory';
 import { Permit2__factory } from '../types/other/factories/Permit2__factory';
 import { CurrencyAmount, log, SWAP_ROUTER_02_ADDRESSES } from '../util';
 
-import { permit2Address } from '@uniswap/permit2-sdk';
 import { IPortionProvider } from './portion-provider';
 
 export type SimulationResult = {
@@ -53,7 +53,7 @@ export abstract class Simulator {
   constructor(
     provider: JsonRpcProvider,
     portionProvider: IPortionProvider,
-    protected chainId: DepricatedChainId
+    protected chainId: number
   ) {
     this.provider = provider;
     this.portionProvider = portionProvider;
@@ -71,7 +71,7 @@ export abstract class Simulator {
       swapRoute.trade.tradeType == TradeType.EXACT_INPUT ? amount : quote;
     if (
       // we assume we always have enough eth mainnet balance because we use beacon address later
-      (neededBalance.currency.isNative && this.chainId == DepricatedChainId.MAINNET) ||
+      (neededBalance.currency.isNative && this.chainId == 1) ||
       (await this.userHasSufficientBalance(
         fromAddress,
         swapRoute.trade.tradeType,

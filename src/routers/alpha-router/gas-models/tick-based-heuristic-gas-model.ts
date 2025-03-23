@@ -1,10 +1,12 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider } from '@ethersproject/providers';
-import { DepricatedChainId, Percent, Price } from '@rtz-dex-tools/sdk-core';
+import { Percent, Price } from '@rtz-dex-tools/sdk-core';
 import { Pool } from '@rtz-dex-tools/v3-sdk';
+
 import { CurrencyAmount, log, WRAPPED_NATIVE_CURRENCY } from '../../../util';
 import { calculateL1GasFeesHelper } from '../../../util/gas-factory-helpers';
 import { V3RouteWithValidQuote, V4RouteWithValidQuote } from '../entities';
+
 import {
   BASE_SWAP_COST,
   COST_PER_HOP,
@@ -268,7 +270,7 @@ export abstract class TickBasedHeuristicGasModelFactory<
   protected estimateGas(
     routeWithValidQuote: TRouteWithValidQuote,
     gasPriceWei: BigNumber,
-    chainId: DepricatedChainId,
+    chainId: number,
     providerConfig?: GasModelProviderConfig
   ) {
     const totalInitializedTicksCrossed = this.totalInitializedTicksCrossed(

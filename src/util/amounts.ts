@@ -60,7 +60,7 @@ export function unparseFeeAmount(feeAmount: FeeAmount) {
   }
 }
 
-export function getApplicableV3FeeAmounts(chainId: DepricatedChainId): FeeAmount[] {
+export function getApplicableV3FeeAmounts(chainId: number): FeeAmount[] {
   const feeAmounts = [
     FeeAmount.HIGH,
     FeeAmount.MEDIUM,
@@ -76,7 +76,7 @@ export function getApplicableV3FeeAmounts(chainId: DepricatedChainId): FeeAmount
 }
 
 export function getApplicableV4FeesTickspacingsHooks(
-  chainId: DepricatedChainId
+  chainId: number
 ): Array<[number, number, string]> {
   const feeAmounts = [
     FeeAmount.HIGH,

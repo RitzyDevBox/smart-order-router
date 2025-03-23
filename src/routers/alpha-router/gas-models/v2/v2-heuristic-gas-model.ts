@@ -1,9 +1,9 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
+import { BaseProvider } from '@ethersproject/providers';
+import { Token } from '@rtz-dex-tools/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import _ from 'lodash';
 
-import { BaseProvider } from '@ethersproject/providers';
 import { ProviderConfig } from '../../../../providers/provider';
 import { IV2PoolProvider } from '../../../../providers/v2/pool-provider';
 import { log, WRAPPED_NATIVE_CURRENCY } from '../../../../util';
@@ -201,7 +201,7 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
   private estimateGas(
     routeWithValidQuote: V2RouteWithValidQuote,
     gasPriceWei: BigNumber,
-    chainId: DepricatedChainId,
+    chainId: number,
     providerConfig?: GasModelProviderConfig
   ) {
     const hops = routeWithValidQuote.route.pairs.length;
@@ -224,7 +224,7 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
   }
 
   private async getEthPool(
-    chainId: DepricatedChainId,
+    chainId: number,
     token: Token,
     poolProvider: IV2PoolProvider,
     providerConfig?: ProviderConfig
@@ -255,7 +255,7 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
   }
 
   private async getHighestLiquidityUSDPool(
-    chainId: DepricatedChainId,
+    chainId: number,
     poolProvider: IV2PoolProvider,
     providerConfig?: ProviderConfig
   ): Promise<Pair> {

@@ -1,5 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider } from '@ethersproject/providers';
+
 import { CurrencyAmount, WRAPPED_NATIVE_CURRENCY } from '../../../../util';
 import { V4RouteWithValidQuote } from '../../entities';
 import {
@@ -10,7 +11,6 @@ import {
 } from '../gas-model';
 import { TickBasedHeuristicGasModelFactory } from '../tick-based-heuristic-gas-model';
 
-import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 export class V4HeuristicGasModelFactory
   extends TickBasedHeuristicGasModelFactory<V4RouteWithValidQuote>
@@ -46,7 +46,7 @@ export class V4HeuristicGasModelFactory
   protected override estimateGas(
     routeWithValidQuote: V4RouteWithValidQuote,
     gasPriceWei: BigNumber,
-    chainId: DepricatedChainId,
+    chainId: number,
     providerConfig?: GasModelProviderConfig
   ) {
     const totalInitializedTicksCrossed = this.totalInitializedTicksCrossed(

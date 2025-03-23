@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { Logger } from '@ethersproject/logger';
 import { SwapRouter, Trade } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, Currency, Token, TradeType } from '@rtz-dex-tools/sdk-core';
+import { Currency, Token, TradeType } from '@rtz-dex-tools/sdk-core';
 import { FeeAmount, MethodParameters, Pool, Route } from '@rtz-dex-tools/v3-sdk';
 import _ from 'lodash';
 
@@ -27,7 +27,7 @@ import {
 } from './bases';
 
 export type LegacyRouterParams = {
-  chainId: DepricatedChainId;
+  chainId: number;
   multicall2Provider: IMulticallProvider;
   poolProvider: IV3PoolProvider;
   quoteProvider: IOnChainQuoteProvider;
@@ -47,7 +47,7 @@ export type LegacyRoutingConfig = {
  * with React/Redux hooks removed, and refactoring to allow re-use in other routers.
  */
 export class LegacyRouter {
-  protected chainId: DepricatedChainId;
+  protected chainId: number;
   protected multicall2Provider: IMulticallProvider;
   protected poolProvider: IV3PoolProvider;
   protected quoteProvider: IOnChainQuoteProvider;
@@ -433,7 +433,7 @@ export class LegacyRouter {
     tokenIn: Token,
     tokenOut: Token,
     pools: Pool[],
-    chainId: DepricatedChainId,
+    chainId: number,
     currentPath: Pool[] = [],
     allPaths: V3Route[] = [],
     startTokenIn: Token = tokenIn,

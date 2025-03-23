@@ -1,6 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { partitionMixedRouteByProtocol } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { Pool as V3Pool } from '@rtz-dex-tools/v3-sdk';
 import { Pool as V4Pool } from '@rtz-dex-tools/v4-sdk';
@@ -171,7 +170,7 @@ export class MixedRouteHeuristicGasModelFactory extends IOnChainGasModelFactory<
   private estimateGas(
     routeWithValidQuote: MixedRouteWithValidQuote,
     gasPriceWei: BigNumber,
-    chainId: DepricatedChainId,
+    chainId: number,
     providerConfig?: GasModelProviderConfig
   ) {
     const totalInitializedTicksCrossed = this.totalInitializedTicksCrossed(

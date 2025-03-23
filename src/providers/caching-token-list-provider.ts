@@ -39,9 +39,9 @@ export class CachingTokenListProvider
   private tokenList: TokenList;
 
   private CHAIN_SYMBOL_KEY = (chainId: DepricatedChainId, symbol: string) =>
-    `${DepricatedChainId.toString()}/${symbol}`;
+    `${chainId.toString()}/${symbol}`;
   private CHAIN_ADDRESS_KEY = (chainId: DepricatedChainId, address: string) =>
-    `${DepricatedChainId.toString()}/${address.toLowerCase()}`;
+    `${chainId.toString()}/${address.toLowerCase()}`;
 
   /**
    * Creates an instance of CachingTokenListProvider.
@@ -171,7 +171,7 @@ export class CachingTokenListProvider
       }
     } else {
       const chainTokens =
-        this.chainToTokenInfos.get(this.DepricatedChainId.toString()) ?? [];
+        this.chainToTokenInfos.get(this.chainId.toString()) ?? [];
       for (const info of chainTokens) {
         const token = await this.buildToken(info);
         addToken(token);

@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, Currency, Token, TradeType } from '@rtz-dex-tools/sdk-core';
+import { Currency, Token, TradeType } from '@rtz-dex-tools/sdk-core';
 import _ from 'lodash';
 
 import {
@@ -51,7 +51,7 @@ export class V2Quoter extends BaseQuoter<V2CandidatePools, V2Route, Token> {
     v2QuoteProvider: IV2QuoteProvider,
     v2GasModelFactory: IV2GasModelFactory,
     tokenProvider: ITokenProvider,
-    chainId: DepricatedChainId,
+    chainId: number,
     blockedTokenListProvider?: ITokenListProvider,
     tokenValidatorProvider?: ITokenValidatorProvider,
     l2GasDataProvider?: IL2GasDataProvider<ArbitrumGasData>

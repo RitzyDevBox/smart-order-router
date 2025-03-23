@@ -8,7 +8,6 @@ import { Protocol } from '@rtz-dex-tools/router-sdk';
 import {
   Currency,
   CurrencyAmount,
-  DepricatedChainId,
   TradeType,
 } from '@rtz-dex-tools/sdk-core';
 
@@ -130,7 +129,7 @@ export abstract class IRouteCachingProvider {
    * @param tradeType
    */
   public abstract getCacheMode(
-    chainId:DepricatedChainId,
+    chainId: number,
     amount: CurrencyAmount<Currency>,
     quoteCurrency: Currency,
     tradeType: TradeType,
@@ -159,7 +158,7 @@ export abstract class IRouteCachingProvider {
    * @protected
    */
   protected abstract _getCachedRoute(
-    chainId: DepricatedChainId,
+    chainId: number,
     amount: CurrencyAmount<Currency>,
     quoteCurrency: Currency,
     tradeType: TradeType,

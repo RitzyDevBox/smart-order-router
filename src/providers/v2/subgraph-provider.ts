@@ -61,7 +61,7 @@ export class V2SubgraphProvider implements IV2SubgraphProvider {
   private client: GraphQLClient;
 
   constructor(
-    private chainId: DepricatedChainId,
+    private chainId: number,
     private retries = 2,
     private timeout = 360000,
     private rollback = true,
@@ -204,7 +204,7 @@ export class V2SubgraphProvider implements IV2SubgraphProvider {
       },
       {
         retries: this.retries,
-        onRetry: (err, retry) => {
+        onRetry: (err: any, retry) => {
           outerRetries += 1;
           if (
             this.rollback &&

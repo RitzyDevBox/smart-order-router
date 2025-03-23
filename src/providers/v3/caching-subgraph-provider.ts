@@ -1,7 +1,7 @@
-import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
-
 import { Protocol } from '@rtz-dex-tools/router-sdk';
+
 import { CachingSubgraphProvider } from '../caching-subgraph-provider';
+
 import { ICache } from './../cache';
 import { IV3SubgraphProvider, V3SubgraphPool } from './subgraph-provider';
 
@@ -21,7 +21,7 @@ export class CachingV3SubgraphProvider
    * @param cache Cache instance to hold cached pools.
    */
   constructor(
-    chainId: DepricatedChainId,
+    chainId: number,
     subgraphProvider: IV3SubgraphProvider,
     cache: ICache<V3SubgraphPool[]>
   ) {

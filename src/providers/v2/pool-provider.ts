@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
+import { Token } from '@rtz-dex-tools/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import retry, { Options as RetryOptions } from 'async-retry';
 import _ from 'lodash';
@@ -77,7 +77,7 @@ export class V2PoolProvider implements IV2PoolProvider {
    * @param retryOptions The retry options for each call to the multicall.
    */
   constructor(
-    protected chainId: DepricatedChainId,
+    protected chainId: number,
     protected multicall2Provider: IMulticallProvider,
     protected tokenPropertiesProvider: ITokenPropertiesProvider,
     protected retryOptions: V2PoolRetryOptions = {

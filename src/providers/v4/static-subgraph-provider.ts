@@ -1,5 +1,6 @@
-import { DepricatedChainId, Currency } from '@rtz-dex-tools/sdk-core';
+import { Currency } from '@rtz-dex-tools/sdk-core';
 import { Pool } from '@rtz-dex-tools/v4-sdk';
+import JSBI from 'jsbi';
 import _ from 'lodash';
 
 import {
@@ -8,15 +9,14 @@ import {
   log,
 } from '../../util';
 import { BASES_TO_CHECK_TRADES_AGAINST } from '../caching-subgraph-provider';
-
-import JSBI from 'jsbi';
 import { ProviderConfig } from '../provider';
+
 import { IV4PoolProvider, V4PoolConstruct } from './pool-provider';
 import { IV4SubgraphProvider, V4SubgraphPool } from './subgraph-provider';
 
 export class StaticV4SubgraphProvider implements IV4SubgraphProvider {
   constructor(
-    private chainId: DepricatedChainId,
+    private chainId: number,
     private poolProvider: IV4PoolProvider,
     private v4PoolParams: Array<
       [number, number, string]

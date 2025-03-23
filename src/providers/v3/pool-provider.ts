@@ -1,10 +1,9 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
+import { Token, V3_CORE_FACTORY_ADDRESSES } from '@rtz-dex-tools/sdk-core';
 import { computePoolAddress, FeeAmount, Pool } from '@rtz-dex-tools/v3-sdk';
 import retry, { Options as RetryOptions } from 'async-retry';
 
 import { IUniswapV3PoolState__factory } from '../../types/v3/factories/IUniswapV3PoolState__factory';
-import { V3_CORE_FACTORY_ADDRESSES } from '../../util/addresses';
 import { log } from '../../util/log';
 import { IMulticallProvider, Result } from '../multicall-provider';
 import { ILiquidity, ISlot0, PoolProvider } from '../pool-provider';
@@ -84,7 +83,7 @@ export class V3PoolProvider
    * @param retryOptions The retry options for each call to the multicall.
    */
   constructor(
-    chainId: DepricatedChainId,
+    chainId: number,
     multicall2Provider: IMulticallProvider,
     retryOptions: V3PoolRetryOptions = {
       retries: 2,

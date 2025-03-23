@@ -1,9 +1,9 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, Currency, Token, TradeType } from '@rtz-dex-tools/sdk-core';
+import { Currency, DepricatedChainId, Token, TradeType } from '@rtz-dex-tools/sdk-core';
+import { isNativeCurrency } from '@rtz-dex-tools/universal-router-sdk';
 import { FeeAmount } from '@rtz-dex-tools/v3-sdk';
 import _ from 'lodash';
 
-import { isNativeCurrency } from '@rtz-dex-tools/universal-router-sdk';
 import {
   DAI_OPTIMISM_SEPOLIA,
   ITokenListProvider,
@@ -140,7 +140,7 @@ export type V4GetCandidatePoolsParams = {
   tokenProvider: ITokenProvider;
   poolProvider: IV4PoolProvider;
   blockedTokenListProvider?: ITokenListProvider;
-  chainId: DepricatedChainId;
+  chainId: number;
   v4PoolParams?: Array<[number, number, string]>;
 };
 
@@ -153,7 +153,7 @@ export type V3GetCandidatePoolsParams = {
   tokenProvider: ITokenProvider;
   poolProvider: IV3PoolProvider;
   blockedTokenListProvider?: ITokenListProvider;
-  chainId: DepricatedChainId;
+  chainId: number;
 };
 
 export type V2GetCandidatePoolsParams = {
@@ -165,7 +165,7 @@ export type V2GetCandidatePoolsParams = {
   tokenProvider: ITokenProvider;
   poolProvider: IV2PoolProvider;
   blockedTokenListProvider?: ITokenListProvider;
-  chainId: DepricatedChainId;
+  chainId: number;
 };
 
 export type MixedRouteGetCandidatePoolsParams = {
@@ -179,7 +179,7 @@ export type MixedRouteGetCandidatePoolsParams = {
   v3poolProvider: IV3PoolProvider;
   v4PoolProvider: IV4PoolProvider;
   blockedTokenListProvider?: ITokenListProvider;
-  chainId: DepricatedChainId;
+  chainId: number;
 };
 
 const baseTokensByChain: { [chainId in DepricatedChainId]?: Token[] } = {

@@ -1,6 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider } from '@ethersproject/providers';
-import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 import { GasDataArbitrum__factory } from '../../types/other/factories/GasDataArbitrum__factory';
 import { ARB_GASINFO_ADDRESS } from '../../util';
@@ -37,7 +36,7 @@ export class ArbitrumGasDataProvider
   protected blockNumberOverride: number | Promise<number> | undefined;
 
   constructor(
-    protected chainId: DepricatedChainId,
+    protected chainId: number,
     protected provider: BaseProvider,
     gasDataAddress?: string
   ) {

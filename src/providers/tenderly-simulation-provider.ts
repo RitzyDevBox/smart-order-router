@@ -3,9 +3,9 @@ import https from 'https';
 
 import { MaxUint256 } from '@ethersproject/constants';
 import { JsonRpcProvider } from '@ethersproject/providers';
-import { permit2Address } from '@uniswap/permit2-sdk';
 import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 import { UNIVERSAL_ROUTER_ADDRESS } from '@rtz-dex-tools/universal-router-sdk';
+import { permit2Address } from '@uniswap/permit2-sdk';
 import axios, { AxiosRequestConfig } from 'axios';
 import { BigNumber } from 'ethers/lib/ethers';
 
@@ -31,8 +31,8 @@ import {
   initSwapRouteFromExisting,
   logGasEstimationVsSimulationMetrics,
 } from '../util/gas-factory-helpers';
-
 import { breakDownTenderlySimulationError } from '../util/tenderlySimulationErrorBreakDown';
+
 import { EthEstimateGasSimulator } from './eth-estimate-gas-provider';
 import { IPortionProvider } from './portion-provider';
 import {

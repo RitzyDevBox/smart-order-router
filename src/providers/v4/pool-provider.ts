@@ -1,12 +1,13 @@
-import { DepricatedChainId, Currency } from '@rtz-dex-tools/sdk-core';
+import { Currency } from '@rtz-dex-tools/sdk-core';
 import { Pool } from '@rtz-dex-tools/v4-sdk';
 import retry, { Options as RetryOptions } from 'async-retry';
-import { getAddress, log, STATE_VIEW_ADDRESSES } from '../../util';
-import { IMulticallProvider, Result } from '../multicall-provider';
-import { ProviderConfig } from '../provider';
 
 import { StateView__factory } from '../../types/other/factories/StateView__factory';
+import { getAddress, log, STATE_VIEW_ADDRESSES } from '../../util';
+import { IMulticallProvider, Result } from '../multicall-provider';
 import { ILiquidity, ISlot0, PoolProvider } from '../pool-provider';
+import { ProviderConfig } from '../provider';
+
 
 type V4ISlot0 = ISlot0 & {
   poolId: string;
@@ -73,7 +74,7 @@ export class V4PoolProvider
    * @param retryOptions The retry options for each call to the multicall.
    */
   constructor(
-    chainId: DepricatedChainId,
+    chainId: number,
     multicall2Provider: IMulticallProvider,
     retryOptions: V4PoolRetryOptions = {
       retries: 2,

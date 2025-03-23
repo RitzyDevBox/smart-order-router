@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, Currency, TradeType } from '@rtz-dex-tools/sdk-core';
+import { Currency, TradeType } from '@rtz-dex-tools/sdk-core';
 import _ from 'lodash';
 
 import { RouteWithValidQuote, SupportedRoutes } from '../../../../routers';
@@ -8,7 +8,7 @@ import { CachedRoute } from './cached-route';
 
 interface CachedRoutesParams {
   routes: CachedRoute<SupportedRoutes>[];
-  chainId: DepricatedChainId;
+  chainId: number;
   currencyIn: Currency;
   currencyOut: Currency;
   protocolsCovered: Protocol[];
@@ -26,7 +26,7 @@ interface CachedRoutesParams {
  */
 export class CachedRoutes {
   public readonly routes: CachedRoute<SupportedRoutes>[];
-  public readonly chainId: DepricatedChainId;
+  public readonly chainId: number;
   public readonly currencyIn: Currency;
   public readonly currencyOut: Currency;
   public readonly protocolsCovered: Protocol[];
@@ -85,7 +85,7 @@ export class CachedRoutes {
    */
   public static fromRoutesWithValidQuotes(
     routes: RouteWithValidQuote[],
-    chainId: DepricatedChainId,
+    chainId: number,
     currencyIn: Currency,
     currencyOut: Currency,
     protocolsCovered: Protocol[],

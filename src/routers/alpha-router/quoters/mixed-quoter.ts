@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { Currency, DepricatedChainId, TradeType } from '@rtz-dex-tools/sdk-core';
+import { Currency, TradeType } from '@rtz-dex-tools/sdk-core';
 import { UniversalRouterVersion } from '@rtz-dex-tools/universal-router-sdk';
 import _ from 'lodash';
 
@@ -70,7 +70,7 @@ export class MixedQuoter extends BaseQuoter<
     v2PoolProvider: IV2PoolProvider,
     onChainQuoteProvider: IOnChainQuoteProvider,
     tokenProvider: ITokenProvider,
-    chainId:DepricatedChainId,
+    chainId: number,
     blockedTokenListProvider?: ITokenListProvider,
     tokenValidatorProvider?: ITokenValidatorProvider
   ) {

@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { DepricatedChainId, Currency } from '@rtz-dex-tools/sdk-core';
+import { Currency } from '@rtz-dex-tools/sdk-core';
 
 import { getAddressLowerCase, log, metric, MetricLoggerUnit } from '../util';
 
@@ -37,11 +37,11 @@ export interface ITokenPropertiesProvider {
 }
 
 export class TokenPropertiesProvider implements ITokenPropertiesProvider {
-  private CACHE_KEY = (chainId: DepricatedChainId, address: string) =>
+  private CACHE_KEY = (chainId: number, address: string) =>
     `token-properties-${chainId}-${address}`;
 
   constructor(
-    private chainId: DepricatedChainId,
+    private chainId: number,
     private tokenPropertiesCache: ICache<TokenPropertiesResult>,
     private tokenFeeFetcher: ITokenFeeFetcher,
     private allowList = DEFAULT_ALLOWLIST,

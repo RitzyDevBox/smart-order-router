@@ -1,4 +1,4 @@
-import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
+import { Token } from '@rtz-dex-tools/sdk-core';
 import _ from 'lodash';
 
 import { ITokenValidator__factory } from '../types/other/factories/ITokenValidator__factory';
@@ -53,13 +53,13 @@ export interface ITokenValidatorProvider {
 }
 
 export class TokenValidatorProvider implements ITokenValidatorProvider {
-  private CACHE_KEY = (chainId: DepricatedChainId, address: string) =>
+  private CACHE_KEY = (chainId: number, address: string) =>
     `token-${chainId}-${address}`;
 
   private BASES: string[];
 
   constructor(
-    protected chainId: DepricatedChainId,
+    protected chainId: number,
     protected multicall2Provider: IMulticallProvider,
     private tokenValidationCache: ICache<TokenValidationResult>,
     private tokenValidatorAddress = TOKEN_VALIDATOR_ADDRESS,

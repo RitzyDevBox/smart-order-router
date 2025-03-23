@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, TradeType } from '@rtz-dex-tools/sdk-core';
+import { TradeType } from '@rtz-dex-tools/sdk-core';
 import JSBI from 'jsbi';
 import _ from 'lodash';
 import FixedReverseHeap from 'mnemonist/fixed-reverse-heap';
@@ -44,7 +44,7 @@ export async function getBestSwapRoute(
   percents: number[],
   routesWithValidQuotes: RouteWithValidQuote[],
   routeType: TradeType,
-  chainId: DepricatedChainId,
+  chainId: number,
   routingConfig: AlphaRouterConfig,
   portionProvider: IPortionProvider,
   v2GasModel?: IGasModel<V2RouteWithValidQuote>,
@@ -175,7 +175,7 @@ export async function getBestSwapRouteBy(
   routeType: TradeType,
   percentToQuotes: { [percent: number]: RouteWithValidQuote[] },
   percents: number[],
-  chainId: DepricatedChainId,
+  chainId: number,
   by: (routeQuote: RouteWithValidQuote) => CurrencyAmount,
   routingConfig: AlphaRouterConfig,
   portionProvider: IPortionProvider,

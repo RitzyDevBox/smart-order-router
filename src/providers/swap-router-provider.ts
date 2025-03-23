@@ -1,5 +1,5 @@
 import { ApprovalTypes } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, Currency, CurrencyAmount } from '@rtz-dex-tools/sdk-core';
+import { Currency, CurrencyAmount } from '@rtz-dex-tools/sdk-core';
 
 import { SwapRouter02__factory } from '../types/other/factories/SwapRouter02__factory';
 import { log, SWAP_ROUTER_02_ADDRESSES } from '../util';
@@ -34,7 +34,7 @@ export interface ISwapRouterProvider {
 export class SwapRouterProvider implements ISwapRouterProvider {
   constructor(
     protected multicall2Provider: IMulticallProvider,
-    protected chainId: DepricatedChainId
+    protected chainId: number
   ) { }
 
   public async getApprovalType(

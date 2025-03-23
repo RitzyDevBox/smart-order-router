@@ -1,21 +1,20 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, Currency, Percent } from '@rtz-dex-tools/sdk-core';
+import { TPool } from '@rtz-dex-tools/router-sdk';
+import { Currency, Percent, V3_CORE_FACTORY_ADDRESSES } from '@rtz-dex-tools/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { Pool as V3Pool } from '@rtz-dex-tools/v3-sdk';
 import { Pool as V4Pool } from '@rtz-dex-tools/v4-sdk';
 import _ from 'lodash';
 
+import { CachedRoutes } from '../providers';
 import {
   AlphaRouterConfig,
   RouteWithValidQuote,
 } from '../routers/alpha-router';
 import { MixedRoute, SupportedRoutes } from '../routers/router';
 
-import { V3_CORE_FACTORY_ADDRESSES } from './addresses';
-
-import { TPool } from '@rtz-dex-tools/router-sdk';
 import { CurrencyAmount, V4_ETH_WETH_FAKE_POOL } from '.';
-import { CachedRoutes } from '../providers';
+
 
 export const routeToTokens = (route: SupportedRoutes): Currency[] => {
   switch (route.protocol) {
@@ -95,7 +94,7 @@ export const routeToString = (route: SupportedRoutes): string => {
       // where we do not want to return the fake pool in the route string as it is not a real pool
       if (
         pool.tickSpacing ===
-        V4_ETH_WETH_FAKE_POOL[pool.chainId as DepricatedChainId].tickSpacing
+        V4_ETH_WETH_FAKE_POOL[pool.chainId].tickSpacing
       ) {
         return ' --  ';
       }

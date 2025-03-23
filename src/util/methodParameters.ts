@@ -4,10 +4,10 @@ import {
   SwapRouter as SwapRouter02,
   Trade,
 } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, Currency, TradeType } from '@rtz-dex-tools/sdk-core';
+import { Currency, TradeType } from '@rtz-dex-tools/sdk-core';
 import {
-  SwapRouter as UniversalRouter,
   UNIVERSAL_ROUTER_ADDRESS,
+  SwapRouter as UniversalRouter,
 } from '@rtz-dex-tools/universal-router-sdk';
 import { Route as V2RouteRaw } from '@rtz-dex-tools/v2-sdk';
 import { Route as V3RouteRaw } from '@rtz-dex-tools/v3-sdk';
@@ -19,9 +19,9 @@ import {
   MethodParameters,
   MixedRouteWithValidQuote,
   RouteWithValidQuote,
+  SWAP_ROUTER_02_ADDRESSES,
   SwapOptions,
   SwapType,
-  SWAP_ROUTER_02_ADDRESSES,
   V2RouteWithValidQuote,
   V3RouteWithValidQuote,
   V4RouteWithValidQuote,
@@ -314,7 +314,7 @@ export function buildTrade<TTradeType extends TradeType>(
 export function buildSwapMethodParameters(
   trade: Trade<Currency, Currency, TradeType>,
   swapConfig: SwapOptions,
-  chainId: DepricatedChainId
+  chainId: number
 ): MethodParameters {
   if (swapConfig.type == SwapType.UNIVERSAL_ROUTER) {
     return {

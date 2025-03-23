@@ -61,7 +61,7 @@ export class V4SubgraphProvider
   extends SubgraphProvider<V4RawSubgraphPool, V4SubgraphPool>
   implements IV4SubgraphProvider {
   constructor(
-    chainId: DepricatedChainId,
+    chainId: number,
     retries = 2,
     timeout = 30000,
     rollback = true,

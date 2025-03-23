@@ -1,4 +1,3 @@
-import { DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 import retry from 'async-retry';
 import Timeout from 'await-timeout';
 import axios from 'axios';
@@ -21,7 +20,7 @@ export class URISubgraphProvider<
   TSubgraphPool extends V2SubgraphPool | V3SubgraphPool
 > {
   constructor(
-    private chainId: DepricatedChainId,
+    private chainId: number,
     private uri: string,
     private timeout = 6000,
     private retries = 2
