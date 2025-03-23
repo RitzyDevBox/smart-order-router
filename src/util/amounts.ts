@@ -5,10 +5,10 @@ import {
   Currency,
   CurrencyAmount as CurrencyAmountRaw,
 } from '@uniswap/sdk-core';
-import { FeeAmount, TICK_SPACINGS } from '@uniswap/v3-sdk';
+import { FeeAmount, TICK_SPACINGS } from '@rtz-dex-tools/v3-sdk';
 import JSBI from 'jsbi';
 
-export class CurrencyAmount extends CurrencyAmountRaw<Currency> {}
+export class CurrencyAmount extends CurrencyAmountRaw<Currency> { }
 
 export const MAX_UINT160 = '0xffffffffffffffffffffffffffffffffffffffff';
 

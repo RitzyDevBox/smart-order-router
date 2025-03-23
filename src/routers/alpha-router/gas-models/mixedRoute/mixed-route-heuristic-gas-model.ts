@@ -2,7 +2,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { partitionMixedRouteByProtocol } from '@uniswap/router-sdk';
 import { ChainId } from '@uniswap/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
-import { Pool as V3Pool } from '@uniswap/v3-sdk';
+import { Pool as V3Pool } from '@rtz-dex-tools/v3-sdk';
 import { Pool as V4Pool } from '@uniswap/v4-sdk';
 import JSBI from 'jsbi';
 

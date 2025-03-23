@@ -5,7 +5,7 @@ import {
   Token,
 } from '@uniswap/sdk-core';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
-import { Pool } from '@uniswap/v3-sdk';
+import { Pool } from '@rtz-dex-tools/v3-sdk';
 
 import { ProviderConfig } from '../../../providers/provider';
 import {

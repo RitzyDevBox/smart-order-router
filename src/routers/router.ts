@@ -22,7 +22,7 @@ import {
   Pool,
   Position,
   Route as V3RouteRaw,
-} from '@uniswap/v3-sdk';
+} from '@rtz-dex-tools/v3-sdk';
 import { Route as V4RouteRaw } from '@uniswap/v4-sdk';
 
 import { SimulationStatus } from '../providers';

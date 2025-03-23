@@ -10,7 +10,7 @@ import {
   UNIVERSAL_ROUTER_ADDRESS,
 } from '@uniswap/universal-router-sdk';
 import { Route as V2RouteRaw } from '@rtz-dex-tools/v2-sdk';
-import { Route as V3RouteRaw } from '@uniswap/v3-sdk';
+import { Route as V3RouteRaw } from '@rtz-dex-tools/v3-sdk';
 import { Route as V4RouteRaw } from '@uniswap/v4-sdk';
 import _ from 'lodash';
 
