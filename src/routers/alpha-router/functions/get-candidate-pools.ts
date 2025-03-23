@@ -3,7 +3,7 @@ import { ChainId, Currency, Token, TradeType } from '@uniswap/sdk-core';
 import { FeeAmount } from '@rtz-dex-tools/v3-sdk';
 import _ from 'lodash';
 
-import { isNativeCurrency } from '@uniswap/universal-router-sdk';
+import { isNativeCurrency } from '@rtz-dex-tools/universal-router-sdk';
 import {
   DAI_OPTIMISM_SEPOLIA,
   ITokenListProvider,

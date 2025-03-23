@@ -15,7 +15,7 @@ import {
 import {
   SwapOptions as UniversalRouterSwapOptions,
   UniversalRouterVersion,
-} from '@uniswap/universal-router-sdk';
+} from '@rtz-dex-tools/universal-router-sdk';
 import { Route as V2RouteRaw } from '@rtz-dex-tools/v2-sdk';
 import {
   MethodParameters as SDKMethodParameters,

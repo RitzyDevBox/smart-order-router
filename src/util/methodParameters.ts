@@ -8,7 +8,7 @@ import { ChainId, Currency, TradeType } from '@uniswap/sdk-core';
 import {
   SwapRouter as UniversalRouter,
   UNIVERSAL_ROUTER_ADDRESS,
-} from '@uniswap/universal-router-sdk';
+} from '@rtz-dex-tools/universal-router-sdk';
 import { Route as V2RouteRaw } from '@rtz-dex-tools/v2-sdk';
 import { Route as V3RouteRaw } from '@rtz-dex-tools/v3-sdk';
 import { Route as V4RouteRaw } from '@rtz-dex-tools/v4-sdk';

@@ -3,7 +3,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider, TransactionRequest } from '@ethersproject/providers';
 import { Protocol } from '@rtz-dex-tools/router-sdk';
 import { ChainId, Percent, Token, TradeType } from '@uniswap/sdk-core';
-import { UniversalRouterVersion } from '@uniswap/universal-router-sdk';
+import { UniversalRouterVersion } from '@rtz-dex-tools/universal-router-sdk';
 import { Pair } from '@rtz-dex-tools/v2-sdk';
 import { FeeAmount, Pool } from '@rtz-dex-tools/v3-sdk';
 import brotli from 'brotli';
