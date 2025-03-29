@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider } from '@ethersproject/providers';
-import { DepricatedChainId, MULTICALL_ADDRESSES } from '@rtz-dex-tools/sdk-core';
+import { MULTICALL_ADDRESSES } from '@rtz-dex-tools/sdk-core';
 import _ from 'lodash';
 import stats from 'stats-lite';
 
@@ -33,7 +33,7 @@ export class UniswapMulticallProvider extends IMulticallProvider<UniswapMultical
   private multicallContract: UniswapInterfaceMulticall;
 
   constructor(
-    protected chainId: DepricatedChainId,
+    protected chainId: number,
     protected provider: BaseProvider,
     protected gasLimitPerCall = 1_000_000
   ) {

@@ -80,7 +80,7 @@ export class V3SubgraphProvider
   extends SubgraphProvider<V3RawSubgraphPool, V3SubgraphPool>
   implements IV3SubgraphProvider {
   constructor(
-    chainId: DepricatedChainId,
+    chainId: number,
     retries = 2,
     timeout = 30000,
     rollback = true,

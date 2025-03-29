@@ -68,7 +68,7 @@ import {
 
 // These tokens will added to the Token cache on initialization.
 export const CACHE_SEED_TOKENS: {
-  [chainId in DepricatedChainId]?: { [symbol: string]: Token };
+  [chainId: number]: { [symbol: string]: Token };
 } = {
   [DepricatedChainId.MAINNET]: {
     WETH: WRAPPED_NATIVE_CURRENCY[DepricatedChainId.MAINNET]!,
@@ -217,11 +217,11 @@ export const CACHE_SEED_TOKENS: {
  * @class CachingTokenProviderWithFallback
  */
 export class CachingTokenProviderWithFallback implements ITokenProvider {
-  private CACHE_KEY = (chainId: DepricatedChainId, address: string) =>
+  private CACHE_KEY = (chainId: number, address: string) =>
     `token-${chainId}-${address}`;
 
   constructor(
-    protected chainId: DepricatedChainId,
+    protected chainId: number,
     // Token metadata (e.g. symbol and decimals) don't change so can be cached indefinitely.
     // Constructing a new token object is slow as sdk-core does checksumming.
     private tokenCache: ICache<Token>,

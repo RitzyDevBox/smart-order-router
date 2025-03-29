@@ -6,6 +6,7 @@ import _ from 'lodash';
 
 import { IERC20Metadata__factory } from '../types/v3/factories/IERC20Metadata__factory';
 import { log, WRAPPED_NATIVE_CURRENCY } from '../util';
+import { SmartOrderRouterConfig } from '../util/initializer';
 
 import { IMulticallProvider, Result } from './multicall-provider';
 import { ProviderConfig } from './provider';
@@ -800,7 +801,7 @@ export const USDC_SONEIUM = new Token(
 
 export class TokenProvider implements ITokenProvider {
   constructor(
-    private chainId:DepricatedChainId,
+    private chainId: number,
     protected multicall2Provider: IMulticallProvider
   ) { }
 
@@ -989,7 +990,13 @@ export class TokenProvider implements ITokenProvider {
   }
 }
 
-export const DAI_ON = (chainId:DepricatedChainId): Token => {
+export const DAI_ON = (chainId: number): Token => {
+
+  const dai = SmartOrderRouterConfig.getConfig(chainId)?.DAI
+  if(dai) {
+    return dai
+  }
+
   switch (chainId) {
     case DepricatedChainId.MAINNET:
       return DAI_MAINNET;
@@ -1034,7 +1041,12 @@ export const DAI_ON = (chainId:DepricatedChainId): Token => {
   }
 };
 
-export const USDT_ON = (chainId:DepricatedChainId): Token => {
+export const USDT_ON = (chainId: number): Token => {
+  const usdt = SmartOrderRouterConfig.getConfig(chainId)?.USDT
+  if(usdt) {
+    return usdt
+  }
+
   switch (chainId) {
     case DepricatedChainId.MAINNET:
       return USDT_MAINNET;
@@ -1057,7 +1069,11 @@ export const USDT_ON = (chainId:DepricatedChainId): Token => {
   }
 };
 
-export const USDC_ON = (chainId:DepricatedChainId): Token => {
+export const USDC_ON = (chainId: number): Token => {
+  const usdc = SmartOrderRouterConfig.getConfig(chainId)?.USDC
+  if(usdc) {
+    return usdc
+  }
   switch (chainId) {
     case DepricatedChainId.MAINNET:
       return USDC_MAINNET;
@@ -1112,8 +1128,20 @@ export const USDC_ON = (chainId:DepricatedChainId): Token => {
   }
 };
 
-export const WNATIVE_ON = (chainId:DepricatedChainId): Token => {
-  return WRAPPED_NATIVE_CURRENCY[chainId];
+export const WNATIVE_ON = (chainId: number): Token => {
+
+  const weth = SmartOrderRouterConfig.getConfig(chainId)?.WETH
+  if(weth) {
+    return weth
+  }
+
+  const wnative = WRAPPED_NATIVE_CURRENCY[chainId as DepricatedChainId];
+
+  if(wnative) {
+    return wnative
+  }
+
+  throw new Error('WETH Not avalailable')
 };
 
 export const V4_SEPOLIA_TEST_A = new Token(

@@ -8,10 +8,10 @@ import {
   log,
   metric,
   MetricLoggerUnit,
-  WRAPPED_NATIVE_CURRENCY,
 } from '../util';
 
 import { ProviderConfig } from './provider';
+import { WNATIVE_ON } from './token-provider';
 
 const DEFAULT_TOKEN_BUY_FEE_BPS = BigNumber.from(0);
 const DEFAULT_TOKEN_SELL_FEE_BPS = BigNumber.from(0);
@@ -86,13 +86,13 @@ export class OnChainTokenFeeFetcher implements ITokenFeeFetcher {
   private readonly contract: TokenFeeDetector;
 
   constructor(
-    private chainId: DepricatedChainId,
+    private chainId: number,
     rpcProvider: BaseProvider,
     private tokenFeeAddress = FEE_DETECTOR_ADDRESS(chainId),
     private gasLimitPerCall = GAS_LIMIT_PER_VALIDATE,
     private amountToFlashBorrow = AMOUNT_TO_FLASH_BORROW
   ) {
-    this.BASE_TOKEN = WRAPPED_NATIVE_CURRENCY[this.chainId]?.address;
+    this.BASE_TOKEN = WNATIVE_ON(this.chainId)?.address;
     this.contract = TokenFeeDetector__factory.connect(
       this.tokenFeeAddress,
       rpcProvider

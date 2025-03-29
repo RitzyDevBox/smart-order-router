@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { DepricatedChainId, Token } from '@rtz-dex-tools/sdk-core';
+import { Token } from '@rtz-dex-tools/sdk-core';
 import { TokenInfo, TokenList } from '@uniswap/token-lists';
 import axios from 'axios';
 
@@ -32,15 +32,15 @@ export class CachingTokenListProvider
     }/${this.tokenList.version}/${tokenInfo.address.toLowerCase()}/${tokenInfo.decimals
     }/${tokenInfo.symbol}/${tokenInfo.name}`;
 
-  private chainId: DepricatedChainId;
+  private chainId: number;
   private chainToTokenInfos: Map<string, TokenInfo[]>;
   private chainSymbolToTokenInfo: Map<string, TokenInfo>;
   private chainAddressToTokenInfo: Map<string, TokenInfo>;
   private tokenList: TokenList;
 
-  private CHAIN_SYMBOL_KEY = (chainId: DepricatedChainId, symbol: string) =>
+  private CHAIN_SYMBOL_KEY = (chainId: number, symbol: string) =>
     `${chainId.toString()}/${symbol}`;
-  private CHAIN_ADDRESS_KEY = (chainId: DepricatedChainId, address: string) =>
+  private CHAIN_ADDRESS_KEY = (chainId: number, address: string) =>
     `${chainId.toString()}/${address.toLowerCase()}`;
 
   /**
@@ -52,7 +52,7 @@ export class CachingTokenListProvider
    * @param tokenCache Cache instance to hold cached tokens.
    */
   constructor(
-    chainId: DepricatedChainId | number,
+    chainId: number,
     tokenList: TokenList,
     private tokenCache: ICache<Token>
   ) {
@@ -65,7 +65,7 @@ export class CachingTokenListProvider
 
     for (const tokenInfo of this.tokenList.tokens) {
       const chainId = tokenInfo.chainId;
-      const chainIdString = DepricatedChainId.toString();
+      const chainIdString = chainId.toString();
       const symbol = tokenInfo.symbol;
       const address = tokenInfo.address.toLowerCase();
 
@@ -86,7 +86,7 @@ export class CachingTokenListProvider
   }
 
   public static async fromTokenListURI(
-    chainId: DepricatedChainId | number,
+    chainId: number,
     tokenListURI: string,
     tokenCache: ICache<Token>
   ) {
@@ -124,7 +124,7 @@ export class CachingTokenListProvider
   }
 
   public static async fromTokenList(
-    chainId: DepricatedChainId | number,
+    chainId: number,
     tokenList: TokenList,
     tokenCache: ICache<Token>
   ) {

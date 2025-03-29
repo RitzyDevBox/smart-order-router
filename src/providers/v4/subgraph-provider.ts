@@ -1,5 +1,5 @@
 import { Protocol } from '@rtz-dex-tools/router-sdk';
-import { DepricatedChainId, Currency } from '@rtz-dex-tools/sdk-core';
+import { Currency, DepricatedChainId } from '@rtz-dex-tools/sdk-core';
 
 import { ProviderConfig } from '../provider';
 import { SubgraphProvider } from '../subgraph-provider';

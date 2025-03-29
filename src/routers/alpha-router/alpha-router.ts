@@ -316,17 +316,17 @@ export type AlphaRouterParams = {
   /**
    * All the supported v2 chains configuration
    */
-  v2Supported?: DepricatedChainId[];
+v2Supported?: DepricatedChainId[];
 
-  /**
-   * All the supported v4 chains configuration
-   */
-  v4Supported?: DepricatedChainId[];
+/**
+ * All the supported v4 chains configuration
+ */
+v4Supported?: DepricatedChainId[];
 
-  /**
-   * All the supported mixed chains configuration
-   */
-  mixedSupported?: DepricatedChainId[];
+/**
+ * All the supported mixed chains configuration
+ */
+mixedSupported?: DepricatedChainId[];
 
   /**
    * The v4 pool params to be used for the v4 pool provider.

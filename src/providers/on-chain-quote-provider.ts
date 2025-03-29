@@ -335,7 +335,7 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
    * @param metricsPrefix metrics prefix to differentiate between different instances of the quote provider.
    */
   constructor(
-    protected chainId: DepricatedChainId,
+    protected chainId: number,
     protected provider: BaseProvider,
     // Only supports Uniswap Multicall as it needs the gas limitting functionality.
     protected multicall2Provider: UniswapMulticallProvider,
