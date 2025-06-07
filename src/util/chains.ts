@@ -432,7 +432,7 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
     'Wrapped Hype Testnet'
   ),
   [ChainId.HYPEREVM]: new Token(
-    ChainId.HYPEREVM_TESTNET,
+    ChainId.HYPEREVM,
     '0x5555555555555555555555555555555555555555',
     18,
     'WHYPE',
