@@ -1,6 +1,7 @@
 import { ChainId, Token } from '@uniswap/sdk-core';
 
 import { log } from '../util';
+
 import { ICache } from './cache';
 import { ProviderConfig } from './provider';
 import {

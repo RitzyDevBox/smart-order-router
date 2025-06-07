@@ -191,6 +191,7 @@ export class V3SubgraphProvider implements IV3SubgraphProvider {
           if (
             this.rollback &&
             blockNumber &&
+            err instanceof Error &&
             _.includes(err.message, 'indexed up to')
           ) {
             blockNumber = blockNumber - 10;
